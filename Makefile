@@ -72,11 +72,12 @@ all:	$(OUTPUT)
 $(OBJ_DIR):
 			@echo ${CUT}[${Y}$(OUTPUT)]${X} ${B}Creating: ${R}$(OBJ_DIR)${X}
 			@mkdir -p $(OBJ_DIR)
+			@mkdir -p $(OBJ_DIR)/tests
 
 # Normal objects
 $(OUTPUT): $(OBJ_DIR) $(OBJS)
 			@echo
-			$(CC) $(OBJS) -I $(HEADER_DIR) $(FLAGS) -o $(OUTPUT)
+			$(CC) $(OBJS) -I $(HEADER_DIR) -I tests $(FLAGS) -o $(OUTPUT)
 			@echo ${B}[-------------------------------------]${X}
 			@echo ${B}[---------- ${BOLD}OK${X}${B} - ${BOLD}$(OUTPUT)${X}${B} ----------]${X}
 			@echo ${B}[------- 🧟 Let containers 🧟 --------]${X}
@@ -89,7 +90,7 @@ $(OBJ_DIR)%.o: %.cpp
 			$(eval COMPILED=$(shell echo '$(COUNTER) files compiled'))
 			$(eval LEN=$(shell echo $$(($(COLUMNS)-$(shell echo \'$(STR)$(COMPILED)\' | wc -m)))))
 			@$(SH) -c "printf '\r$(STR)%$(LEN)s $(COMPILED) $(shell seq -s. $(COUNTER)|tr -d '[:digit:]')\0'"
-			$(CC) -c $(FLAGS) -I$(HEADER_DIR) $< -o $@
+			$(CC) -c $(FLAGS) -I$(HEADER_DIR) -Itests $< -o $@
 
 ##@ Cleaning
 clean:		## Clean all objects.

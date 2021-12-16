@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   colors.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 12:36:41 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/16 19:43:51 by aborboll         ###   ########.fr       */
+/*   Created: 2021/12/16 18:47:31 by aborboll          #+#    #+#             */
+/*   Updated: 2021/12/16 18:47:31 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** Incluimos las librerias esenciales.
-*/
-#include <iostream>
-#include <string.h>
+#ifndef COLOR_H
+# define COLOR_H
 
-#include "tests/templates/is_integral.hpp"
-bool	exit_status = 0;
+# define C_X "\033[0m"
+# define C_YELLOW "\033[33m"
+# define C_RED "\033[31;1m"
+# define C_GREEN "\033[32;1m"
+# define C_CYAN "\033[36;1m"
+# define C_WHITE "\033[37;1m"
+# define C_BLUE "\033[34;1m"
+# define C_UP "\033[A"
+# define C_CUT "\033[K"
+# define C_U "\033[4m"
+# define C_BLINK "\033[5m"
+# define C_BOLD "\033[1m"
 
-int main(void)
-{
-	Tester * tests[] = { new is_integral_tester() };
-
-	for (size_t i = 0; i < 1; i++)
-	{
-		if (!tests[i]->test())
-			exit_status = 1;
-		delete tests[i];
-	}
-	return (exit_status);
-}
+#endif
