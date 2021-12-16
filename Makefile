@@ -6,7 +6,7 @@ RM					=	@/bin/rm -rf
 FLAGS				=	-Wextra -Wall -Werror -g -fsanitize=address
 LEAKS_FLAGS			=	--tool=memcheck --leak-check=full --leak-resolution=high --show-leak-kinds=all --track-origins=yes
 
-HEADER_DIR			=	.
+HEADER_DIR			=	includes
 OBJ_DIR				=	obj/
 RESULT				=	$(shell cat output.txt)
 AUTHOR				=	$(shell cat ../author)
