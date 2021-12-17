@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/16 23:47:54 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:17:19 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ struct is_integral
 
 class type_traits_tester : public Tester
 {
-	protected:
+	private:
 		bool	_status;
 	public:
 		type_traits_tester(void) : Tester("type_traits"), _status(true) {};
 		void	setStatus(bool status) { _status = status; }
 		bool	getStatus(void) { return (_status); }
-
 		bool	test()
 		{
 			this->section("is_integral");
