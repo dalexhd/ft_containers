@@ -1,6 +1,6 @@
 OUTPUT				=	containers
 
-CC					=	@clang++ -std=c++98
+CC					=	@clang++ -std=c++11
 SH					=	@bash
 RM					=	@/bin/rm -rf
 FLAGS				=	-Wextra -Wall -Werror -g -fsanitize=address

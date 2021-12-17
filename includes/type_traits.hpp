@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_integral.hpp                                    :+:      :+:    :+:   */
+/*   type_traits.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/16 17:57:16 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:53:29 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IS_INTEGRAL_HPP
-# define IS_INTEGRAL_HPP
+#ifndef TYPE_TRAITS_HPP
+# define TYPE_TRAITS_HPP
 
 namespace	ft
 {
+	/**
+	 * fn:	is_integral
+	 * url: https://en.cppreference.com/w/cpp/types/is_integral
+	 *
+	 * If B is true, std::enable_if has a public member typedef type, equal to T; otherwise, there is no member typedef.
+	 * This metafunction is a convenient way to leverage SFINAE to conditionally remove functions from overload resolution based on type traits and to provide separate function overloads and specializations for different type traits. std::enable_if can be used as an additional function argument (not applicable to operator overloads), as a return type (not applicable to constructors and destructors), or as a class template or function template parameter.
+	 * The behavior of a program that adds specializations for enable_if is undefined.
+	*/
+	template<bool B, class T = void>
+	struct enable_if {};
+
+	template<class T>
+	struct enable_if<true, T>
+	{
+		typedef T type;
+	};
+
 	/**
 	 * fn:	is_integral
 	 * url: https://en.cppreference.com/w/cpp/types/is_integral
