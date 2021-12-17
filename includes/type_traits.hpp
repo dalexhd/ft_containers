@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/16 21:53:29 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:12:00 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 namespace	ft
 {
 	/**
-	 * fn:	is_integral
-	 * url: https://en.cppreference.com/w/cpp/types/is_integral
+	 * fn:	enable_if
+	 * url: https://en.cppreference.com/w/cpp/types/enable_if
 	 *
 	 * If B is true, std::enable_if has a public member typedef type, equal to T; otherwise, there is no member typedef.
 	 * This metafunction is a convenient way to leverage SFINAE to conditionally remove functions from overload resolution based on type traits and to provide separate function overloads and specializations for different type traits. std::enable_if can be used as an additional function argument (not applicable to operator overloads), as a return type (not applicable to constructors and destructors), or as a class template or function template parameter.
