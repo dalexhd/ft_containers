@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 14:15:36 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 14:25:03 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:19:35 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ class algorithm_tester : public Tester
 			char bar[] = "apartment";
 			this->expect("Using default comparison (operator<)", ft::lexicographical_compare(foo, foo + 5, bar, bar + 9), true);
 			this->expect("Using mycomp as comparison object", ft::lexicographical_compare(foo, foo + 5, bar, bar + 9, mycomp), false);
+			this->expect("Using default comparison (operator<)", ft::lexicographical_compare(bar, bar + 9, foo, foo + 5), false);
+			this->expect("Using mycomp as comparison object", ft::lexicographical_compare(bar, bar + 9, foo, foo + 5, mycomp), true);
 			this->endSection();
 			return (_status);
 		}
