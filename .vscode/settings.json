@@ -47,5 +47,6 @@
 		"list": "cpp",
 		"map": "cpp",
 		"set": "cpp"
-	}
+	},
+	"workbench.editor.showTabs": true
 }

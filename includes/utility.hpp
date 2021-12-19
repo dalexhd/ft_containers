@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 11:28:55 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 12:35:33 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,58 +19,59 @@ namespace	ft
 	template<class T1, class T2>
 	struct pair
 	{
-		// Member types
-		typedef	first_type	T1 // The first template parameter (T1)
-		typedef	second_type	T2 // The second template parameter (T2)
+		public:
+			// Member types
+			typedef	first_type	T1; // The first template parameter (T1)
+			typedef	second_type	T2; // The second template parameter (T2)
 
-		// Member variables
-		first_type	first; // The first value in the pair
-		second_type	second; // The second value in the pair
+			// Member variables
+			first_type	first; // The first value in the pair
+			second_type	second; // The second value in the pair
 
-		/**
-		 * @brief Default constructor.
-		 * Constructs a pair object with its elements value-initialized.
-		 *
-		 */
-		pair(): first(), second();
+			/**
+			 * @brief Default constructor.
+			 * Constructs a pair object with its elements value-initialized.
+			 *
+			 */
+			pair(): first(), second();
 
-		/**
-		 * @brief Copy / move constructor (and implicit conversion)
-		 * The object is initialized with the contents of the pr pair object.
-		 * The corresponding member of pr is passed to the constructor of each of its members.
-		 *
-		 * @tparam U The first template parameter
-		 * @tparam V The second template parameter (T2)
-		 * @param pr Another pair object. This may be an object of the same type as the object being constructed or of a pair type whose elements' types are implicitly convertible to those in the pair being constructed.
-		 */
-		template<class U, class V>
-		pair (const pair<U,V>& pr): first(pr.first) : second(pr.second) {};
+			/**
+			 * @brief Copy / move constructor (and implicit conversion)
+			 * The object is initialized with the contents of the pr pair object.
+			 * The corresponding member of pr is passed to the constructor of each of its members.
+			 *
+			 * @tparam U The first template parameter
+			 * @tparam V The second template parameter (T2)
+			 * @param pr Another pair object. This may be an object of the same type as the object being constructed or of a pair type whose elements' types are implicitly convertible to those in the pair being constructed.
+			 */
+			template<class U, class V>
+			pair (const pair<U,V>& pr): first(pr.first) : second(pr.second) {};
 
-		/**
-		 * @brief Initialization constructor.
-		 * Member first is constructed with a and member second with b.
-		 *
-		 * @param a An object of the type of first, or some other type implicitly convertible to it.
-		 * @param b An object of the type of second, or some other type implicitly convertible to it.
-		 */
-		pair (const first_type& a, const second_type& b) : first(a), second(b) {};
+			/**
+			 * @brief Initialization constructor.
+			 * Member first is constructed with a and member second with b.
+			 *
+			 * @param a An object of the type of first, or some other type implicitly convertible to it.
+			 * @param b An object of the type of second, or some other type implicitly convertible to it.
+			 */
+			pair (const first_type& a, const second_type& b) : first(a), second(b) {};
 
-		/**
-		 * @brief Assigns pr as the new content for the pair object.
-		 * Member first is assigned pr.first, and member second is assigned pr.second.
-		 * The copying forms (1) perform copy assignments, with the elements of its argument preserving their values after the call. While the moving forms (2) perform move assignments (as if calling forward for each element), which, for elements of types supporting move semantics implies that these elements of pr are left in an unspecified but valid state.
-		 *
-		 * @param pr Another pair object.
-		 * This may be an object of the same type or of a pair type whose elements' types are implicitly convertible.
-		 * @return pair& *this
-		 */
-		pair& operator= (const pair& pr)
-		{
-			first = pr.first;
-			second = pr.second;
+			/**
+			 * @brief Assigns pr as the new content for the pair object.
+			 * Member first is assigned pr.first, and member second is assigned pr.second.
+			 * The copying forms (1) perform copy assignments, with the elements of its argument preserving their values after the call. While the moving forms (2) perform move assignments (as if calling forward for each element), which, for elements of types supporting move semantics implies that these elements of pr are left in an unspecified but valid state.
+			 *
+			 * @param pr Another pair object.
+			 * This may be an object of the same type or of a pair type whose elements' types are implicitly convertible.
+			 * @return pair& *this
+			 */
+			pair& operator= (const pair& pr)
+			{
+				first = pr.first;
+				second = pr.second;
 
-			return (*this);
-		}
+				return (*this);
+			}
 	};
 
 
