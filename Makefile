@@ -115,7 +115,7 @@ test:		## Make test
 			echo "Please set test cmd!!!"
 
 cov:		## Make coverage files
-			gcov $(OBJS)
+			gcov -abcfu $(OBJS)
 			@gcovr -g -k -r . --html --html-details -o coverage.html
 
 
