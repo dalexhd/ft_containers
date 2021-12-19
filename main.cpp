@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:36:41 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 13:32:13 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:49:51 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int main(void)
 	TestRunner		testRunner;
 
 	status = testRunner.run();
-	return (status);
+	return (!status);
 }
