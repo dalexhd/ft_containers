@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 12:35:33 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:08:41 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ namespace	ft
 	{
 		public:
 			// Member types
-			typedef	first_type	T1; // The first template parameter (T1)
-			typedef	second_type	T2; // The second template parameter (T2)
+			typedef	T1 first_type; // The first template parameter (T1)
+			typedef	T2 second_type; // The second template parameter (T2)
 
 			// Member variables
 			first_type	first; // The first value in the pair
@@ -33,7 +33,7 @@ namespace	ft
 			 * Constructs a pair object with its elements value-initialized.
 			 *
 			 */
-			pair(): first(), second();
+			pair(): first(), second() {};
 
 			/**
 			 * @brief Copy / move constructor (and implicit conversion)
@@ -45,7 +45,7 @@ namespace	ft
 			 * @param pr Another pair object. This may be an object of the same type as the object being constructed or of a pair type whose elements' types are implicitly convertible to those in the pair being constructed.
 			 */
 			template<class U, class V>
-			pair (const pair<U,V>& pr): first(pr.first) : second(pr.second) {};
+			pair (const pair<U,V>& pr): first(pr.first), second(pr.second) {};
 
 			/**
 			 * @brief Initialization constructor.
@@ -65,15 +65,52 @@ namespace	ft
 			 * This may be an object of the same type or of a pair type whose elements' types are implicitly convertible.
 			 * @return pair& *this
 			 */
-			pair& operator= (const pair& pr)
+			template <class U, class V>
+			pair& operator= (const pair<U,V>& pr)
 			{
+				if (pr == *this)
+					return (*this);
 				first = pr.first;
 				second = pr.second;
-
 				return (*this);
 			}
 	};
 
+	template <class T1, class T2>
+	bool operator==(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+	{
+		return (lhs.first == rhs.first && lhs.second == rhs.second);
+	}
+
+	template <class T1, class T2>
+	bool operator!=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+	{
+		return (!(lhs == rhs));
+	}
+
+	template <class T1, class T2>
+	bool operator<(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+	{
+		return (lhs.first<rhs.first || (!(rhs.first<lhs.first) && lhs.second<rhs.second));
+	}
+
+	template <class T1, class T2>
+	bool operator<=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+	{
+		return (!(rhs<lhs));
+	}
+
+	template <class T1, class T2>
+	bool operator>(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template <class T1, class T2>
+	bool operator>=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+	{
+		return (!(lhs < rhs));
+	}
 
 	/**
 	 * fn:	make_pair

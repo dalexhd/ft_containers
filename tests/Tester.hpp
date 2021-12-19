@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/17 00:00:33 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:31:41 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Tester
 		public:
 			Tester(std::string const name) : _index(0), _name(name)
 			{
-				std::cout << C_CYAN;
+				std::cout << std::endl << C_CYAN;
 				for (int each = 0; each < 4; each++)
 				{
 					printf("\rStarting test for %s %.*s   \b\b\b", this->getName().c_str(), each, "...");
