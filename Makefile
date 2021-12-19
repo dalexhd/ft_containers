@@ -123,7 +123,7 @@ cov:		## Make coverage files
 
 
 rmcov:		## Clean coverage files
-			@rm *.gcov tp*.html tp*.css
+			@rm *.gcov coverage*.html coverage*.css
 
 ##@ Help
 help:		## View all available commands.
