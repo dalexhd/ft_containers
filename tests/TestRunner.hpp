@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 14:20:06 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:30:30 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ class TestRunner
 		private:
 			bool	_status;
 		public:
-			TestRunner() : _status(true) {};
+			TestRunner() {
+				setStatus(true);
+			};
 			bool	run(void)
 			{
 				Tester * type_traits_test = new type_traits_tester();
