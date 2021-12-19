@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/17 00:12:00 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 11:29:30 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ namespace	ft
 	 * fn:	enable_if
 	 * url: https://en.cppreference.com/w/cpp/types/enable_if
 	 *
-	 * If B is true, std::enable_if has a public member typedef type, equal to T; otherwise, there is no member typedef.
+	 * @brief If B is true, std::enable_if has a public member typedef type, equal to T; otherwise, there is no member typedef.
 	 * This metafunction is a convenient way to leverage SFINAE to conditionally remove functions from overload resolution based on type traits and to provide separate function overloads and specializations for different type traits. std::enable_if can be used as an additional function argument (not applicable to operator overloads), as a return type (not applicable to constructors and destructors), or as a class template or function template parameter.
 	 * The behavior of a program that adds specializations for enable_if is undefined.
 	*/
@@ -36,7 +36,7 @@ namespace	ft
 	 * fn:	is_integral
 	 * url: https://en.cppreference.com/w/cpp/types/is_integral
 	 *
-	 * Checks whether T is an integral type. Provides the member constant value which is equal to true, if T is the type bool, char, char8_t (since C++20), char16_t, char32_t, wchar_t, short, int, long, long long, or any implementation-defined extended integer types, including any signed, unsigned, and cv-qualified variants. Otherwise, value is equal to false.
+	 * @brief Checks whether T is an integral type. Provides the member constant value which is equal to true, if T is the type bool, char, char8_t (since C++20), char16_t, char32_t, wchar_t, short, int, long, long long, or any implementation-defined extended integer types, including any signed, unsigned, and cv-qualified variants. Otherwise, value is equal to false.
 	 * The behavior of a program that adds specializations for is_integral or is_integral_v (since C++17) is undefined.
 	*/
 	template<class T>
