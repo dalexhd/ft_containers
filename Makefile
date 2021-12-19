@@ -1,6 +1,6 @@
 OUTPUT				=	containers
 
-CC					=	@clang++ -std=c++11
+CC					=	@clang++ -std=c++11 -fprofile-arcs -ftest-coverage -fPIC
 SH					=	@bash
 RM					=	@/bin/rm -rf
 FLAGS				=	-Wextra -Wall -Werror -g -fsanitize=address
@@ -113,6 +113,14 @@ re:			## Call fclean => all
 
 test:		## Make test
 			echo "Please set test cmd!!!"
+
+cov:		## Make coverage files
+			@gcov $(OBJS)
+			@gcovr -g -k -r . --html --html-details -o coverage.html
+
+
+rmcov:		## Clean coverage files
+			@rm *.gcov tp*.html tp*.css
 
 ##@ Help
 help:		## View all available commands.

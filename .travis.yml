@@ -1,0 +1,9 @@
+language: cpp
+sudo: false # only for faster builds
+script:
+  - make
+  - ./containers
+  - "make cov"
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
