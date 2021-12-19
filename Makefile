@@ -1,6 +1,10 @@
 OUTPUT				=	containers
 
-CC					=	@clang++ -std=c++11 -fprofile-arcs -ftest-coverage -O0 -fPIC
+ifeq ($(shell whoami), runner)
+	CC				=	@g++ -std=c++11 -fprofile-arcs -ftest-coverage -O0 -fPIC
+else
+	CC				=	@clang++ -std=c++11 -fprofile-arcs -ftest-coverage -O0 -fPIC
+endif
 SH					=	@bash
 RM					=	@/bin/rm -rf
 FLAGS				=	-Wextra -Wall -Werror -g -fsanitize=address
@@ -115,8 +119,7 @@ test:		## Make test
 			echo "Please set test cmd!!!"
 
 cov:		## Make coverage files
-			@gcov-5 -abcfu $(SOURCES)
-			@gcovr -g -k -r . --html --html-details -o coverage.html
+			gcov $(OBJS)
 
 
 rmcov:		## Clean coverage files

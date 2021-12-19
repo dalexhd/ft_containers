@@ -28,12 +28,10 @@ jobs:
         run: make
       - name: Run test
         run: ./containers
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-      # - name: Generate cov
-      #   run: make cov
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v1
+      - name: Generate cov
+        run: make cov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
       # - name: Clone test
       #   run: git clone https://github.com/mli42/containers_test.git
       # - name: Run test
