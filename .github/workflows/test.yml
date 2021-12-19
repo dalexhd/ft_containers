@@ -29,7 +29,7 @@ jobs:
       - name: Run test
         run: ./containers
       - name: Update gcov
-        run: sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+        run: sudo apt install gcov-5
       - name: Generate cov
         run: make cov
       - name: Upload coverage to Codecov
