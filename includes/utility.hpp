@@ -6,10 +6,9 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 13:08:41 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:56:03 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef UTILITY_HPP
 # define UTILITY_HPP
