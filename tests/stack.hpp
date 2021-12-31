@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 15:37:03 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 16:19:37 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:24:08 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ class stack_tester : public Tester
 				for (int i=0; i<6; ++i) mystack3.push(i);
 				return mystack < mystack2 && !(mystack2 < mystack3);
 			});
-			this->expect(">", [&]{
+/* 			this->expect(">", [&]{
 				ft::stack<int> mystack;
 				ft::stack<int> mystack2;
 				for (int i=0; i<5; ++i) mystack.push(i);
@@ -170,7 +170,7 @@ class stack_tester : public Tester
 				for (int i=0; i<5; ++i) mystack.push(i);
 				for (int i=0; i<4; ++i) mystack2.push(i);
 				return mystack > mystack2;
-			});
+			}); */
 
 			this->expect(">=", [&]{
 				ft::stack<int> mystack;
