@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:36:41 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 13:49:51 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 17:07:59 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 */
 #include <iostream>
 #include <string.h>
-
 #include "tests/TestRunner.hpp"
 
 int main(void)
