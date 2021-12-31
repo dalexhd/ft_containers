@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 13:31:41 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 09:09:38 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <functional>
+#include <chrono>
+#include <numeric>
 
 #include "colors.hpp"
 
@@ -45,20 +48,6 @@ class Tester
 			std::string	getName() const {
 				return (this->_name);
 			}
-			template <typename T, typename E>
-			bool	expect(std::string const title, T (fn), E ret)
-			{
-				if (fn != ret)
-				{
-					std::cerr << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex() << "]" << C_RED << " (" << title << ") test not passed 💣" << C_X << std::endl;
-					this->setStatus(false);
-				}
-				else
-					std::cout << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex()  << "]" << C_GREEN << " (" << title << ") test passed 🚀" << C_X << std::endl;
-				this->setIndex(this->getIndex() + 1);
-				usleep(50000);
-				return (this->getStatus());
-			}
 			void	section(std::string const name)
 			{
 				this->setSection(name);
@@ -69,10 +58,44 @@ class Tester
 				std::cout << "------------------------------------ " << C_BOLD << "Ending " << this->getSection() << " section..." << C_X << " ------------------------------------" << std::endl;
 				this->setSection("");
 			}
-			template <typename T>
-			bool	expect(void (*fn)(int), T &ret)
+			bool	expect(std::string const title, std::function<bool()>&& fn, std::function<bool()>&& ret)
 			{
-				return ((*fn) == ret);
+				long long fnDuration[10];
+				long long retDuration[10];
+				bool fnVal;
+				bool retVal;
+
+				for (size_t i = 0; i < 10; i++)
+				{
+					auto fnstart = std::chrono::high_resolution_clock::now();
+					fnVal = fn();
+					fnDuration[i] = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - fnstart).count();
+					auto retstart = std::chrono::high_resolution_clock::now();
+					retVal = ret();
+					retDuration[i] = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - retstart).count();
+					usleep(10);
+				}
+				long long fnMeanDuration = std::accumulate(std::begin(fnDuration), std::end(fnDuration), 0, std::plus<long long>())
+					/ sizeof(fnDuration)/sizeof(fnDuration[0]);
+				long long retMeanDuration = std::accumulate(std::begin(retDuration), std::end(retDuration), 0, std::plus<long long>())
+					/ sizeof(retDuration)/sizeof(retDuration[0]);
+				double slowerRatio = fnMeanDuration / retMeanDuration;
+
+				if (fnVal != retVal)
+				{
+					std::cerr << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex() << "]" << C_RED << " (" << title << ") test not passed 💣" << C_X << " [🙋" << fnMeanDuration << "ns / 🌐" << retMeanDuration << "ns] (" << slowerRatio << " slower)" << C_X << std::endl;
+					this->setStatus(false);
+				}
+				else if (slowerRatio >= 20)
+				{
+					std::cerr << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex() << "]" << C_RED << " (" << title << ") test not passed ⌛" << C_X << " [🙋" << fnMeanDuration << "ns / 🌐" << retMeanDuration << "ns] (" << slowerRatio << " slower)" << C_X << std::endl;
+					this->setStatus(false);
+				}
+				else
+					std::cout << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex()  << "]" << C_GREEN << " (" << title << ") test passed 🚀" << C_X << " [🙋" << fnMeanDuration << "ns / 🌐" << retMeanDuration << "ns] (" << slowerRatio << " slower)" << C_X << std::endl;
+				this->setIndex(this->getIndex() + 1);
+				usleep(50000);
+				return (this->getStatus());
 			}
 			void	setIndex(size_t index)
 			{
