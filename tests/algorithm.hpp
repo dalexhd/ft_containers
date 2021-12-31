@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 14:15:36 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 16:29:04 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/30 12:53:34 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ class algorithm_tester : public Tester
 			this->section("lexicographical_compare");
 			char foo[] = "Apple";
 			char bar[] = "apartment";
-			this->expect("Using default comparison (operator<)", ft::lexicographical_compare(foo, foo + 5, bar, bar + 9), true);
-			this->expect("Using mycomp as comparison object", ft::lexicographical_compare(foo, foo + 5, bar, bar + 9, mycomp), false);
-			this->expect("Using default comparison (operator<)", ft::lexicographical_compare(bar, bar + 9, foo, foo + 5), false);
-			this->expect("Using mycomp as comparison object", ft::lexicographical_compare(bar, bar + 9, foo, foo + 5, mycomp), true);
+			this->expect("Using default comparison (operator<)", [&]{ return ft::lexicographical_compare(foo, foo + 5, bar, bar + 9); }, [&]{ return std::lexicographical_compare(foo, foo + 5, bar, bar + 9); });
+			this->expect("Using mycomp as comparison object", [&]{ return ft::lexicographical_compare(foo, foo + 5, bar, bar + 9, mycomp); }, [&]{ return std::lexicographical_compare(foo, foo + 5, bar, bar + 9, mycomp); });
+			this->expect("Using default comparison (operator<)", [&]{ return ft::lexicographical_compare(bar, bar + 9, foo, foo + 5); }, [&]{ return std::lexicographical_compare(bar, bar + 9, foo, foo + 5); });
+			this->expect("Using mycomp as comparison object", [&]{ return ft::lexicographical_compare(bar, bar + 9, foo, foo + 5, mycomp); }, [&]{ return std::lexicographical_compare(bar, bar + 9, foo, foo + 5, mycomp); });
 			this->endSection();
 			return (_status);
 		}
