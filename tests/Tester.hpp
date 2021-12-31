@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 15:53:25 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:34:35 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ class Tester
 				bool fnVal;
 				bool retVal;
 
-				for (size_t i = 0; i < 10; i++)
+				int i = 0;
+				while (i < 10)
 				{
 					auto fnstart = std::chrono::high_resolution_clock::now();
 					fnVal = fn();
@@ -73,7 +74,8 @@ class Tester
 					auto retstart = std::chrono::high_resolution_clock::now();
 					retVal = ret();
 					retDuration[i] = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - retstart).count();
-					usleep(10);
+					i++;
+					usleep(100);
 				}
 				long long fnMeanDuration = std::accumulate(std::begin(fnDuration), std::end(fnDuration), 0, std::plus<long long>())
 					/ sizeof(fnDuration)/sizeof(fnDuration[0]);

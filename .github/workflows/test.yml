@@ -29,7 +29,11 @@ jobs:
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
       - name: Run test
-        run: ./containers
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          command: ./containers
+          max_attempts: 5
       - name: Generate cov
         run: make cov
       - name: Upload coverage to Codecov
