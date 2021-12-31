@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 16:30:30 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 15:43:48 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "type_traits.hpp"
 #include "utility.hpp"
 #include "algorithm.hpp"
+#include "stack.hpp"
 
 class TestRunner
 	{
@@ -38,6 +39,10 @@ class TestRunner
 				Tester * algorithm_test = new algorithm_tester();
 				if (!algorithm_test->test()) setStatus(false);
 				delete algorithm_test;
+
+				Tester * stack_test = new stack_tester();
+				if (!stack_test->test()) setStatus(false);
+				delete stack_test;
 
 				return (getStatus());
 			};

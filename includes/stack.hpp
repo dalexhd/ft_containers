@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 14:26:22 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:04:13 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ namespace ft
 	 * @tparam T Type of the elements.
 	 * @tparam Container Type of the internal underlying container object where the elements are stored.
 	 */
-	template <class T, class Container = std::deque<T>>
+	template < class T, class Container = std::deque<T> >
 	class stack
 	{
 		public:
@@ -32,7 +32,7 @@ namespace ft
 			typedef	size_t		size_type;
 
 			explicit stack (const container_type& ctnr = container_type()) : container(ctnr) {};
-			~stack {};
+			~stack() {};
 
 			/**
 			 * @brief Test whether container is empty
@@ -58,6 +58,18 @@ namespace ft
 
 			/**
 			 * @brief Returns a reference to the top element in the stack.
+			 * Since stacks are last-in first-out containers, the top element is the last element inserted into the stack.
+			 * This member function effectively calls member back of the underlying container object.
+			 *
+			 * @return A reference to the top element in the stack.
+			 */
+			value_type& top()
+			{
+				return this->container.back();
+			}
+
+			/**
+			 * @brief Returns a constant reference to the top element in the stack.
 			 * Since stacks are last-in first-out containers, the top element is the last element inserted into the stack.
 			 * This member function effectively calls member back of the underlying container object.
 			 *
@@ -92,29 +104,31 @@ namespace ft
 			{
 				return this->container.pop_back();
 			}
-			bool operator==( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
+
+			// operators
+			friend bool operator==( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
 			{
-				return true;
+				return lhs.container == rhs.container;
 			}
-			bool operator!=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
+			friend bool operator!=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
 			{
-				return true;
+				return lhs.container != rhs.container;
 			}
-			bool operator<( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
+			friend bool operator<( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
 			{
-				return true;
+				return lhs.container < rhs.container;
 			}
-			bool operator<=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
+			friend bool operator<=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
 			{
-				return true;
+				return lhs.container <= rhs.container;
 			}
-			bool operator>( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
+			friend bool operator>( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
 			{
-				return true;
+				return lhs.container > rhs.container;
 			}
-			bool operator>=( const ft::stack<T,Container>& lhs, const std::stack<T,Container>& rhs )
+			friend bool operator>=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
 			{
-				return true;
+				return lhs.container >= rhs.container;
 			}
 		private:
 			container_type		container;
