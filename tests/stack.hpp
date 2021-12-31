@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 15:37:03 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 16:43:16 by aborboll         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:49:55 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ class stack_tester : public Tester
 				for (int i=0; i<5; ++i) mystack.push(i);
 				for (int i=0; i<5; ++i) mystack2.push(i);
 				for (int i=0; i<6; ++i) mystack3.push(i);
-				return mystack < mystack2 && !(mystack2 < mystack3);
+				return mystack <= mystack2 && !(mystack2 <= mystack3);
 			}, [&]{
 				std::stack<int> mystack;
 				std::stack<int> mystack2;
