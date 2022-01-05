@@ -79,7 +79,6 @@ all:	$(OUTPUT)
 $(OBJ_DIR):
 			@echo ${CUT}[${Y}$(OUTPUT)]${X} ${B}Creating: ${R}$(OBJ_DIR)${X}
 			@mkdir -p $(OBJ_DIR)
-			@mkdir -p $(OBJ_DIR)/tests
 
 # Normal objects
 $(OUTPUT): $(OBJ_DIR) $(OBJS)
