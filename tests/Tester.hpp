@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 17:08:06 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/05 21:19:24 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 #include <functional>
 #include <chrono>
 #include <numeric>
+#include <vector>
+#include <iterator>
+#include <map>
+#include <string>
 
 #include "colors.hpp"
 
