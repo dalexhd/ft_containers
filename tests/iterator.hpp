@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/05 21:19:07 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/09 12:15:08 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,32 +133,57 @@ class iterator_tester : public Tester
 					str += std::to_string((*rev_iterator).first) + " " + (*rev_iterator).second + " ";
 				return (str == "3 three 2 two 1 one ");
 			});
+			this->expect("ft::reverse_iterator::operator==", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator!=", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator<", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator>", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator<=", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator>=", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator+", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator-", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator+=", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
+			this->expect("ft::reverse_iterator::operator-=", [&]{
+				return (true);
+			}, [&]{
+				return (false);
+			});
 			this->endSection();
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator->" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator==" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator!=" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator<" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator>" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator<=" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator>=" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator+" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator-" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator+=" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-			// std::cout << "Testing ft::reverse_iterator::operator-=" << std::endl;
-			// std::cout << "--------------------------------------------" << std::endl;
-
-
 			return (true);
 		}
 };

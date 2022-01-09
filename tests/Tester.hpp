@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/05 21:19:24 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/09 11:26:41 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ class Tester
 					/ sizeof(fnDuration)/sizeof(fnDuration[0]);
 				long long retMeanDuration = std::accumulate(std::begin(retDuration), std::end(retDuration), 0, std::plus<long long>())
 					/ sizeof(retDuration)/sizeof(retDuration[0]);
+				retMeanDuration = retMeanDuration == 0 ? 1 : retMeanDuration;
 				double slowerRatio = fnMeanDuration / retMeanDuration;
 
 				if (fnVal != retVal)
