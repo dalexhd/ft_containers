@@ -88,6 +88,8 @@
 		"typeinfo": "cpp",
 		"utility": "cpp",
 		"memory_resource": "cpp",
-		"__memory": "cpp"
+		"__memory": "cpp",
+		"*.tcc": "cpp",
+		"random": "cpp"
 	}
 }

@@ -2,3 +2,4 @@ obj
 .DS Store
 containers
 *.gcov
+.vscode
