@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/19 11:29:30 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/14 19:16:07 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,76 +40,40 @@ namespace	ft
 	 * The behavior of a program that adds specializations for is_integral or is_integral_v (since C++17) is undefined.
 	*/
 	template<class T>
-	struct is_integral
-	{
-		static const bool value = false;
-	};
+	struct is_integral : public std::false_type {};
 
 	template<>
-	struct is_integral<int>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<int> : public std::true_type {};
 
 	template<>
-	struct is_integral<bool>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<bool> : public std::true_type {};
 
 	template<>
-	struct is_integral<char>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<char> : public std::true_type {};
 
 	template<>
-	struct is_integral<wchar_t>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<wchar_t> : public std::true_type {};
 
 	template<>
-	struct is_integral<short>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<short> : public std::true_type {};
 
 	template<>
-	struct is_integral<long>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<long> : public std::true_type {};
 
 	template<>
-	struct is_integral<long long>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<long long> : public std::true_type {};
 
 	template<>
-	struct is_integral<unsigned char>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<unsigned char> : public std::true_type {};
 
 	template<>
-	struct is_integral<unsigned short>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<unsigned short> : public std::true_type {};
 
 	template<>
-	struct is_integral<unsigned int>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<unsigned int> : public std::true_type {};
 
 	template<>
-	struct is_integral<unsigned long>
-	{
-		static const bool value = true;
-	};
+	struct is_integral<unsigned long> : public std::true_type {};
 }
 
 #endif
