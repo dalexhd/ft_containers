@@ -90,6 +90,10 @@
 		"memory_resource": "cpp",
 		"__memory": "cpp",
 		"*.tcc": "cpp",
-		"random": "cpp"
+		"random": "cpp",
+		"list": "cpp",
+		"set": "cpp",
+		"csignal": "cpp",
+		"queue": "cpp"
 	}
 }

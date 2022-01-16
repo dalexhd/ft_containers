@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/05 20:11:38 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/16 19:08:34 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,42 @@ namespace	ft
 			{
 				this->_type += n;
 				return (*this);
+			}
+
+			template <class Iter>
+			friend bool operator==(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			{
+				return (lhs._type == rhs.base());
+			}
+
+			template <class Iter>
+			friend bool operator!=(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			{
+				return (lhs._type != rhs.base());
+			}
+
+			template <class Iter>
+			friend bool operator<(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			{
+				return (lhs._type < rhs.base());
+			}
+
+			template <class Iter>
+			friend bool operator<=(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			{
+				return (lhs._type <= rhs.base());
+			}
+
+			template <class Iter>
+			friend bool operator>(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			{
+				return (lhs._type > rhs.base());
+			}
+
+			template <class Iter>
+			friend bool operator>=(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			{
+				return (lhs._type >= rhs.base());
 			}
 
 			iterator_type base() const
