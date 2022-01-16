@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/16 20:14:38 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/16 20:17:33 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,38 +127,32 @@ namespace	ft
 				return (*this);
 			}
 
-			template <class Iter>
-			friend bool operator==(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			friend bool operator==(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
 				return (lhs._type == rhs.base());
 			}
 
-			template <class Iter>
-			friend bool operator!=(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			friend bool operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
 				return (lhs._type != rhs.base());
 			}
 
-			template <class Iter>
-			friend bool operator<(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			friend bool operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
 				return (lhs._type < rhs.base());
 			}
 
-			template <class Iter>
-			friend bool operator<=(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			friend bool operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
 				return (lhs._type <= rhs.base());
 			}
 
-			template <class Iter>
-			friend bool operator>(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			friend bool operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
 				return (lhs._type > rhs.base());
 			}
 
-			template <class Iter>
-			friend bool operator>=(const reverse_iterator<Iter>& lhs, const reverse_iterator<Iter>& rhs)
+			friend bool operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
 				return (lhs._type >= rhs.base());
 			}
