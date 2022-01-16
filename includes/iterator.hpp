@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/16 20:07:02 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/16 20:09:23 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ namespace	ft
 		public:
 			reverse_iterator() {};
 			explicit reverse_iterator (iterator_type it): _type(it) {};
-			template <class Iter>
-			reverse_iterator (const reverse_iterator<Iter>& rev_it): _type(rev_it.base()) {};
+			template <class Itera>
+			reverse_iterator (const reverse_iterator<Itera>& rev_it): _type(rev_it.base()) {};
 
 			reference operator*() const
 			{
