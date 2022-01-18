@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/18 17:57:23 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:13:08 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,24 +366,68 @@ class iterator_tester : public Tester
 				return (result == "9876543210");
 			});
 			this->expect("ft::reverse_iterator::operator+", [&]{
-				return (true);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				ft::reverse_iterator<iter_type> rev_until (from);
+				return (*(from + 5) == 10);
 			}, [&]{
-				return (false);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				std::reverse_iterator<iter_type> rev_until (from);
+				return (*(from + 5) == 10);
 			});
 			this->expect("ft::reverse_iterator::operator-", [&]{
-				return (true);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.end());
+				std::reverse_iterator<iter_type> rev_until (from);
+				return (*(from - 6) == 8);
 			}, [&]{
-				return (false);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.end());
+				std::reverse_iterator<iter_type> rev_until (from);
+				return (*(from - 6) == 8);
 			});
 			this->expect("ft::reverse_iterator::operator+=", [&]{
-				return (true);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				ft::reverse_iterator<iter_type> rev_until (from);
+				from += 5;
+				return (*from == 10);
 			}, [&]{
-				return (false);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				std::reverse_iterator<iter_type> rev_until (from);
+				from += 5;
+				return (*from == 10);
 			});
 			this->expect("ft::reverse_iterator::operator-=", [&]{
-				return (true);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.end());
+				ft::reverse_iterator<iter_type> rev_until (from);
+				from -= 6;
+				return (*from == 8);
 			}, [&]{
-				return (false);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back((i * 2));	// myvector: 0 2 4 6 8 10 12 14 16 18
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.end());
+				std::reverse_iterator<iter_type> rev_until (from);
+				from -= 6;
+				return (*from == 8);
 			});
 			this->endSection();
 			return (true);
