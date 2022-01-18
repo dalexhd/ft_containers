@@ -95,5 +95,6 @@
 		"set": "cpp",
 		"csignal": "cpp",
 		"queue": "cpp"
-	}
+	},
+	"files.autoSave": "off"
 }
