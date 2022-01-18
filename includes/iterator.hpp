@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/16 20:17:33 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:41:17 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,22 +139,22 @@ namespace	ft
 
 			friend bool operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				return (lhs._type < rhs.base());
+				return (lhs._type > rhs.base());
 			}
 
 			friend bool operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				return (lhs._type <= rhs.base());
+				return (lhs._type >= rhs.base());
 			}
 
 			friend bool operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				return (lhs._type > rhs.base());
+				return (lhs._type < rhs.base());
 			}
 
 			friend bool operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				return (lhs._type >= rhs.base());
+				return (lhs._type <= rhs.base());
 			}
 
 			iterator_type base() const

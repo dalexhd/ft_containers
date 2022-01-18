@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/14 16:54:27 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:28:51 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ class Tester
 				{
 					printf("\rStarting test for %s %.*s   \b\b\b", this->getName().c_str(), each, "...");
 					fflush(stdout);//force printing as no newline in output
-					usleep(250000);
+					usleep(100000);
 				}
 				std::cout << C_X << std::endl;
 			}
@@ -119,7 +119,7 @@ class Tester
 				else
 					std::cout << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex()  << "]" << C_GREEN << " (" << title << ") test passed 🚀" << C_X << " [🙋" << fnMeanDuration << "ns / 🌐" << retMeanDuration << "ns] (" << slowerRatio << " slower)" << C_X << std::endl;
 				this->setIndex(this->getIndex() + 1);
-				usleep(50000);
+				usleep(5000);
 				return (this->getStatus());
 			}
 			void	setIndex(size_t index)

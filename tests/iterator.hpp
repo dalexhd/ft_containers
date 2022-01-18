@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/17 17:26:40 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:40:19 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,9 +254,9 @@ class iterator_tester : public Tester
 				ft::reverse_iterator<iter_type> rev_until (from);
 				ft::reverse_iterator<iter_type> rev_from (until);
 				std::string result;
-				while (rev_from > rev_until)
+				while (rev_from < rev_until)
 					result += std::to_string(*rev_from++);
-				return (result == "876543210");
+				return (result == "9876543210");
 			}, [&]{
 				std::vector<int> myvector;
 				for (int i=0; i<10; i++) myvector.push_back(i);
@@ -266,9 +266,9 @@ class iterator_tester : public Tester
 				std::reverse_iterator<iter_type> rev_until (from);
 				std::reverse_iterator<iter_type> rev_from (until);
 				std::string result;
-				while (rev_from > rev_until)
+				while (rev_from < rev_until)
 					result += std::to_string(*rev_from++);
-				return (result == "876543210");
+				return (result == "9876543210");
 			});
 			this->expect("ft::reverse_iterator::operator>", [&]{
 				std::vector<int> myvector;
@@ -276,8 +276,8 @@ class iterator_tester : public Tester
 				typedef std::vector<int>::iterator iter_type;
 				iter_type from (myvector.begin());
 				iter_type until (myvector.end());
-				std::reverse_iterator<iter_type> rev_until (from);
-				std::reverse_iterator<iter_type> rev_from (until);
+				ft::reverse_iterator<iter_type> rev_until (from);
+				ft::reverse_iterator<iter_type> rev_from (until);
 				std::string result;
 				while (rev_until > rev_from)
 					result += std::to_string(*rev_from++);
