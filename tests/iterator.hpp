@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/18 18:13:08 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:23:19 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ class iterator_tester : public Tester
 		bool	test()
 		{
 			this->section("operators");
-			this->expect("ft::reverse_iterator::operator++(vector)", [&]{
+			this->expect("ft::reverse_iterator::operator++", [&]{
+				//vector
 				std::vector<int> myvector;
 				for (int i=0; i<10; i++) myvector.push_back(i);
 				typedef std::vector<int>::iterator iter_type;
@@ -32,57 +33,54 @@ class iterator_tester : public Tester
 				iter_type until (myvector.end());
 				ft::reverse_iterator<iter_type> rev_until (from);
 				ft::reverse_iterator<iter_type> rev_from (until);
-				std::string str = "";
+				std::string strvector = "";
 				while (rev_from != rev_until) {
-					str += std::to_string(*rev_from) + " ";
+					strvector += std::to_string(*rev_from) + " ";
 					++rev_from;
 				}
-				return (str == "9 8 7 6 5 4 3 2 1 0 ");
+				//map
+				std::map<int, int> mymap;
+				for (int i=0; i<10; i++) mymap.insert(std::pair<int, int>(i, i));
+				typedef std::map<int, int>::iterator iter_typemap;
+				iter_typemap frommap (mymap.begin());
+				iter_typemap untilmap (mymap.end());
+				ft::reverse_iterator<iter_typemap> rev_until_map (frommap);
+				ft::reverse_iterator<iter_typemap> rev_from_map (untilmap);
+				std::string strmap = "";
+				while (rev_from_map != rev_until_map) {
+					strmap += std::to_string(rev_from_map->first) + " ";
+					++rev_from_map;
+				}
+				return (strvector == "9 8 7 6 5 4 3 2 1 0 " && strmap == "9 8 7 6 5 4 3 2 1 0 ");
 			}, [&]{
+				//vector
 				std::vector<int> myvector;
 				for (int i=0; i<10; i++) myvector.push_back(i);
 				typedef std::vector<int>::iterator iter_type;
 				iter_type from (myvector.begin());
 				iter_type until (myvector.end());
-				ft::reverse_iterator<iter_type> rev_until (from);
-				ft::reverse_iterator<iter_type> rev_from (until);
-				std::string str = "";
-				while (rev_from != rev_until) {
-					str += std::to_string(*rev_from) + " ";
-					++rev_from;
-				}
-				return (str == "9 8 7 6 5 4 3 2 1 0 ");
-			});
-			this->expect("ft::reverse_iterator::operator++(map)", [&]{
-				std::map<int, int> mymap;
-				for (int i=0; i<10; i++) mymap.insert(std::pair<int, int>(i, i));
-				typedef std::map<int, int>::iterator iter_type;
-				iter_type from (mymap.begin());
-				iter_type until (mymap.end());
-				ft::reverse_iterator<iter_type> rev_until (from);
-				ft::reverse_iterator<iter_type> rev_from (until);
-				std::string str = "";
-				while (rev_from != rev_until) {
-					str += std::to_string(rev_from->first) + " ";
-					++rev_from;
-				}
-				return (str == "9 8 7 6 5 4 3 2 1 0 ");
-			}, [&]{
-				std::map<int, int> mymap;
-				for (int i=0; i<10; i++) mymap.insert(std::pair<int, int>(i, i));
-				typedef std::map<int, int>::iterator iter_type;
-				iter_type from (mymap.begin());
-				iter_type until (mymap.end());
 				std::reverse_iterator<iter_type> rev_until (from);
 				std::reverse_iterator<iter_type> rev_from (until);
-				std::string str = "";
+				std::string strvector = "";
 				while (rev_from != rev_until) {
-					str += std::to_string(rev_from->first) + " ";
+					strvector += std::to_string(*rev_from) + " ";
 					++rev_from;
 				}
-				return (str == "9 8 7 6 5 4 3 2 1 0 ");
+				//map
+				std::map<int, int> mymap;
+				for (int i=0; i<10; i++) mymap.insert(std::pair<int, int>(i, i));
+				typedef std::map<int, int>::iterator iter_typemap;
+				iter_typemap frommap (mymap.begin());
+				iter_typemap untilmap (mymap.end());
+				std::reverse_iterator<iter_typemap> rev_until_map (frommap);
+				std::reverse_iterator<iter_typemap> rev_from_map (untilmap);
+				std::string strmap = "";
+				while (rev_from_map != rev_until_map) {
+					strmap += std::to_string(rev_from_map->first) + " ";
+					++rev_from_map;
+				}
+				return (strvector == "9 8 7 6 5 4 3 2 1 0 " && strmap == "9 8 7 6 5 4 3 2 1 0 ");
 			});
-
 			this->expect("ft::reverse_iterator::operator--", [&]{
 				std::vector<int> myvector;
 				for (int i=0; i<10; i++) myvector.push_back(i);
