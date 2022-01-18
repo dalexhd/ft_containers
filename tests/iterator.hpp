@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/18 18:49:36 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:54:21 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ class iterator_tester : public Tester
 				}
 				while ( rev_iterator != rev_begin )
 				{
-					--rev_iterator;
+					rev_iterator--;
 					ret2 += std::to_string(*rev_iterator) + " ";
 				}
 				return (ret1 == "9 8 7 6 5 4 3 2 1 0 " && ret2 == "0 1 2 3 4 5 6 7 8 9 ");
@@ -168,7 +168,7 @@ class iterator_tester : public Tester
 				}
 				while ( rev_iterator != rev_begin )
 				{
-					--rev_iterator;
+					rev_iterator--;
 					ret2 += std::to_string(*rev_iterator) + " ";
 				}
 				return (ret1 == "9 8 7 6 5 4 3 2 1 0 " && ret2 == "0 1 2 3 4 5 6 7 8 9 ");
