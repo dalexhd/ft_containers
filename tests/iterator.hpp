@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/18 17:40:19 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:57:23 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,14 +296,74 @@ class iterator_tester : public Tester
 				return (result == "9876543210");
 			});
 			this->expect("ft::reverse_iterator::operator<=", [&]{
-				return (true);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back(i);
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				iter_type until (myvector.end());
+				ft::reverse_iterator<iter_type> rev_until (from);
+				ft::reverse_iterator<iter_type> rev_from (until);
+				std::string result;
+				while (rev_from <= rev_until)
+				{
+					if (rev_from != rev_until)
+						result += std::to_string(rev_from != rev_until ? *rev_from++ : *rev_from);
+					else
+						break ;
+				}
+				return (result == "9876543210");
 			}, [&]{
-				return (false);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back(i);
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				iter_type until (myvector.end());
+				std::reverse_iterator<iter_type> rev_until (from);
+				std::reverse_iterator<iter_type> rev_from (until);
+				std::string result;
+				while (rev_from <= rev_until)
+				{
+					if (rev_from != rev_until)
+						result += std::to_string(rev_from != rev_until ? *rev_from++ : *rev_from);
+					else
+						break ;
+				}
+				return (result == "9876543210");
 			});
 			this->expect("ft::reverse_iterator::operator>=", [&]{
-				return (true);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back(i);
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				iter_type until (myvector.end());
+				ft::reverse_iterator<iter_type> rev_until (from);
+				ft::reverse_iterator<iter_type> rev_from (until);
+				std::string result;
+				while (rev_until >= rev_from)
+				{
+					if (rev_from != rev_until)
+						result += std::to_string(rev_from != rev_until ? *rev_from++ : *rev_from);
+					else
+						break ;
+				}
+				return (result == "9876543210");
 			}, [&]{
-				return (false);
+				std::vector<int> myvector;
+				for (int i=0; i<10; i++) myvector.push_back(i);
+				typedef std::vector<int>::iterator iter_type;
+				iter_type from (myvector.begin());
+				iter_type until (myvector.end());
+				std::reverse_iterator<iter_type> rev_until (from);
+				std::reverse_iterator<iter_type> rev_from (until);
+				std::string result;
+				while (rev_until >= rev_from)
+				{
+					if (rev_from != rev_until)
+						result += std::to_string(rev_from != rev_until ? *rev_from++ : *rev_from);
+					else
+						break ;
+				}
+				return (result == "9876543210");
 			});
 			this->expect("ft::reverse_iterator::operator+", [&]{
 				return (true);
