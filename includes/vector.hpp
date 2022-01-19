@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/19 15:58:19 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/19 21:19:51 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define VECTOR_H
 
 #include <memory>
+#include "iterator.hpp"
 
 namespace ft
 {
@@ -27,16 +28,24 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef	T													value_type;
-			typedef	Allocator											allocator_type;
-			typedef	typename	allocator_type::reference				reference;
-			typedef	typename	allocator_type::reference				const_reference;
-			typedef	typename	allocator_type::pointer					pointer;
-			typedef	typename	allocator_type::const_pointer			const_pointer;
-			//typedef typename	ft::vector_iterator<const_pointer>		const_iterator;
-			//typedef				ft::reverse_iterator<iterator>			reverse_iterator;
-			//typedef				ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef	T															value_type;
+			typedef	Allocator													allocator_type;
+			typedef	typename	allocator_type::reference						reference;
+			typedef	typename	allocator_type::reference						const_reference;
+			typedef	typename	allocator_type::pointer							pointer;
+			typedef	typename	allocator_type::const_pointer					const_pointer;
+			typedef typename	ft::iterator<pointer>							iterator;
+			typedef typename	ft::iterator<const_pointer>						const_iterator;
+			typedef				ft::reverse_iterator<iterator>					reverse_iterator;
+			typedef				ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef	size_t		size_type;
+		private:
+			size_type _size;
+			size_type _capacity;
+			allocator_type _allocator;
+			pointer _data;
+		public:
+			explicit vector (const allocator_type& alloc = allocator_type()) : _allocator(alloc) {};
 	};
 }
 
