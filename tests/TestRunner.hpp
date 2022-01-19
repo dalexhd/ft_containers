@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 15:43:48 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/05 19:39:06 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "utility.hpp"
 #include "algorithm.hpp"
 #include "stack.hpp"
+#include "iterator.hpp"
 
 class TestRunner
 	{
@@ -43,6 +44,10 @@ class TestRunner
 				Tester * stack_test = new stack_tester();
 				if (!stack_test->test()) setStatus(false);
 				delete stack_test;
+
+				Tester * iterator_test = new iterator_tester();
+				if (!iterator_test->test()) setStatus(false);
+				delete iterator_test;
 
 				return (getStatus());
 			};

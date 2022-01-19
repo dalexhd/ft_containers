@@ -3,7 +3,7 @@ OUTPUT				=	containers
 ifeq ($(shell whoami), runner)
 	CC				=	@g++ -std=c++11 -fprofile-arcs -ftest-coverage -O0 -fPIC
 else
-	CC				=	@clang++ -std=c++11 -fprofile-arcs -ftest-coverage -O0 -fPIC
+	CC				=	@clang++ -std=c++11
 endif
 SH					=	@bash
 RM					=	@/bin/rm -rf
@@ -31,6 +31,9 @@ SOURCES				=	$(SRCS)
 # Mandatory Objects
 OFILE				=	$(SOURCES:%.cpp=%.o)
 OBJS				=	$(addprefix $(OBJ_DIR), $(OFILE))
+
+# Dependencies
+DEPS				=	$(wildcard $(HEADER_DIR)/*.hpp)
 
 # Functions
 disp_indent			=	for I in `seq 1 $(MAKELEVEL)`; do \
@@ -76,7 +79,6 @@ all:	$(OUTPUT)
 $(OBJ_DIR):
 			@echo ${CUT}[${Y}$(OUTPUT)]${X} ${B}Creating: ${R}$(OBJ_DIR)${X}
 			@mkdir -p $(OBJ_DIR)
-			@mkdir -p $(OBJ_DIR)/tests
 
 # Normal objects
 $(OUTPUT): $(OBJ_DIR) $(OBJS)
@@ -87,7 +89,7 @@ $(OUTPUT): $(OBJ_DIR) $(OBJS)
 			@echo ${B}[------- 🧟 Let containers 🧟 --------]${X}
 			@echo ${B}[-------------------------------------]${X}
 
-$(OBJ_DIR)%.o: %.cpp
+$(OBJ_DIR)%.o: %.cpp $(DEPS)
 			$(eval COUNTER=$(shell echo $$(($(COUNTER)+1))))
 			$(eval SIZE=$(shell wc -c < $<))
 			$(eval STR=$(shell echo ${CUT}[${Y}$(OUTPUT)]${X} ${B}Compiling: ${X}$(SIZE) Bytes${R} $<${X}))

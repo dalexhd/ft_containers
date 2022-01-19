@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2021/12/31 16:34:35 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:28:51 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,32 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <functional>
-#include <chrono>
 #include <numeric>
+#include <vector>
+#include <iterator>
+#include <map>
+#include <string>
 
 #include "colors.hpp"
+
+#ifdef __MACH__
+# include <sys/time.h>
+# include <mach/mach_time.h>
+# include <mach/clock.h>
+# include <mach/mach.h>
+int64_t	getNs()
+{
+	return mach_absolute_time();
+}
+#elif __linux__
+# include <time.h>
+long	getNs()
+{
+	struct timespec time;
+	clock_gettime(CLOCK_REALTIME, &time);
+	return (time.tv_nsec);
+}
+#endif
 
 class Tester
 	{
@@ -41,7 +63,7 @@ class Tester
 				{
 					printf("\rStarting test for %s %.*s   \b\b\b", this->getName().c_str(), each, "...");
 					fflush(stdout);//force printing as no newline in output
-					usleep(250000);
+					usleep(100000);
 				}
 				std::cout << C_X << std::endl;
 			}
@@ -68,12 +90,12 @@ class Tester
 				int i = 0;
 				while (i < 10)
 				{
-					auto fnstart = std::chrono::high_resolution_clock::now();
+					long long fnstart = getNs();
 					fnVal = fn();
-					fnDuration[i] = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - fnstart).count();
-					auto retstart = std::chrono::high_resolution_clock::now();
+					fnDuration[i] = getNs() - fnstart;
+					long long retstart = getNs();
 					retVal = ret();
-					retDuration[i] = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - retstart).count();
+					retDuration[i] = getNs() - retstart;
 					i++;
 					usleep(100);
 				}
@@ -81,6 +103,7 @@ class Tester
 					/ sizeof(fnDuration)/sizeof(fnDuration[0]);
 				long long retMeanDuration = std::accumulate(std::begin(retDuration), std::end(retDuration), 0, std::plus<long long>())
 					/ sizeof(retDuration)/sizeof(retDuration[0]);
+				retMeanDuration = retMeanDuration == 0 ? 1 : retMeanDuration;
 				double slowerRatio = fnMeanDuration / retMeanDuration;
 
 				if (fnVal != retVal)
@@ -96,7 +119,7 @@ class Tester
 				else
 					std::cout << C_WHITE << "[" << this->getName()  << "]" << "[" << this->getIndex()  << "]" << C_GREEN << " (" << title << ") test passed 🚀" << C_X << " [🙋" << fnMeanDuration << "ns / 🌐" << retMeanDuration << "ns] (" << slowerRatio << " slower)" << C_X << std::endl;
 				this->setIndex(this->getIndex() + 1);
-				usleep(50000);
+				usleep(5000);
 				return (this->getStatus());
 			}
 			void	setIndex(size_t index)
