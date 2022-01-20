@@ -94,7 +94,8 @@
 		"list": "cpp",
 		"set": "cpp",
 		"csignal": "cpp",
-		"queue": "cpp"
+		"queue": "cpp",
+		"__functional_03": "cpp"
 	},
 	"files.autoSave": "off"
 }
