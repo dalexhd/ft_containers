@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/20 20:25:06 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:54:40 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,45 @@ class vector_tester : public Tester
 		{
 			this->section("member functions");
 			this->expect("vector::at", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return myvector.at(5) == 42;
+				return myvector.at(8) == 42;
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (myvector.at(5) == 42);
+				return (myvector.at(8) == 42);
+			});
+			this->expect("vector::at catch(out_of_range)", [&]{
+				try
+				{
+					ft::vector<int> myvector;
+					myvector.assign(10, 42);
+					return myvector.at(11) == 42;
+				}
+				catch(const std::exception& e)
+				{
+					return (true);
+				}
+			}, [&]{
+				try
+				{
+					std::vector<int> myvector;
+					myvector.assign(10, 42);
+					return myvector.at(11) == 42;
+				}
+				catch(const std::out_of_range& e)
+				{
+					return (true);
+				}
 			});
 			this->expect("vector::back", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return myvector.back() == 42;
+				return myvector.back() == 42;
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (myvector.back() == 42);
+				return myvector.back() == 42;
 			});
 			this->expect("vector::begin", [&]{
 				std::vector<int> myvector;
@@ -53,14 +74,13 @@ class vector_tester : public Tester
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (*(myvector.begin()) == 42);
+				return *(myvector.begin()) == 42;
 			});
 			this->expect("vector::clear", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
 				myvector.clear();
-				return (false);
-				//return myvector.empty();
+				return (myvector.empty());
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
@@ -68,10 +88,9 @@ class vector_tester : public Tester
 				return (myvector.empty());
 			});
 			this->expect("vector::empty", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return !myvector.empty();
+				return !myvector.empty();
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
@@ -100,10 +119,9 @@ class vector_tester : public Tester
 				return (myvector.size() == 9);
 			});
 			this->expect("vector::front", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return myvector.front() == 42;
+				return myvector.front() == 42;
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
@@ -132,13 +150,10 @@ class vector_tester : public Tester
 				return (myvector.size() == 11);
 			});
 			this->expect("vector::max_size", [&]{
-				std::vector<int> myvector;
-				myvector.assign(10, 42);
-				return (false);
-				//return myvector.max_size() == std::vector<int>().max_size();
+				ft::vector<int> myvector;
+				return myvector.max_size() == ft::vector<int>().max_size();
 			}, [&]{
 				std::vector<int> myvector;
-				myvector.assign(10, 42);
 				return (myvector.max_size() == std::vector<int>().max_size());
 			});
 			this->expect("vector::pop_back", [&]{
@@ -154,16 +169,15 @@ class vector_tester : public Tester
 				return (myvector.size() == 9);
 			});
 			this->expect("vector::push_back", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				myvector.push_back(42);
-				return (false);
-				//return myvector.size() == 11;
+				myvector.push_back(24);
+				return (myvector.size() == 11 && myvector.back() == 24);
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				myvector.push_back(42);
-				return (myvector.size() == 11);
+				myvector.push_back(24);
+				return (myvector.size() == 11 && myvector.back() == 24);
 			});
 			this->expect("vector::rbegin", [&]{
 				std::vector<int> myvector;
@@ -186,16 +200,36 @@ class vector_tester : public Tester
 				return (*(myvector.rend() - 1) == 42);
 			});
 			this->expect("vector::reserve", [&]{
-				std::vector<int> myvector;
-				myvector.assign(10, 42);
-				myvector.reserve(42);
-				return (false);
-				//return myvector.capacity() == 42;
-			}, [&]{
-				std::vector<int> myvector;
-				myvector.assign(10, 42);
+				ft::vector<int> myvector;
 				myvector.reserve(42);
 				return (myvector.capacity() == 42);
+			}, [&]{
+				std::vector<int> myvector;
+				myvector.reserve(42);
+				return (myvector.capacity() == 42);
+			});
+			this->expect("vector::reserve catch(length_error)", [&]{
+				try
+				{
+					ft::vector<int> myvector;
+					myvector.reserve(myvector.max_size() + 1);
+					return (false);
+				}
+				catch(const std::length_error& e)
+				{
+					return (true);
+				}
+			}, [&]{
+				try
+				{
+					std::vector<int> myvector;
+					myvector.reserve(myvector.max_size() + 1);
+					return (false);
+				}
+				catch(const std::length_error& e)
+				{
+					return (true);
+				}
 			});
 			this->expect("vector::resize", [&]{
 				std::vector<int> myvector;
@@ -210,14 +244,17 @@ class vector_tester : public Tester
 				return (myvector.size() == 42);
 			});
 			this->expect("vector::size", [&]{
-				std::vector<int> myvector;
-				myvector.assign(10, 42);
-				return (false);
-				//return myvector.size() == 10;
+				ft::vector<int> myvector;
+				myvector.push_back(1);
+				myvector.push_back(2);
+				myvector.push_back(3);
+				return (myvector.size() == 3);
 			}, [&]{
 				std::vector<int> myvector;
-				myvector.assign(10, 42);
-				return (myvector.size() == 10);
+				myvector.push_back(1);
+				myvector.push_back(2);
+				myvector.push_back(3);
+				return (myvector.size() == 3);
 			});
 			this->expect("vector::swap", [&]{
 				std::vector<int> myvector;

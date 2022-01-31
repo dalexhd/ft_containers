@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/20 20:36:43 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:53:24 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,30 @@ namespace ft
 			pointer _data;
 
 		public:
-			explicit vector (const allocator_type& alloc = allocator_type()) : _data(nullptr), _size(0), _capacity(0), _allocator(alloc) {};
+			explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(_allocator.allocate(0)) {};
 			explicit vector (size_type n, const allocator_type & alloc = allocator_type()) : _data(nullptr), _size(0), _capacity(0), _allocator(alloc)
 			{
 				try
 				{
 					_data = _allocator.allocacte(n);
 					_capacity = 0;
+					this->resize();
 				}
 				catch(const std::exception& e)
 				{
 					std::cerr << e.what() << '\n';
 				}
 			};
+
+			/**
+			 * @brief This destroys all container elements, and deallocates all the storage capacity allocated by the vector using its allocator.
+			 *
+			 */
+			~vector()
+			{
+				this->clear();
+				_allocator.deallocate(_data, this->capacity());
+			}
 
 			iterator begin()
 			{
@@ -131,7 +142,7 @@ namespace ft
 			reference at (size_type n)
 			{
 				if (n >= _size)
-					throw std::out_of_range("vector");
+					throw std::out_of_range("vectasdasor");
 				return (_data[n]);
 			}
 
@@ -162,7 +173,7 @@ namespace ft
 			 */
 			reference back()
 			{
-				return *(_data[_size - 1]);
+				return (_data[_size - 1]);
 			}
 
 			/**
@@ -186,7 +197,7 @@ namespace ft
 			 */
 			reference front()
 			{
-				return *(_data[0]);
+				return (_data[0]);
 			}
 
 			/**
@@ -247,6 +258,97 @@ namespace ft
 				return (_size == 0);
 			}
 
+			/**
+			 * @brief Removes all elements from the vector (which are destroyed), leaving the container with a size of 0.
+			 *
+			 */
+			void clear()
+			{
+				size_type tmpSize = this->size();
+				while (tmpSize)
+				{
+					tmpSize--;
+					_allocator.destroy(&_data[_size]);
+				}
+				_size = tmpSize;
+			}
+
+			/**
+			 * @brief Requests that the vector capacity be at least enough to contain n elements.
+			 * If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).
+			 * In all other cases, the function call does not cause a reallocation and the vector capacity is not affected.
+			 * This function has no effect on the vector size and cannot alter its elements.
+			 *
+			 * @param n Minimum capacity for the vector.
+			 * Note that the resulting vector capacity may be equal or greater than n.
+			 * Member type size_type is an unsigned integral type.
+			 */
+			void reserve (size_type n)
+			{
+
+				if (n > this->max_size())
+					throw std::length_error("Allocation size exceeds maximum supported size");
+				else if (n > this->capacity())
+				{
+					T * tmp = _allocator.allocate(n);
+					size_type newSize;
+					for (newSize = 0; newSize < _size; newSize++)
+					{
+						_allocator.construct(&tmp[newSize], _data[newSize]);
+					}
+					this->clear();
+					_allocator.deallocate(_data, _capacity);
+					_data = tmp;
+					_capacity = n;
+					_size = newSize;
+				}
+			}
+
+
+			/**
+			 * @brief  Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
+			 * The new contents are elements constructed from each of the elements in the range between first and last, in the same order.
+			 *
+			 * @param n New size for the container.
+			 * Member type size_type is an unsigned integral type.
+			 * @param val Value to fill the container with. Each of the n elements in the container will be initialized to a copy of this value.
+			 * Member type value_type is the type of the elements in the container, defined in vector as an alias of its first template parameter (T).
+			 */
+			void assign (size_type n, const value_type& val)
+			{
+				reserve(n);
+				clear();
+				for (size_type i = 0; i < n; i++)
+					push_back(val);
+			}
+
+			/**
+			 * @brief Add element at the end
+			 * Adds a new element at the end of the vector, after its current last element. The content of val is copied (or moved) to the new element.
+			 * This effectively increases the container size by one, which causes an automatic reallocation of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity.
+			 *
+			 * @param val Value to be copied (or moved) to the new element.
+			 * Member type value_type is the type of the elements in the container, defined in vector as an alias of its first template parameter (T).
+			 */
+			void push_back (const value_type& val)
+			{
+				if (_size == this->capacity())
+				{
+					this->reserve((_size + 1) * 2); // See https://stackoverflow.com/q/1100311 in order to understand why it's *2
+				}
+				_allocator.construct(_data + _size++, val);
+			}
+
+			/**
+			 * @brief Returns a copy of the allocator object associated with the vector.
+			 *
+			 * @return allocator_type The allocator.
+			 * Member type allocator_type is the type of the allocator used by the container, defined in vector as an alias of its second template parameter (Alloc).
+			 */
+			allocator_type get_allocator() const
+			{
+				return (_allocator);
+			}
 	};
 }
 
