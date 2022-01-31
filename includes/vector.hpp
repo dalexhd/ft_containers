@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/31 21:53:24 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/01/31 22:02:48 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ namespace ft
 			reference at (size_type n)
 			{
 				if (n >= _size)
-					throw std::out_of_range("vectasdasor");
+					throw std::out_of_range("vector");
 				return (_data[n]);
 			}
 
