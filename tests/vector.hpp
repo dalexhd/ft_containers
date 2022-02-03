@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/03 17:52:02 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:00:01 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,24 +180,25 @@ class vector_tester : public Tester
 				return (myvector.size() == 11 && myvector.back() == 24);
 			});
 			this->expect("vector::rbegin", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return *(myvector.rbegin()) == 42;
+				myvector.at(9) = 1;
+				return (*(myvector.rbegin()) == 1);
 			}, [&]{
 				std::vector<int> myvector;
-				myvector.assign(10, 42);
-				return (*(myvector.rbegin()) == 42);
+				myvector.at(9) = 1;
+				return (*(myvector.rbegin()) == 1);
 			});
 			this->expect("vector::rend", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return *(myvector.rend() - 1) == 42;
+				myvector.at(0) = 10;
+				return (*(myvector.rend() - 1) == 10);
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (*(myvector.rend() - 1) == 42);
+				myvector.at(0) = 10;
+				return (*(myvector.rend() - 1) == 10);
 			});
 			this->expect("vector::reserve", [&]{
 				ft::vector<int> myvector;

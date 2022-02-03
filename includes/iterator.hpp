@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/03 17:51:24 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:55:11 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,9 @@ namespace	ft
 
 			reverse_iterator operator-( difference_type n ) const
 			{
-				return (reverse_iterator(this->_type + n));
+				reverse_iterator tmp(*this);
+				tmp -= n;
+				return tmp;
 			}
 
 			reverse_iterator& operator+=( difference_type n )
