@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/31 21:54:40 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:52:02 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,9 @@ class vector_tester : public Tester
 				return myvector.back() == 42;
 			});
 			this->expect("vector::begin", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return *(myvector.begin()) == 42;
+				return *(myvector.begin()) == 42;
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
@@ -97,14 +96,15 @@ class vector_tester : public Tester
 				return (!myvector.empty());
 			});
 			this->expect("vector::end", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return *(myvector.end() - 1) == 42;
+				myvector.push_back(11);
+				return *(myvector.end() - 1) == 11;
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (*(myvector.end() - 1) == 42);
+				myvector.push_back(11);
+				return *(myvector.end() - 1) == 11;
 			});
 			this->expect("vector::erase", [&] {
 				std::vector<int> myvector;

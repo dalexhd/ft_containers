@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/01/19 21:19:22 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:51:24 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ namespace	ft
 			iterator_type _type;
 		public:
 			iterator() : _type() {};
-
+			iterator(const iterator::pointer u) : _type(u) {};
 			template <class Iterator1>
 			iterator(const iterator<Iterator1>& u) : _type(u.base()) {};
 
@@ -114,7 +114,12 @@ namespace	ft
 				return (*this);
 			};
 			iterator operator- (difference_type n) const {
-				return (*this + (-n));
+				iterator tmp(*this);
+				tmp -= n;
+				return tmp;
+			};
+			difference_type operator- (const iterator& u) const {
+				return (_type - u._type);
 			};
 			iterator& operator-= (difference_type n) {
 				*this += -n;
