@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/03 18:00:01 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:00:23 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ class vector_tester : public Tester
 			}, [&] {
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				myvector.erase(myvector.begin() + 5);
 				return (myvector.size() == 9);
 			});
 			this->expect("vector::front", [&]{
@@ -181,13 +180,14 @@ class vector_tester : public Tester
 			});
 			this->expect("vector::rbegin", [&]{
 				ft::vector<int> myvector;
-				myvector.assign(10, 42);
-				myvector.at(9) = 1;
-				return (*(myvector.rbegin()) == 1);
+				myvector.push_back(1);
+				myvector.push_back(2);
+				return *(myvector.rbegin()) == 1;
 			}, [&]{
 				std::vector<int> myvector;
-				myvector.at(9) = 1;
-				return (*(myvector.rbegin()) == 1);
+				myvector.push_back(1);
+				myvector.push_back(2);
+				return *(myvector.rbegin()) == 1;
 			});
 			this->expect("vector::rend", [&]{
 				ft::vector<int> myvector;
@@ -258,20 +258,19 @@ class vector_tester : public Tester
 				return (myvector.size() == 3);
 			});
 			this->expect("vector::swap", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				std::vector<int> myvector2;
-				myvector2.assign(10, 42);
+				ft::vector<int> myvector2;
+				myvector2.assign(10, 20);
 				myvector.swap(myvector2);
-				return (false);
-				//return myvector.size() == 10 && myvector2.size() == 10;
+				return (myvector.at(0) == 42 && myvector2.at(0) == 20);
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
 				std::vector<int> myvector2;
-				myvector2.assign(10, 42);
+				myvector2.assign(10, 20);
 				myvector.swap(myvector2);
-				return (myvector.size() == 10 && myvector2.size() == 10);
+				return (myvector.at(0) == 42 && myvector2.at(0) == 20);
 			});
 			this->endSection();
 			return (_status);

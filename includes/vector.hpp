@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/03 17:21:30 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:59:16 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,17 @@ namespace ft
 			size_type _capacity;
 			allocator_type _allocator;
 			pointer _data;
+			size_type	diff(iterator first, iterator last)
+			{
+				size_t	i;
 
+				while (first != last)
+				{
+					i++;
+					first++;
+				}
+				return (i);
+			}
 		public:
 			explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(_allocator.allocate(0)) {};
 			explicit vector (size_type n, const allocator_type & alloc = allocator_type()) : _data(nullptr), _size(0), _capacity(0), _allocator(alloc)
@@ -80,6 +90,40 @@ namespace ft
 			iterator end()
 			{
 				return (iterator(_data + _size));
+			}
+
+
+			/**
+			 * @brief Removes from the vector either a single element (position) or a range of elements ([first,last)).
+			 * This effectively reduces the container size by the number of elements removed, which are destroyed.
+			 * Because vectors use an array as their underlying storage, erasing elements in positions other than the vector end causes the container to relocate all the elements after the segment erased to their new positions. This is generally an inefficient operation compared to the one performed for the same operation by other kinds of sequence containers (such as list or forward_list).
+			 *
+			 * @param position Iterator pointing to a single element to be removed from the vector.
+			 * Member types iterator and const_iterator are random access iterator types that point to elements.
+			 * @return iterator An iterator pointing to the new location of the element that followed the last element erased by the function call. This is the container end if the operation erased the last element in the sequence.
+			 * Member type iterator is a random access iterator type that points to elements.
+			 */
+			iterator erase (iterator position)
+			{
+				return this->erase(position, position + 1);
+			}
+
+			/**
+			 * @brief Removes from the vector either a single element (position) or a range of elements ([first,last)).
+			 * This effectively reduces the container size by the number of elements removed, which are destroyed.
+			 * Because vectors use an array as their underlying storage, erasing elements in positions other than the vector end causes the container to relocate all the elements after the segment erased to their new positions. This is generally an inefficient operation compared to the one performed for the same operation by other kinds of sequence containers (such as list or forward_list).
+			 *
+			 * @param position Iterator pointing to a single element to be removed from the vector.
+			 * Member types iterator and const_iterator are random access iterator types that point to elements.
+			 * @param last Iterators specifying a range within the vector] to be removed: [first,last). i.e., the range includes all the elements between first and last, including the element pointed by first but not the one pointed by last.
+			 * Member types iterator and const_iterator are random access iterator types that point to elements.
+			 * @return iterator An iterator pointing to the new location of the element that followed the last element erased by the function call. This is the container end if the operation erased the last element in the sequence.
+			 * Member type iterator is a random access iterator type that points to elements.
+			 */
+			iterator erase (iterator first, iterator last)
+			{
+				(void)first;
+				(void)last;
 			}
 
 			const_iterator end() const
@@ -337,6 +381,21 @@ namespace ft
 					this->reserve((_size + 1) * 2); // See https://stackoverflow.com/q/1100311 in order to understand why it's *2
 				}
 				_allocator.construct(_data + _size++, val);
+			}
+
+			/**
+			 * @brief Exchanges the content of the container by the content of x, which is another vector object of the same type. Sizes may differ.
+			 * After the call to this member function, the elements in this container are those which were in x before the call, and the elements of x are those which were in this. All iterators, references and pointers remain valid for the swapped objects.
+			 * Notice that a non-member function exists with the same name, swap, overloading that algorithm with an optimization that behaves like this member function.
+			 *
+			 * @param x Another vector container of the same type (i.e., instantiated with the same template parameters, T and Alloc) whose content is swapped with that of this container.
+			 */
+			void swap (vector& x)
+			{
+				std::swap(_data, x._data);
+				std::swap(_size, x._size);
+				std::swap(_capacity, x._capacity);
+				std::swap(_allocator, x._allocator);
 			}
 
 			/**
