@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/04 16:59:41 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:50:56 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ namespace	ft
 				--(*this);
 				return (tmp);
 			}
-			iterator& operator+ (difference_type n) {
+			iterator operator+ (difference_type n) {
 				iterator tmp(*this);
 				tmp += n;
 				return tmp;

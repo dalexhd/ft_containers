@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/04 16:59:16 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:40:07 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft
 			pointer _data;
 			size_type	diff(iterator first, iterator last)
 			{
-				size_t	i;
+				size_t	i = 0;
 
 				while (first != last)
 				{
@@ -122,8 +122,18 @@ namespace ft
 			 */
 			iterator erase (iterator first, iterator last)
 			{
-				(void)first;
-				(void)last;
+				iterator		it;
+				size_type		i;
+
+				i = this->diff(first, last);
+				while (first != last)
+				{
+					_allocator.construct(&(*first), *(first + i));
+					_allocator.destroy(&(*(first + 1)));
+					first++;
+				}
+				_size -= i;
+				return (first);
 			}
 
 			const_iterator end() const
