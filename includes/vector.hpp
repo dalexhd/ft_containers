@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/07 14:40:07 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:06:34 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,23 @@ namespace ft
 			 */
 			void resize (size_type n, value_type val = value_type())
 			{
-				(void)n;
-				(void)val;
+				if (n < _size)
+				{
+					while (n < _size)
+					{
+						_allocator.destroy(&_data[n]);
+						_size--;
+					}
+				}
+				else if (n > _size)
+				{
+					size_type inc = n - _size;
+					while (inc)
+					{
+						push_back(val);
+						inc--;
+					}
+				}
 			}
 
 			/**

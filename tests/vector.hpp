@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/07 14:50:02 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:07:38 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,28 +108,12 @@ class vector_tester : public Tester
 			});
 			this->expect("vector::erase", [&] {
 				ft::vector<int> myvector;
-				myvector.push_back(0);
-				myvector.push_back(1);
-				myvector.push_back(2);
-				myvector.push_back(3);
-				myvector.push_back(4);
-				myvector.push_back(5);
-				myvector.push_back(6);
-				myvector.push_back(7);
-				myvector.push_back(8);
-				myvector.push_back(9);
+				for (size_t i = 0; i < 10; i++)
+					myvector.push_back(i);
 				myvector.erase(myvector.begin() + 5);
 				ft::vector<int> myvector2;
-				myvector2.push_back(0);
-				myvector2.push_back(1);
-				myvector2.push_back(2);
-				myvector2.push_back(3);
-				myvector2.push_back(4);
-				myvector2.push_back(5);
-				myvector2.push_back(6);
-				myvector2.push_back(7);
-				myvector2.push_back(8);
-				myvector2.push_back(9);
+				for (size_t i = 0; i < 10; i++)
+					myvector2.push_back(i);
 				myvector2.erase(myvector2.begin() + 4, myvector2.begin() + 7);
 				ft::vector<int>::iterator	it;
 				std::string result = "";
@@ -138,28 +122,12 @@ class vector_tester : public Tester
 				return (myvector.size() == 9 && myvector2.size() == 7 && result == "0 1 2 3 7 8 9 ");
 			}, [&] {
 				std::vector<int> myvector;
-				myvector.push_back(0);
-				myvector.push_back(1);
-				myvector.push_back(2);
-				myvector.push_back(3);
-				myvector.push_back(4);
-				myvector.push_back(5);
-				myvector.push_back(6);
-				myvector.push_back(7);
-				myvector.push_back(8);
-				myvector.push_back(9);
+				for (size_t i = 0; i < 10; i++)
+					myvector.push_back(i);
 				myvector.erase(myvector.begin() + 5);
 				std::vector<int> myvector2;
-				myvector2.push_back(0);
-				myvector2.push_back(1);
-				myvector2.push_back(2);
-				myvector2.push_back(3);
-				myvector2.push_back(4);
-				myvector2.push_back(5);
-				myvector2.push_back(6);
-				myvector2.push_back(7);
-				myvector2.push_back(8);
-				myvector2.push_back(9);
+				for (size_t i = 0; i < 10; i++)
+					myvector2.push_back(i);
 				myvector2.erase(myvector2.begin() + 4, myvector2.begin() + 7);
 				std::vector<int>::iterator	it;
 				std::string result = "";
@@ -283,16 +251,15 @@ class vector_tester : public Tester
 				}
 			});
 			this->expect("vector::resize", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				myvector.resize(42);
-				return (false);
-				//return myvector.size() == 42;
+				myvector.resize(30);
+				return (myvector.size() == 30);
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
-				myvector.resize(42);
-				return (myvector.size() == 42);
+				myvector.resize(30);
+				return (myvector.size() == 30);
 			});
 			this->expect("vector::size", [&]{
 				ft::vector<int> myvector;
