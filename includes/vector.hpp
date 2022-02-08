@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/08 18:06:34 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:26:31 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,6 +406,18 @@ namespace ft
 					this->reserve((_size + 1) * 2); // See https://stackoverflow.com/q/1100311 in order to understand why it's *2
 				}
 				_allocator.construct(_data + _size++, val);
+			}
+
+			/**
+			 * @brief Removes the last element in the vector, effectively reducing the container size by one.
+			 */
+			void pop_back()
+			{
+				if (_size > 0)
+				{
+					_allocator.destroy(&_data[_size]);
+					_size--;
+				}
 			}
 
 			/**

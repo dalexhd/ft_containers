@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/08 18:07:38 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:26:17 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,9 @@ class vector_tester : public Tester
 				return (myvector.front() == 42);
 			});
 			this->expect("vector::get_allocator", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
-				return (false);
-				//return myvector.get_allocator() == std::allocator<int>();
+				return (myvector.get_allocator() == std::allocator<int>());
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
@@ -174,11 +173,10 @@ class vector_tester : public Tester
 				return (myvector.max_size() == std::vector<int>().max_size());
 			});
 			this->expect("vector::pop_back", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
 				myvector.assign(10, 42);
 				myvector.pop_back();
-				return (false);
-				//return myvector.size() == 9;
+				return (myvector.size() == 9);
 			}, [&]{
 				std::vector<int> myvector;
 				myvector.assign(10, 42);
