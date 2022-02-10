@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/08 19:26:17 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:28:20 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,16 +154,37 @@ class vector_tester : public Tester
 				return (myvector.get_allocator() == std::allocator<int>());
 			});
 			this->expect("vector::insert", [&]{
-				std::vector<int> myvector;
+				ft::vector<int> myvector;
+				ft::vector<int> myvector2;
 				myvector.assign(10, 42);
-				myvector.insert(myvector.begin() + 5, 42);
-				return (false);
-				//return myvector.size() == 11;
+				myvector.insert(myvector.begin() + 5, 20);
+				ft::vector<int>::iterator	it;
+				std::string result = "";
+				for (it = myvector.begin(); it != myvector.end(); it++)
+					result += std::to_string(*it) + " ";
+				myvector2.assign(10, 42);
+				myvector2.insert(myvector2.begin() + 4, 10, 4);
+				ft::vector<int>::iterator	it2;
+				std::string result2= "";
+				for (it2 = myvector2.begin(); it2 != myvector2.end(); it2++)
+					result2 += std::to_string(*it2) + " ";
+				return (myvector.size() == 11 && result == "42 42 42 42 42 20 42 42 42 42 42 " && result2 == "42 42 42 42 4 4 4 4 4 4 4 4 4 4 42 42 42 42 42 42 ");
 			}, [&]{
 				std::vector<int> myvector;
+				std::vector<int> myvector2;
 				myvector.assign(10, 42);
-				myvector.insert(myvector.begin() + 5, 42);
-				return (myvector.size() == 11);
+				myvector.insert(myvector.begin() + 5, 20);
+				std::vector<int>::iterator	it;
+				std::string result = "";
+				for (it = myvector.begin(); it != myvector.end(); it++)
+					result += std::to_string(*it) + " ";
+				myvector2.assign(10, 42);
+				myvector2.insert(myvector2.begin() + 4, 10, 4);
+				std::vector<int>::iterator	it2;
+				std::string result2= "";
+				for (it2 = myvector2.begin(); it2 != myvector2.end(); it2++)
+					result2 += std::to_string(*it2) + " ";
+				return (myvector.size() == 11 && result == "42 42 42 42 42 20 42 42 42 42 42 " && result2 == "42 42 42 42 4 4 4 4 4 4 4 4 4 4 42 42 42 42 42 42 ");
 			});
 			this->expect("vector::max_size", [&]{
 				ft::vector<int> myvector;

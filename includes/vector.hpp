@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/08 19:26:31 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:32:14 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,6 +433,95 @@ namespace ft
 				std::swap(_size, x._size);
 				std::swap(_capacity, x._capacity);
 				std::swap(_allocator, x._allocator);
+			}
+
+			/**
+			 * @brief The vector is extended by inserting new elements before the element at the specified position, effectively increasing the container size by the number of elements inserted.
+			 This causes an automatic reallocation of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity.
+			 Because vectors use an array as their underlying storage, inserting elements in positions other than the vector end causes the container to relocate all the elements that were after position to their new positions. This is generally an inefficient operation compared to the one performed for the same operation by other kinds of sequence containers (such as list or forward_list).
+			 The parameters determine how many elements are inserted and to which values they are initialized:
+			 *
+			 * @param position Position in the vector where the new elements are inserted.
+			 iterator is a member type, defined as a random access iterator type that points to elements.
+			 * @param val Value to be copied (or moved) to the inserted elements.
+			 Member type value_type is the type of the elements in the container, defined in deque as an alias of its first template parameter (T).
+			 * @return iterator An iterator that points to the first of the newly inserted elements.
+			 Member type iterator is a random access iterator type that points to elements.
+			 If reallocations happen, the storage is allocated using the container's allocator, which may throw exceptions on failure (for the default allocator, bad_alloc is thrown if the allocation request does not succeed).
+			 */
+			iterator insert (iterator position, const value_type& val)
+			{
+				iterator		it;
+				size_type		pos_index;
+				size_type		tmp_size;
+
+				pos_index = position - begin();
+				this->resize(_size + 1);
+				tmp_size = _size;
+				while (tmp_size > pos_index)
+				{
+					_data[tmp_size] = _data[tmp_size - 1];
+					tmp_size--;
+				}
+				_data[tmp_size] = val;
+				return (iterator(_data));
+			}
+
+			/**
+			 * @brief The vector is extended by inserting new elements before the element at the specified position, effectively increasing the container size by the number of elements inserted.
+			 This causes an automatic reallocation of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity.
+			 Because vectors use an array as their underlying storage, inserting elements in positions other than the vector end causes the container to relocate all the elements that were after position to their new positions. This is generally an inefficient operation compared to the one performed for the same operation by other kinds of sequence containers (such as list or forward_list).
+			 The parameters determine how many elements are inserted and to which values they are initialized:
+			 *
+			 * @param position Position in the vector where the new elements are inserted.
+			 iterator is a member type, defined as a random access iterator type that points to elements.
+			 * @param n Number of elements to insert. Each element is initialized to a copy of val.
+			 Member type size_type is an unsigned integral type.
+			 * @param val Value to be copied (or moved) to the inserted elements.
+			 Member type value_type is the type of the elements in the container, defined in deque as an alias of its first template parameter (T).
+			 */
+			void insert (iterator position, size_type n, const value_type& val)
+			{
+				iterator		it;
+				size_type		pos_index;
+				size_type		tmp_size;
+
+				pos_index = position - begin();
+				this->resize(_size + n);
+				tmp_size = _size;
+				while (tmp_size > pos_index && tmp_size - n > 0)
+				{
+					_data[tmp_size] = _data[tmp_size - n];
+					tmp_size--;
+				}
+				for (size_t i = 0; i < n; i++)
+					_data[pos_index + i] = val;
+			}
+
+			/**
+			 * @brief The vector is extended by inserting new elements before the element at the specified position, effectively increasing the container size by the number of elements inserted.
+			 This causes an automatic reallocation of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity.
+			 Because vectors use an array as their underlying storage, inserting elements in positions other than the vector end causes the container to relocate all the elements that were after position to their new positions. This is generally an inefficient operation compared to the one performed for the same operation by other kinds of sequence containers (such as list or forward_list).
+			 The parameters determine how many elements are inserted and to which values they are initialized:
+			 *
+			 * @tparam InputIterator
+			 * @param position Position in the vector where the new elements are inserted.
+			 * iterator is a member type, defined as a random access iterator type that points to elements.
+			 * @param first Iterators specifying a range of elements. Copies of the elements in the range [first,last) are inserted at position (in the same order).
+			 * Notice that the range includes all the elements between first and last, including the element pointed by first but not the one pointed by last.
+			 * The function template argument InputIterator shall be an input iterator type that points to elements of a type from which value_type objects can be constructed.
+			 * @param last Iterators specifying a range of elements. Copies of the elements in the range [first,last) are inserted at position (in the same order).
+			 * Notice that the range includes all the elements between first and last, including the element pointed by first but not the one pointed by last.
+			 * The function template argument InputIterator shall be an input iterator type that points to elements of a type from which value_type objects can be constructed.
+			 */
+ 			template <class InputIterator>
+			void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
+			{
+				while (first != last)
+				{
+					position = insert(position, *first) + 1;
+					++first;
+				}
 			}
 
 			/**
