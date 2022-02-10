@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/10 18:28:20 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:37:10 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,6 @@ class vector_tester : public Tester
 				{
 					ft::vector<int> myvector;
 					myvector.reserve(myvector.max_size() + 1);
-					return (false);
 				}
 				catch(const std::length_error& e)
 				{
@@ -262,7 +261,6 @@ class vector_tester : public Tester
 				{
 					std::vector<int> myvector;
 					myvector.reserve(myvector.max_size() + 1);
-					return (false);
 				}
 				catch(const std::length_error& e)
 				{
