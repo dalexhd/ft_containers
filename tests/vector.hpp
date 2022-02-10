@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/10 18:37:10 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:40:02 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ class vector_tester : public Tester
 				return (myvector.capacity() == 42);
 			});
 			this->expect("vector::reserve catch(length_error)", [&]{
+				int status = 0;
 				try
 				{
 					ft::vector<int> myvector;
@@ -254,9 +255,11 @@ class vector_tester : public Tester
 				}
 				catch(const std::length_error& e)
 				{
-					return (true);
+					status = 1;
 				}
+				return (status);
 			}, [&]{
+				int status = 0;
 				try
 				{
 					std::vector<int> myvector;
@@ -264,8 +267,9 @@ class vector_tester : public Tester
 				}
 				catch(const std::length_error& e)
 				{
-					return (true);
+					status = 1;
 				}
+				return (status);
 			});
 			this->expect("vector::resize", [&]{
 				ft::vector<int> myvector;
