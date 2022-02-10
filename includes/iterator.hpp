@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/07 14:50:56 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:55:27 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ namespace	ft
 				return (_type[n]);
 			};
 			pointer operator->() const {
-				return (std::addressof(operator*()));
+				return (&(operator*()));
 			};
 			iterator& operator++() {
 				++_type;
@@ -264,7 +264,7 @@ namespace	ft
 
 			pointer operator->() const
 			{
-				return (std::addressof(operator*()));
+				return (&(operator*()));
 			}
 
 			reverse_iterator& operator++()

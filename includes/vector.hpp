@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/10 18:32:14 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:15:31 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <memory>
 #include <exception>
 #include "iterator.hpp"
+#include "type_traits.hpp"
 
 namespace ft
 {
@@ -58,13 +59,13 @@ namespace ft
 			}
 		public:
 			explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(_allocator.allocate(0)) {};
-			explicit vector (size_type n, const allocator_type & alloc = allocator_type()) : _data(nullptr), _size(0), _capacity(0), _allocator(alloc)
+			explicit vector (size_type n, const allocator_type & alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(NULL)
 			{
 				try
 				{
 					_data = _allocator.allocacte(n);
 					_capacity = 0;
-					this->resize();
+					this->resize(n);
 				}
 				catch(const std::exception& e)
 				{
