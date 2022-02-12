@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/12 14:32:48 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:06:15 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,19 @@ namespace ft
 			reference operator[] (size_type n) { return (_data[n]); };
 			const_reference operator[] (size_type n) const { return (_data[n]); };
 			explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(_allocator.allocate(0)) {};
+			vector (const vector& x) : _size(x._size), _capacity(x._capacity)
+			{
+				_data = _allocator.allocate(_capacity);
+				for (size_type i = 0; i < _size; i++)
+					_allocator.construct(&_data[i], x._data[i]);
+			}
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type & alloc = allocator_type()) : _size(n), _capacity(n), _allocator(alloc), _data(NULL)
 			{
 				try
 				{
 					_data = _allocator.allocate(n);
 					while (n--)
-						_allocator.construct(&_data[n], val);
+						_data[n] = val;
 				}
 				catch (std::exception & e)
 				{
