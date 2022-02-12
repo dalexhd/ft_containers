@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/10 19:15:31 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:32:48 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,22 @@ namespace ft
 				return (i);
 			}
 		public:
+			reference operator[] (size_type n) { return (_data[n]); };
+			const_reference operator[] (size_type n) const { return (_data[n]); };
 			explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(_allocator.allocate(0)) {};
-			explicit vector (size_type n, const allocator_type & alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(NULL)
+			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type & alloc = allocator_type()) : _size(n), _capacity(n), _allocator(alloc), _data(NULL)
 			{
 				try
 				{
-					_data = _allocator.allocacte(n);
-					_capacity = 0;
-					this->resize(n);
+					_data = _allocator.allocate(n);
+					while (n--)
+						_allocator.construct(&_data[n], val);
 				}
-				catch(const std::exception& e)
+				catch (std::exception & e)
 				{
-					std::cerr << e.what() << '\n';
+					std::cerr << e.what() << std::endl;
 				}
 			};
-
 			/**
 			 * @brief This destroys all container elements, and deallocates all the storage capacity allocated by the vector using its allocator.
 			 *
@@ -86,6 +87,16 @@ namespace ft
 			iterator begin()
 			{
 				return (iterator(_data));
+			}
+
+			reference operator*() const
+			{
+				return (*this->data);
+			}
+
+			const_iterator begin() const
+			{
+				return (const_iterator(_data));
 			}
 
 			iterator end()
@@ -255,7 +266,7 @@ namespace ft
 			 */
 			const_reference back() const
 			{
-				return *(_data[_size - 1]);
+				return (_data[_size - 1]);
 			}
 
 			/**
@@ -279,7 +290,7 @@ namespace ft
 			 */
 			const_reference front() const
 			{
-				return *(_data[0]);
+				return (_data[0]);
 			}
 
 			/**
@@ -390,6 +401,13 @@ namespace ft
 				clear();
 				for (size_type i = 0; i < n; i++)
 					push_back(val);
+			}
+
+			template <class InputIterator>
+			void assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = NULL)
+			{
+				clear();
+				insert(begin(), first, last);
 			}
 
 			/**

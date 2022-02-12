@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/10 18:55:27 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:06:09 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ namespace	ft
 		public:
 			typedef std::ptrdiff_t difference_type;
 			typedef T value_type;
-			typedef T *pointer;
-			typedef T &reference;
+			typedef const T *pointer;
+			typedef const T &reference;
 			typedef ft::random_access_iterator_tag iterator_category;
 	};
 
