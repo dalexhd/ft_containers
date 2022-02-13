@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/13 15:54:15 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:58:36 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,10 +444,7 @@ namespace ft
 			void pop_back()
 			{
 				if (_size > 0)
-				{
-					_allocator.destroy(&_data[_size]);
-					_size--;
-				}
+					_allocator.destroy(&_data[--_size]);
 			}
 
 			/**
