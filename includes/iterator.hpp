@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/14 18:27:26 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:24:25 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,6 +349,13 @@ namespace	ft
 				return (lhs._type <= rhs.base());
 			}
 
+
+			template <class Iterator1, class Iterator2>
+			friend bool operator==(const reverse_iterator<Iterator1>&, const reverse_iterator<Iterator2>&);
+
+			template <class Iterator1, class Iterator2>
+			friend bool operator-(const reverse_iterator<Iterator1>&, const reverse_iterator<Iterator2>&);
+
 			iterator_type base() const
 			{
 				return (this->_type);
@@ -366,6 +373,18 @@ namespace	ft
 	{
 		return (it.base() - n.base());
 	}
+
+	template <class Iterator1, class Iterator2>
+	bool operator==(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
+	{
+		return (x.base() == y.base());
+	};
+
+	template <class Iterator1, class Iterator2>
+	typename reverse_iterator<Iterator1>::difference_type operator-(const reverse_iterator<Iterator1>& x, const reverse_iterator<Iterator2>& y)
+	{
+		return (y.base() - x.base());
+	};
 }
 
 #endif
