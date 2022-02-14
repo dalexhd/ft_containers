@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/14 21:06:21 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/14 21:25:58 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ namespace	ft
 	template <class Iterator1>
 	bool operator>(const iterator<Iterator1>& x, const iterator<Iterator1>& y)
 	{
-		return y < x;
+		return (y < x);
 	};
 
 	template <class Iterator1>
