@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/14 18:28:25 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/14 18:59:57 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <exception>
 #include "iterator.hpp"
 #include "type_traits.hpp"
+#include "algorithm.hpp"
 
 namespace ft
 {
@@ -42,11 +43,11 @@ namespace ft
 			typedef				ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef	size_t		size_type;
 		private:
-			size_type _size;
-			size_type _capacity;
-			allocator_type _allocator;
-			pointer _data;
-			size_type	diff(iterator first, iterator last)
+			size_type			_size;
+			size_type			_capacity;
+			allocator_type		_allocator;
+			pointer				_data;
+			size_type			diff(iterator first, iterator last)
 			{
 				return (last - first);
 			}
@@ -539,6 +540,46 @@ namespace ft
 				return (_allocator);
 			}
 	};
+
+	template <class T, class Allocator>
+	bool operator==(const vector<T, Allocator>& lhs, const vector<T, Allocator>& rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return (false);
+		for (size_t i = 0; i < lhs.size(); i++)
+			if (lhs[i] != rhs[i]) return (false);
+		return (true);
+	}
+
+	template <class T, class Allocator>
+	bool operator!=(const vector<T, Allocator>& lhs, const vector<T, Allocator>& rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T, class Allocator>
+	bool operator<(const vector<T, Allocator>& lhs, const vector<T, Allocator>& rhs)
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Allocator>
+	bool operator<=(const vector<T, Allocator>& lhs, const vector<T, Allocator>& rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T, class Allocator>
+	bool operator>(const vector<T, Allocator>& lhs, const vector<T, Allocator>& rhs)
+	{
+		return (rhs < lhs);
+	}
+
+	template <class T, class Allocator>
+	bool operator>=(const vector<T, Allocator>& lhs, const vector<T, Allocator>& rhs)
+	{
+		return !(lhs < rhs);
+	}
 }
 
 #endif
