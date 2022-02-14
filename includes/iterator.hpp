@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/12 14:06:09 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/14 18:27:26 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,26 @@ namespace	ft
 			typedef typename Iterator::pointer pointer;
 			typedef typename Iterator::reference reference;
 	};
-	template <class T>
-	class iterator_traits<T *>
+
+	template <class Iterator>
+	class iterator_traits<Iterator *>
 	{
 		public:
 			typedef std::ptrdiff_t difference_type;
-			typedef T value_type;
-			typedef T *pointer;
-			typedef T &reference;
+			typedef Iterator value_type;
+			typedef Iterator *pointer;
+			typedef Iterator &reference;
 			typedef ft::random_access_iterator_tag iterator_category;
 	};
-	template <class T>
-	class iterator_traits<const T* >
+
+	template <class Iterator>
+	class iterator_traits<const Iterator* >
 	{
 		public:
 			typedef std::ptrdiff_t difference_type;
-			typedef T value_type;
-			typedef const T *pointer;
-			typedef const T &reference;
+			typedef Iterator value_type;
+			typedef const Iterator *pointer;
+			typedef const Iterator &reference;
 			typedef ft::random_access_iterator_tag iterator_category;
 	};
 
