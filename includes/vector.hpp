@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/13 15:58:36 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/14 18:28:25 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,7 @@ namespace ft
 			pointer _data;
 			size_type	diff(iterator first, iterator last)
 			{
-				size_t	i = 0;
-
-				while (first != last)
-				{
-					i++;
-					first++;
-				}
-				return (i);
+				return (last - first);
 			}
 		public:
 			explicit vector (const allocator_type& alloc = allocator_type()) : _size(0), _capacity(0), _allocator(alloc), _data(_allocator.allocate(0)) {};
