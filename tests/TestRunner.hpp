@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:38:59 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:22:09 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "algorithm.hpp"
 #include "iterator.hpp"
+#include "map.hpp"
 #include "stack.hpp"
 #include "type_traits.hpp"
 #include "utility.hpp"
@@ -61,6 +62,11 @@ class TestRunner
 		if (!vector_test->test())
 			setStatus(false);
 		delete vector_test;
+
+		Tester *map_test = new map_tester();
+		if (!map_test->test())
+			setStatus(false);
+		delete map_test;
 
 		return (getStatus());
 	};
