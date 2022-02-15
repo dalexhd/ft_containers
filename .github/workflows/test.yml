@@ -34,12 +34,13 @@ jobs:
           timeout_minutes: 10
           command: ./containers
           max_attempts: 5
+      - name: Run mli42 test
+        run: |
+          git clone https://github.com/mli42/containers_test.git && cd containers_test
+          perl -i -pe's/#CFLAGS+=" -fsanitize=address -g3"/CFLAGS+=" -fsanitize=address -g3"/' fct.sh
+          perl -i -pe's/incl_path="..\/"/incl_path="..\/includes\/"/' fct.sh
+          ./do.sh stack vector
       - name: Generate cov
         run: make cov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
-      # - name: Clone test
-      #   run: git clone https://github.com/mli42/containers_test.git
-      # - name: Run test
-      #   run: ./do.sh
-      #   working-directory: containers_test

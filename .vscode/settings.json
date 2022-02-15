@@ -11,6 +11,8 @@
 	"cryptoticker.cryptoCurrency": "EUR",
 	"cryptoticker.cryptoExchange": "Binance",
 	"pdf-preview.default.scale": "page-width",
+	"42norminette.command": "/usr/local/bin/norminette",
+	"editor.formatOnSave": true,
 	"cryptoticker.cryptoSymbols": [
 		"BTC",
 		"ETH",
@@ -94,7 +96,8 @@
 		"list": "cpp",
 		"set": "cpp",
 		"csignal": "cpp",
-		"queue": "cpp"
+		"queue": "cpp",
+		"__functional_03": "cpp"
 	},
 	"files.autoSave": "off"
 }
