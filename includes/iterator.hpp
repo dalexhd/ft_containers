@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:37:19 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/15 16:53:34 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ namespace ft
 		friend typename iterator<Iterator1>::difference_type operator-(const iterator<Iterator1> &, const iterator<Iterator2> &);
 
 		template <class Iterator1>
-		friend iterator<Iterator1> operator+(typename iterator<Iterator1>::difference_type, iterator<Iterator1>);
+		friend iterator<Iterator1> operator+(const typename iterator<Iterator1>::difference_type n, const iterator<Iterator1> &x);
 
 		iterator_type base() const
 		{
@@ -242,10 +242,9 @@ namespace ft
 	};
 
 	template <class Iterator1>
-	iterator<Iterator1> operator+(const typename iterator<Iterator1>::difference_type &n, const iterator<Iterator1> &x)
+	iterator<Iterator1> operator+(const typename iterator<Iterator1>::difference_type n, const iterator<Iterator1> &x)
 	{
-		x += n;
-		return x;
+		return iterator<Iterator1>(x.base() + n);
 	};
 
 	/**
