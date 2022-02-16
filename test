@@ -1,0 +1,160 @@
+
+[36;1mStarting test for type_traits    Starting test for type_traits .   Starting test for type_traits ..   Starting test for type_traits ...   [0m
+------------------------------------ [1mStarting is_integral section...[0m ------------------------------------
+[37;1m[type_traits][0][32;1m (int) test passed 🚀[0m [🙋8ns / 🌐2ns] (4 slower)[0m
+[37;1m[type_traits][1][32;1m (bool) test passed 🚀[0m [🙋4ns / 🌐1ns] (4 slower)[0m
+[37;1m[type_traits][2][32;1m (char) test passed 🚀[0m [🙋1ns / 🌐1ns] (1 slower)[0m
+[37;1m[type_traits][3][32;1m (wchar_t) test passed 🚀[0m [🙋2ns / 🌐1ns] (2 slower)[0m
+[37;1m[type_traits][4][32;1m (short) test passed 🚀[0m [🙋2ns / 🌐1ns] (2 slower)[0m
+[37;1m[type_traits][5][32;1m (long) test passed 🚀[0m [🙋1ns / 🌐1ns] (1 slower)[0m
+[37;1m[type_traits][6][32;1m (long long) test passed 🚀[0m [🙋2ns / 🌐1ns] (2 slower)[0m
+[37;1m[type_traits][7][32;1m (unsigned char) test passed 🚀[0m [🙋8ns / 🌐2ns] (4 slower)[0m
+[37;1m[type_traits][8][32;1m (unsigned short) test passed 🚀[0m [🙋3ns / 🌐1ns] (3 slower)[0m
+[37;1m[type_traits][9][32;1m (unsigned int) test passed 🚀[0m [🙋2ns / 🌐1ns] (2 slower)[0m
+[37;1m[type_traits][10][32;1m (unsigned long) test passed 🚀[0m [🙋0ns / 🌐1ns] (0 slower)[0m
+[37;1m[type_traits][11][32;1m (std::string) test passed 🚀[0m [🙋1ns / 🌐1ns] (1 slower)[0m
+[37;1m[type_traits][12][32;1m (float) test passed 🚀[0m [🙋1ns / 🌐1ns] (1 slower)[0m
+[37;1m[type_traits][13][32;1m (double) test passed 🚀[0m [🙋1ns / 🌐1ns] (1 slower)[0m
+------------------------------------ [1mEnding is_integral section...[0m ------------------------------------
+------------------------------------ [1mStarting enable_if section...[0m ------------------------------------
+[37;1m[type_traits][14][32;1m (enable_if) test passed 🚀[0m [🙋6ns / 🌐2ns] (3 slower)[0m
+------------------------------------ [1mEnding enable_if section...[0m ------------------------------------
+[36;1m--- Finishing test for type_traits[0m ---
+
+[36;1mStarting test for utility    Starting test for utility .   Starting test for utility ..   Starting test for utility ...   [0m
+------------------------------------ [1mStarting pair section...[0m ------------------------------------
+[37;1m[utility][0][32;1m (pair & make_pair) test passed 🚀[0m [🙋52ns / 🌐19ns] (2 slower)[0m
+------------------------------------ [1mEnding pair section...[0m ------------------------------------
+------------------------------------ [1mStarting red_black_tree section...[0m ------------------------------------
+Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  Inorder Traversal of Created Tree
+1  2  3  4  5  6  7  
+
+Level Order Traversal of Created Tree
+6  4  7  2  5  1  3  ------------------------------------ [1mEnding red_black_tree section...[0m ------------------------------------
+[36;1m--- Finishing test for utility[0m ---
+
+[36;1mStarting test for algorithm    Starting test for algorithm .   Starting test for algorithm ..   Starting test for algorithm ...   [0m
+------------------------------------ [1mStarting lexicographical_compare section...[0m ------------------------------------
+[37;1m[algorithm][0][32;1m (Using default comparison (operator<)) test passed 🚀[0m [🙋10ns / 🌐5ns] (2 slower)[0m
+[37;1m[algorithm][1][32;1m (Using mycomp as comparison object) test passed 🚀[0m [🙋11ns / 🌐4ns] (2 slower)[0m
+[37;1m[algorithm][2][32;1m (Using default comparison (operator<)) test passed 🚀[0m [🙋2ns / 🌐2ns] (1 slower)[0m
+[37;1m[algorithm][3][32;1m (Using mycomp as comparison object) test passed 🚀[0m [🙋4ns / 🌐4ns] (1 slower)[0m
+------------------------------------ [1mEnding lexicographical_compare section...[0m ------------------------------------
+[36;1m--- Finishing test for algorithm[0m ---
+
+[36;1mStarting test for stack    Starting test for stack .   Starting test for stack ..   Starting test for stack ...   [0m
+------------------------------------ [1mStarting empty section...[0m ------------------------------------
+[37;1m[stack][0][32;1m (empty true) test passed 🚀[0m [🙋241ns / 🌐36ns] (6 slower)[0m
+[37;1m[stack][1][32;1m (empty false) test passed 🚀[0m [🙋124ns / 🌐44ns] (2 slower)[0m
+------------------------------------ [1mEnding empty section...[0m ------------------------------------
+------------------------------------ [1mStarting size section...[0m ------------------------------------
+[37;1m[stack][2][32;1m (size 0) test passed 🚀[0m [🙋252ns / 🌐64ns] (3 slower)[0m
+[37;1m[stack][3][32;1m (size 1) test passed 🚀[0m [🙋158ns / 🌐87ns] (1 slower)[0m
+------------------------------------ [1mEnding size section...[0m ------------------------------------
+------------------------------------ [1mStarting top section...[0m ------------------------------------
+[37;1m[stack][4][32;1m (top) test passed 🚀[0m [🙋153ns / 🌐59ns] (2 slower)[0m
+------------------------------------ [1mEnding top section...[0m ------------------------------------
+------------------------------------ [1mStarting push section...[0m ------------------------------------
+[37;1m[stack][5][32;1m (top) test passed 🚀[0m [🙋231ns / 🌐33ns] (7 slower)[0m
+[37;1m[stack][6][32;1m (top with pop) test passed 🚀[0m [🙋93ns / 🌐91ns] (1 slower)[0m
+------------------------------------ [1mEnding push section...[0m ------------------------------------
+------------------------------------ [1mStarting operators section...[0m ------------------------------------
+[37;1m[stack][7][32;1m (==) test passed 🚀[0m [🙋219ns / 🌐94ns] (2 slower)[0m
+[37;1m[stack][8][32;1m (!=) test passed 🚀[0m [🙋190ns / 🌐41ns] (4 slower)[0m
+[37;1m[stack][9][32;1m (<) test passed 🚀[0m [🙋163ns / 🌐69ns] (2 slower)[0m
+[37;1m[stack][10][32;1m (<=) test passed 🚀[0m [🙋227ns / 🌐140ns] (1 slower)[0m
+[37;1m[stack][11][32;1m (>) test passed 🚀[0m [🙋188ns / 🌐82ns] (2 slower)[0m
+[37;1m[stack][12][32;1m (>=) test passed 🚀[0m [🙋256ns / 🌐152ns] (1 slower)[0m
+------------------------------------ [1mEnding operators section...[0m ------------------------------------
+[36;1m--- Finishing test for stack[0m ---
+
+[36;1mStarting test for iterator    Starting test for iterator .   Starting test for iterator ..   Starting test for iterator ...   [0m
+------------------------------------ [1mStarting operators section...[0m ------------------------------------
+[37;1m[iterator][0][32;1m (ft::reverse_iterator::operator++) test passed 🚀[0m [🙋985ns / 🌐570ns] (1 slower)[0m
+[37;1m[iterator][1][32;1m (ft::reverse_iterator::&operator++) test passed 🚀[0m [🙋390ns / 🌐382ns] (1 slower)[0m
+[37;1m[iterator][2][32;1m (ft::reverse_iterator::operator--) test passed 🚀[0m [🙋224ns / 🌐194ns] (1 slower)[0m
+[37;1m[iterator][3][32;1m (ft::reverse_iterator::&operator--) test passed 🚀[0m [🙋244ns / 🌐184ns] (1 slower)[0m
+[37;1m[iterator][4][32;1m (ft::reverse_iterator::operator*) test passed 🚀[0m [🙋157ns / 🌐136ns] (1 slower)[0m
+[37;1m[iterator][5][32;1m (ft::reverse_iterator::operator[]) test passed 🚀[0m [🙋61ns / 🌐49ns] (1 slower)[0m
+[37;1m[iterator][6][32;1m (ft::reverse_iterator::operator->) test passed 🚀[0m [🙋191ns / 🌐83ns] (2 slower)[0m
+[37;1m[iterator][7][32;1m (ft::reverse_iterator::operator==) test passed 🚀[0m [🙋213ns / 🌐133ns] (1 slower)[0m
+[37;1m[iterator][8][32;1m (ft::reverse_iterator::operator!=) test passed 🚀[0m [🙋125ns / 🌐105ns] (1 slower)[0m
+[37;1m[iterator][9][32;1m (ft::reverse_iterator::operator<) test passed 🚀[0m [🙋158ns / 🌐132ns] (1 slower)[0m
+[37;1m[iterator][10][32;1m (ft::reverse_iterator::operator>) test passed 🚀[0m [🙋123ns / 🌐106ns] (1 slower)[0m
+[37;1m[iterator][11][32;1m (ft::reverse_iterator::operator<=) test passed 🚀[0m [🙋176ns / 🌐159ns] (1 slower)[0m
+[37;1m[iterator][12][32;1m (ft::reverse_iterator::operator>=) test passed 🚀[0m [🙋153ns / 🌐132ns] (1 slower)[0m
+[37;1m[iterator][13][32;1m (ft::reverse_iterator::operator+) test passed 🚀[0m [🙋105ns / 🌐50ns] (2 slower)[0m
+[37;1m[iterator][14][32;1m (ft::reverse_iterator::operator-) test passed 🚀[0m [🙋90ns / 🌐51ns] (1 slower)[0m
+[37;1m[iterator][15][32;1m (ft::reverse_iterator::operator+=) test passed 🚀[0m [🙋159ns / 🌐70ns] (2 slower)[0m
+[37;1m[iterator][16][32;1m (ft::reverse_iterator::operator-=) test passed 🚀[0m [🙋94ns / 🌐59ns] (1 slower)[0m
+------------------------------------ [1mEnding operators section...[0m ------------------------------------
+[36;1m--- Finishing test for iterator[0m ---
+
+[36;1mStarting test for vector    Starting test for vector .   Starting test for vector ..   Starting test for vector ...   [0m
+------------------------------------ [1mStarting member functions section...[0m ------------------------------------
+[37;1m[vector][0][32;1m (vector::at) test passed 🚀[0m [🙋60ns / 🌐31ns] (1 slower)[0m
+[37;1m[vector][1][32;1m (vector::at catch(out_of_range)) test passed 🚀[0m [🙋18968ns / 🌐5813ns] (3 slower)[0m
+[37;1m[vector][2][32;1m (vector::back) test passed 🚀[0m [🙋24ns / 🌐17ns] (1 slower)[0m
+[37;1m[vector][3][32;1m (vector::begin) test passed 🚀[0m [🙋62ns / 🌐30ns] (2 slower)[0m
+[37;1m[vector][4][32;1m (vector::clear) test passed 🚀[0m [🙋67ns / 🌐17ns] (3 slower)[0m
+[37;1m[vector][5][32;1m (vector::empty) test passed 🚀[0m [🙋26ns / 🌐16ns] (1 slower)[0m
+[37;1m[vector][6][32;1m (vector::end) test passed 🚀[0m [🙋65ns / 🌐34ns] (1 slower)[0m
+[37;1m[vector][7][32;1m (vector::erase) test passed 🚀[0m [🙋169ns / 🌐223ns] (0 slower)[0m
+[37;1m[vector][8][32;1m (vector::front) test passed 🚀[0m [🙋42ns / 🌐15ns] (2 slower)[0m
+[37;1m[vector][9][32;1m (vector::get_allocator) test passed 🚀[0m [🙋33ns / 🌐28ns] (1 slower)[0m
+[37;1m[vector][10][32;1m (vector::insert) test passed 🚀[0m [🙋587ns / 🌐292ns] (2 slower)[0m
+[37;1m[vector][11][32;1m (vector::max_size) test passed 🚀[0m [🙋17ns / 🌐5ns] (3 slower)[0m
+[37;1m[vector][12][32;1m (vector::pop_back) test passed 🚀[0m [🙋59ns / 🌐23ns] (2 slower)[0m
+[37;1m[vector][13][32;1m (vector::push_back) test passed 🚀[0m [🙋60ns / 🌐38ns] (1 slower)[0m
+[37;1m[vector][14][32;1m (vector::rbegin) test passed 🚀[0m [🙋33ns / 🌐45ns] (0 slower)[0m
+[37;1m[vector][15][32;1m (vector::rend) test passed 🚀[0m [🙋28ns / 🌐31ns] (0 slower)[0m
+[37;1m[vector][16][32;1m (vector::reserve) test passed 🚀[0m [🙋107ns / 🌐20ns] (5 slower)[0m
+[37;1m[vector][17][32;1m (vector::reserve catch(length_error)) test passed 🚀[0m [🙋119ns / 🌐92ns] (1 slower)[0m
+[37;1m[vector][18][32;1m (vector::resize) test passed 🚀[0m [🙋42ns / 🌐42ns] (1 slower)[0m
+[37;1m[vector][19][32;1m (vector::size) test passed 🚀[0m [🙋57ns / 🌐48ns] (1 slower)[0m
+[37;1m[vector][20][32;1m (vector::swap) test passed 🚀[0m [🙋40ns / 🌐50ns] (0 slower)[0m
+------------------------------------ [1mEnding member functions section...[0m ------------------------------------
+[36;1m--- Finishing test for vector[0m ---
+
+[36;1mStarting test for map    Starting test for map .   Starting test for map ..   Starting test for map ...   [0m
+[36;1m--- Finishing test for map[0m ---
+
+
+
+-------------------------------- [31;1mTester finished with some errors... 💣[0m --------------------------------

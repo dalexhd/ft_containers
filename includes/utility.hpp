@@ -6,12 +6,16 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:37:15 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:23:10 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
+
+#include "vector.hpp"
+#include <functional>
+#include <queue>
 
 namespace ft
 {
@@ -118,6 +122,186 @@ namespace ft
 	template <class T1, class T2> ft::pair<T1, T2> make_pair(T1 t, T2 u)
 	{
 		return (ft::pair<T1, T2>(t, u));
+	};
+
+	// Red-Black tree utility
+	enum Color
+	{
+		RED,
+		BLACK
+	};
+
+	struct Node
+	{
+		int   data;
+		bool  color;
+		Node *left;
+		Node *right;
+		Node *parent;
+		Node(int data)
+		{
+			this->data = data;
+			left = right = parent = NULL;
+			this->color = RED;
+		}
+	};
+
+	class red_black_tree
+	{
+	  private:
+		Node *_root;
+		Node *_insert(Node *root, Node *parent)
+		{
+			if (root == NULL)
+				return parent;
+			if (parent->data < root->data)
+			{
+				root->left = _insert(root->left, parent);
+				root->left->parent = root;
+			}
+			else if (parent->data > root->data)
+			{
+				root->right = _insert(root->right, parent);
+				root->right->parent = root;
+			}
+			return (root);
+		};
+
+	  protected:
+		void rotateLeft(Node *&root, Node *&parent)
+		{
+			Node *pt_right = parent->right;
+
+			parent->right = pt_right->left;
+			if (parent->right != NULL)
+				parent->right->parent = parent;
+			pt_right->parent = parent->parent;
+			if (parent->parent == NULL)
+				root = pt_right;
+			else if (parent == parent->parent->left)
+				parent->parent->left = pt_right;
+			else
+				parent->parent->right = pt_right;
+			pt_right->left = parent;
+			parent->parent = pt_right;
+		};
+		void rotateRight(Node *&root, Node *&parent)
+		{
+			Node *pt_left = parent->left;
+
+			parent->left = pt_left->right;
+			if (parent->left != NULL)
+				parent->left->parent = parent;
+			pt_left->parent = parent->parent;
+			if (parent->parent == NULL)
+				root = pt_left;
+			else if (parent == parent->parent->left)
+				parent->parent->left = pt_left;
+			else
+				parent->parent->right = pt_left;
+			pt_left->right = parent;
+			parent->parent = pt_left;
+		};
+		void fixViolation(Node *&root, Node *&parent)
+		{
+			Node *parent_pt = NULL;
+			Node *grand_parent_pt = NULL;
+
+			while (parent != root && parent->color != BLACK && parent->parent->color == RED)
+			{
+				parent_pt = parent->parent;
+				grand_parent_pt = parent->parent->parent;
+
+				if (parent_pt == grand_parent_pt->left)
+				{
+					Node *uncle_pt = grand_parent_pt->right;
+
+					if (uncle_pt != NULL && uncle_pt->color == RED)
+					{
+						grand_parent_pt->color = RED;
+						parent_pt->color = BLACK;
+						uncle_pt->color = BLACK;
+						parent = grand_parent_pt;
+					}
+					else
+					{
+						if (parent == parent_pt->right)
+						{
+							rotateLeft(root, parent_pt);
+							parent = parent_pt;
+							parent_pt = parent->parent;
+						}
+						rotateRight(root, grand_parent_pt);
+						std::swap(parent_pt->color, grand_parent_pt->color);
+						parent = parent_pt;
+					}
+				}
+				else
+				{
+					Node *uncle_pt = grand_parent_pt->left;
+
+					if (uncle_pt != NULL && uncle_pt->color == RED)
+					{
+						grand_parent_pt->color = RED;
+						parent_pt->color = BLACK;
+						uncle_pt->color = BLACK;
+						parent = grand_parent_pt;
+					}
+					else
+					{
+						if (parent == parent_pt->left)
+						{
+							rotateLeft(root, parent_pt);
+							parent = parent_pt;
+							parent_pt = parent->parent;
+						}
+						rotateLeft(root, grand_parent_pt);
+						std::swap(parent_pt->color, grand_parent_pt->color);
+						parent = parent_pt;
+					}
+				}
+			}
+			root->color = BLACK;
+		};
+
+	  public:
+		red_black_tree() : _root(NULL){};
+		void insert(const int &n)
+		{
+			Node *parent = new Node(n);
+			_root = _insert(_root, parent);
+			fixViolation(_root, parent);
+		};
+		void inOrder(Node *root)
+		{
+			if (root == NULL)
+				return;
+			inOrder(root->left);
+			std::cout << root->data << "  ";
+			inOrder(root->right);
+		};
+		void levelOrder()
+		{
+			if (_root == NULL)
+				return;
+			std::queue<Node *> q;
+			q.push(_root);
+			while (!q.empty())
+			{
+				Node *temp = q.front();
+				std::cout << temp->data << "  ";
+				q.pop();
+				if (temp->left != NULL)
+					q.push(temp->left);
+				if (temp->right != NULL)
+					q.push(temp->right);
+			}
+		};
+
+		Node *getRoot()
+		{
+			return (_root);
+		}
 	};
 } // namespace ft
 

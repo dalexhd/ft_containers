@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 18:14:53 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:00:49 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "iterator.hpp"
 #include "utility.hpp"
 #include <functional>
+#include <map>
 
 namespace ft
 {

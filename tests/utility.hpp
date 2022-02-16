@@ -6,12 +6,13 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:37:03 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:39:28 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:34:28 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/utility.hpp"
 #include "Tester.hpp"
+#include <map>
 
 class utility_tester : public Tester
 {
@@ -50,6 +51,33 @@ class utility_tester : public Tester
 			    product2.first = "shoes"; // the type of first is string
 			    product2.second = 39.90;  // the type of second is double
 			    return product1.first == "lightbulbs" && product1.second == 0.99 && product2.first == "shoes" && product2.second == 39.90 && product3.first == "tomatoes" && product3.second == 2.30;
+		    });
+		this->endSection();
+
+		this->section("red_black_tree");
+		this->expect(
+		    "pair & make_pair",
+		    [&] {
+			    ft::red_black_tree tree;
+			    tree.insert(7);
+			    tree.insert(6);
+			    tree.insert(5);
+			    tree.insert(4);
+			    tree.insert(3);
+			    tree.insert(2);
+			    return (true);
+		    },
+		    [&] {
+			    std::map<int, int>  tree;
+			    std::map<char, int> mymap;
+			    tree.insert(std::pair<char, int>('a', 500));
+			    tree.insert(std::pair<char, int>('a', 500));
+			    tree.insert(std::pair<char, int>('a', 500));
+			    tree.insert(std::pair<char, int>('a', 500));
+			    tree.insert(std::pair<char, int>('a', 500));
+			    tree.insert(std::pair<char, int>('a', 500));
+			    tree.insert(std::pair<char, int>('a', 500));
+			    return (true);
 		    });
 		this->endSection();
 		return (_status);
