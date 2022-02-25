@@ -6,12 +6,15 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 16:53:34 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/25 15:11:43 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
+
+#include "./type_traits.hpp"
+#include "./utility.hpp"
 
 namespace ft
 {
@@ -418,6 +421,104 @@ namespace ft
 	{
 		return (y.base() - x.base());
 	};
-} // namespace ft
+
+	//--------------
+	// Map iterator
+	//--------------
+	template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> >, bool isConst = false>
+	class map_iterator
+	{
+		typedef struct s_node
+		{
+			ft::pair<const Key, T> data;
+			s_node *               left;
+			s_node *               right;
+			s_node *               parent;
+			bool                   color;
+			s_node(ft::pair<const Key, T> data) : data(data){};
+			const Key &key(void)
+			{
+				return (data.first);
+			};
+			T &val(void)
+			{
+				return (data.second);
+			};
+		} node;
+
+	  public:
+		typedef ft::pair<const Key, T> pair_type;
+		typedef typename ft::conditional<isConst, const pair_type, pair_type>::type value_type;
+		typedef typename ft::conditional<isConst, const node, node>::type node_type;
+		typedef std::ptrdiff_t difference_type;
+		typedef size_t         size_type;
+
+	  private:
+		node_type *_ptr;
+
+	  public:
+		node_type *getPtr(void)
+		{
+			return (_ptr);
+		};
+
+	  public:
+		map_iterator() : _ptr(NULL){};
+		map_iterator(const node_type *ptr) : _ptr(ptr){};
+		template <bool _isConst>
+		map_iterator(const map_iterator<Key, T, Compare, Allocator, _isConst> &x, typename ft::enable_if<!_isConst>::type * = 0)
+		{
+			_ptr = x.getPtr();
+		}
+		~map_iterator(){};
+		map_iterator &operator=(const map_iterator &x)
+		{
+			_ptr = x.getPtr();
+		};
+		template <bool _isConst>
+		bool operator==(const map_iterator<Key, T, Compare, Allocator, _isConst> &x)
+		{
+			_ptr == x.getPtr();
+		};
+		template <bool _isConst>
+		bool operator!=(const map_iterator<Key, T, Compare, Allocator, _isConst> &x)
+		{
+			!(_ptr == x.getPtr());
+		};
+		map_iterator &operator++(void)
+		{
+			nextNode();
+			return (*this);
+		};
+		map_iterator &operator--(void)
+		{
+			prevNode();
+			return (*this);
+		}
+		map_iterator operator++(int)
+		{
+			map_iterator iterator(*this);
+			nextNode();
+			return (iterator);
+		};
+		map_iterator operator--(int)
+		{
+			map_iterator iterator(*this);
+			prevNode();
+			return (iterator);
+		};
+		value_type &operator*(void) const
+		{
+			return (_ptr->data);
+		};
+		value_type *operator->(void) const
+		{
+			return (&_ptr);
+		};
+		void nextNode(void){};
+		void prevNode(void){};
+		// Constructors
+	};
+}; // namespace ft
 
 #endif

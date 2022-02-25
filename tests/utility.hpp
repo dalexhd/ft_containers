@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:37:03 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/16 19:34:28 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:51:27 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,18 @@ class utility_tester : public Tester
 		this->expect(
 		    "pair & make_pair",
 		    [&] {
-			    ft::red_black_tree tree;
-			    tree.insert(7);
-			    tree.insert(6);
-			    tree.insert(5);
-			    tree.insert(4);
-			    tree.insert(3);
-			    tree.insert(2);
+			    /* 			    ft::red_black_tree tree;
+			                    // Inserting
+			                    tree.insert(7);
+			                    tree.insert(6);
+			                    tree.insert(5);
+			                    tree.insert(4);
+			                    tree.insert(3);
+			                    tree.insert(2);
+			                    std::cout << "Inorder Traversal of Created Tree\n";
+			                    tree.inOrder(tree.getRoot());
+			                    std::cout << "\n\nLevel Order Traversal of Created Tree\n";
+			                    tree.levelOrder(); */
 			    return (true);
 		    },
 		    [&] {

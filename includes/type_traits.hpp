@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:37:17 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/25 15:06:32 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,24 @@ namespace ft
 	template <class T> struct enable_if<true, T>
 	{
 		typedef T type;
+	};
+
+	//////////////////////////////
+	// Conditional
+	//////////////////////////////
+
+	template <bool B, class T = void, class U = void> struct conditional
+	{
+	};
+
+	template <class T, class U> struct conditional<true, T, U>
+	{
+		typedef T type;
+	};
+
+	template <class T, class U> struct conditional<false, T, U>
+	{
+		typedef U type;
 	};
 
 	/**
