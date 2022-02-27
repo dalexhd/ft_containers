@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/25 15:12:47 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:48:53 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ namespace ft
 		typedef typename allocator_type::const_pointer const_pointer;
 		typedef typename ft::iterator<pointer>         iterator;
 		typedef typename ft::iterator<const_pointer>   const_iterator;
-		// typedef map_iterator<typename iterator>             iterator;
-		// typedef map_const_iterator<typename const_iterator> const_iterator;
+		typedef typename ft::map_iterator<key_type, mapped_type, key_compare, allocator_type> iterator;
+		typedef typename ft::map_iterator<key_type, mapped_type, key_compare, allocator_type, true> const_iterator;
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
 		typedef ft::reverse_iterator<iterator> const_reverse_iterator;
+
+		// Insert
 	};
 } // namespace ft
 

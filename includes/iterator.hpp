@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/25 15:11:43 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:43:51 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -487,24 +487,24 @@ namespace ft
 		};
 		map_iterator &operator++(void)
 		{
-			nextNode();
+			next();
 			return (*this);
 		};
 		map_iterator &operator--(void)
 		{
-			prevNode();
+			prev();
 			return (*this);
 		}
 		map_iterator operator++(int)
 		{
 			map_iterator iterator(*this);
-			nextNode();
+			next();
 			return (iterator);
 		};
 		map_iterator operator--(int)
 		{
 			map_iterator iterator(*this);
-			prevNode();
+			prev();
 			return (iterator);
 		};
 		value_type &operator*(void) const
@@ -515,9 +515,54 @@ namespace ft
 		{
 			return (&_ptr);
 		};
-		void nextNode(void){};
-		void prevNode(void){};
-		// Constructors
+		void next(void)
+		{
+			if (_ptr->right)
+			{
+				_ptr = _ptr->right;
+				while (_ptr->left) // Here we go to the left most node of the right subtree
+					_ptr = _ptr->left;
+			}
+			else
+			{
+				node_type *tmp = _ptr->parent;
+				while (tmp && _ptr == tmp->right) // Here we check if the node is the right child of its parent and go up until we find a node that is the left child of its parent
+				{
+					_ptr = tmp;
+					tmp = tmp->parent;
+				}
+				_ptr = tmp;
+			}
+		};
+		void prev(void)
+		{
+			if (_ptr->left)
+			{
+				_ptr = _ptr->left;
+				while (_ptr->right) // Here we go to the right most node of the left subtree
+					_ptr = _ptr->right;
+			}
+			else
+			{
+				node_type *tmp = _ptr->parent;
+				while (tmp && _ptr == tmp->left) // Here we check if the node is the left child of its parent and go up until we find a node that is the right child of its parent
+				{
+					_ptr = tmp;
+					tmp = tmp->parent;
+				}
+				_ptr = tmp;
+			}
+		};
+		void next(size_t n)
+		{
+			for (size_t i = 0; i < n; i++)
+				next();
+		};
+		void prev(size_t n)
+		{
+			for (size_t i = 0; i < n; i++)
+				prev();
+		};
 	};
 }; // namespace ft
 
