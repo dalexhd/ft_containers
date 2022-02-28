@@ -6,11 +6,11 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:16:04 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 18:21:38 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/02/27 15:29:46 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/stack.hpp"
+#include "../includes/map.hpp"
 #include "Tester.hpp"
 #include <map>
 
@@ -31,6 +31,9 @@ class map_tester : public Tester
 	}
 	bool test()
 	{
+		ft::map<int, char> a;
+
+		a.insert(ft::pair<int, char>(1, 'a'));
 		return (_status);
 	}
 };
