@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/02 17:04:21 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:32:07 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include "iterator.hpp"
 #include "type_traits.hpp"
 #include <functional>
-#define LEFT 2;
-#define RIGHT 3;
-#define RED 1;
-#define BLACK 2;
+int LEFT = 2;
+int RIGHT = 3;
+int RED = 1;
+int BLACK = 2;
 
 namespace ft
 {
@@ -251,8 +251,21 @@ namespace ft
 			(void) tree;
 			return (*this);
 		};
+		void clear(node_pointer node)
+		{
+			if (node)
+			{
+				clear(node->left);
+				clear(node->right);
+				_node_allocator.destroy(node);
+				_node_allocator.deallocate(node, 1);
+			}
+		};
 		// Destructor
-		~red_black_tree(){};
+		~red_black_tree()
+		{
+			clear(_root);
+		};
 
 	  public:
 		// Iterators
@@ -365,6 +378,10 @@ namespace ft
 			ft::pair<iterator, bool> ret(iterator(node), true);
 			return (ret);
 		}
+		void insert_fix(node_pointer node)
+		{
+			(void) node;
+		}
 		iterator insert(iterator position, const value_type &value)
 		{
 			node_pointer node = search(value);
@@ -384,7 +401,7 @@ namespace ft
 			}
 			else // If the iterator is somewhere in the middle of the tree
 				insert(node);
-			// TODO: here we need to fix the tree
+			insert_fix(node);
 			_size++;
 			return (iterator(node));
 		}
