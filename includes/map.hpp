@@ -6,17 +6,14 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/02 15:16:37 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:44:58 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 #define MAP_H
 
-#include "iterator.hpp"
 #include "tree.hpp"
-#include "utility.hpp"
-#include <functional>
 #include <map>
 
 namespace ft
