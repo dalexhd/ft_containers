@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/01 17:32:40 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:49:35 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,44 @@ namespace ft
 		};
 
 	  public:
-		// Helper functions
+		// Tree functions
+		size_type size(void) const
+		{
+			return (_size);
+		};
+		bool empty(void) const
+		{
+			return (_size == 0);
+		};
+		allocator_type get_allocator(void) const
+		{
+			return (_allocator);
+		};
+		// Tree main functions
+		node_pointer insert(node_pointer parent, node_pointer node)
+		{
+			node_pointer tmp = parent;
+			while (tmp) // Here we go down the tree until we find a node that is NULL
+			{
+				parent = tmp;
+				if (_comp(node->value, tmp->value))
+					tmp = tmp->left;
+				else
+					tmp = tmp->right;
+			}
+			if (_comp(node->value, parent->value)) // Chekc if the node is the left child of its parent
+				parent->left = node;
+			else
+				parent->right = node;
+			node->parent = parent;
+		}
+		node_pointer insert(node_pointer node)
+		{
+			if (!_root) // If the tree is empty
+				return (node);
+			insert(_root, node);
+			return (node);
+		}
 	};
 }; // namespace ft
 #endif
