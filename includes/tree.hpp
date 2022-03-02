@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/02 13:49:35 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/02 14:19:20 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ namespace ft
 		};
 
 	  public:
-		// Tree functions
+		// Tree main functions
 		size_type size(void) const
 		{
 			return (_size);
@@ -296,7 +296,10 @@ namespace ft
 		{
 			return (_allocator);
 		};
-		// Tree main functions
+		pointer create_node(const T &value)
+		{
+			return (_allocator.allocate(1, value));
+		}
 		node_pointer insert(node_pointer parent, node_pointer node)
 		{
 			node_pointer tmp = parent;
@@ -320,6 +323,64 @@ namespace ft
 				return (node);
 			insert(_root, node);
 			return (node);
+		}
+		node_pointer search(node_pointer node, const T &value) const
+		{
+			while (node)
+			{
+				if (_comp(value, node->value))
+					node = node->left;
+				else if (_comp(node->value, value))
+					node = node->right;
+				else
+					return (node);
+			}
+			return (NULL);
+		}
+		node_pointer search(const T &value) const
+		{
+			return (search(_root, value));
+		}
+		ft::pair<iterator, bool> insert(const T &value)
+		{
+			node_pointer node = search(value);
+			if (node)
+				return (ft::pair<iterator, bool>(iterator(node), false));
+			node = create_node(value);
+			node->right = node->left = NULL;
+			insert(node);
+			_size++;
+			ft::pair<iterator, bool> ret(iterator(node), true);
+			return (ret);
+		}
+		iterator insert(iterator position, const T &value)
+		{
+			node_pointer node = search(value);
+			if (node)
+				return (iterator(node));
+			node = create_node(value);
+			node->right = node->left = NULL;
+			if (position == begin()) // If the iterator is at the beginning of the tree
+			{
+				node->parent = NULL;
+				_root = node;
+			}
+			else if (position == end()) // If the iterator is at the end of the tree
+			{
+				node->parent = _root;
+				insert(node);
+			}
+			else // If the iterator is somewhere in the middle of the tree
+				insert(node);
+			// TODO: here we need to fix the tree
+			_size++;
+			return (iterator(node));
+		}
+		template <class InputIterator>
+		void insert(InputIterator first, InputIterator last, typename std::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type)
+		{
+			for (; first != last; first++)
+				insert(*first);
 		}
 	};
 }; // namespace ft
