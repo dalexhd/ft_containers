@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/02 16:36:30 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:48:18 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,10 @@ namespace ft
 				_ptr = x.getPtr();
 			}
 			~red_black_tree_iterator(){};
-			red_black_tree_iterator &operator=(const red_black_tree_iterator &x)
+			red_black_tree_iterator operator=(const red_black_tree_iterator &x)
 			{
 				_ptr = x.getPtr();
+				return (*this);
 			};
 			template <bool _isConst>
 			bool operator==(const red_black_tree_iterator<_isConst> &x)
