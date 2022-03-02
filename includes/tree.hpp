@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/02 14:19:20 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:17:12 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <functional>
 #define LEFT 2;
 #define RIGHT 3;
+#define RED 1;
+#define BLACK 2;
 
 namespace ft
 {
@@ -96,7 +98,8 @@ namespace ft
 
 		  public:
 			red_black_tree_iterator() : _ptr(NULL){};
-			red_black_tree_iterator(const node_type *ptr) : _ptr(ptr){};
+			red_black_tree_iterator(node_type *ptr)
+			    : _ptr(static_cast<node_type *>(ptr)){};
 			template <bool _isConst>
 			red_black_tree_iterator(const red_black_tree_iterator<_isConst> &x, typename ft::enable_if<!_isConst>::type * = 0)
 			{
@@ -215,10 +218,11 @@ namespace ft
 		typedef ft::reverse_iterator<const_iterator>     const_reverse_iterator;
 
 	  private:
-		allocator_type _allocator; // Allocator used to allocate the nodes
-		value_compare  _comp;      // Comparator used to compare the values
-		node_pointer   _root;      // Root node of the tree
-		size_type      _size;      // Number of nodes in the tree
+		allocator_type _allocator; // Allocator used to allocate memory for the nodes
+		node_allocator _node_allocator; // Allocator used to allocate the nodes
+		value_compare  _comp;           // Comparator used to compare the values
+		node_pointer   _root;           // Root node of the tree
+		size_type      _size;           // Number of nodes in the tree
 
 	  public:
 		// Default constructor
@@ -235,7 +239,7 @@ namespace ft
 		    : _allocator(alloc), _comp(comp), _root(NULL), _size(0){};
 		// Copy constructor
 		red_black_tree(const red_black_tree &tree)
-		    : _comp(tree._comp), _root(tree._root), _allocator(tree._allocator), _size(tree._size)
+		    : _allocator(tree._allocator), _comp(tree._comp), _root(tree._root), _size(tree._size)
 		{
 			*this = tree;
 		};
@@ -243,6 +247,7 @@ namespace ft
 		red_black_tree operator=(const red_black_tree &tree)
 		{
 			(void) tree;
+			return (*this);
 		};
 		// Destructor
 		~red_black_tree(){};
@@ -296,9 +301,11 @@ namespace ft
 		{
 			return (_allocator);
 		};
-		pointer create_node(const T &value)
+		node_pointer create_node(const value_type &value)
 		{
-			return (_allocator.allocate(1, value));
+			node_pointer node = _node_allocator.allocate(1);
+			_node_allocator.construct(node, value);
+			return (node);
 		}
 		node_pointer insert(node_pointer parent, node_pointer node)
 		{
@@ -306,16 +313,19 @@ namespace ft
 			while (tmp) // Here we go down the tree until we find a node that is NULL
 			{
 				parent = tmp;
-				if (_comp(node->value, tmp->value))
+				if (_comp(node->data, tmp->data))
 					tmp = tmp->left;
 				else
 					tmp = tmp->right;
 			}
-			if (_comp(node->value, parent->value)) // Chekc if the node is the left child of its parent
+			if (_comp(node->data, parent->data)) // Chekc if the node is the left child of its parent
 				parent->left = node;
 			else
 				parent->right = node;
 			node->parent = parent;
+			node->left = node->right = NULL;
+			node->color = RED; // INFO: check if this is red
+			return (node);
 		}
 		node_pointer insert(node_pointer node)
 		{
@@ -328,9 +338,9 @@ namespace ft
 		{
 			while (node)
 			{
-				if (_comp(value, node->value))
+				if (_comp(value, node->data))
 					node = node->left;
-				else if (_comp(node->value, value))
+				else if (_comp(node->data, value))
 					node = node->right;
 				else
 					return (node);
@@ -341,7 +351,7 @@ namespace ft
 		{
 			return (search(_root, value));
 		}
-		ft::pair<iterator, bool> insert(const T &value)
+		ft::pair<iterator, bool> insert(const value_type &value)
 		{
 			node_pointer node = search(value);
 			if (node)
@@ -353,7 +363,7 @@ namespace ft
 			ft::pair<iterator, bool> ret(iterator(node), true);
 			return (ret);
 		}
-		iterator insert(iterator position, const T &value)
+		iterator insert(iterator position, const value_type &value)
 		{
 			node_pointer node = search(value);
 			if (node)
