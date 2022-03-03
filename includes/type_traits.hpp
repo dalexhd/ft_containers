@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:14 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/25 15:06:32 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 19:59:14 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ namespace ft
 	template <class T, class U> struct conditional<false, T, U>
 	{
 		typedef U type;
+	};
+
+	template <class T> struct is_bool : public false_type
+	{
+	};
+
+	template <> struct is_bool<bool> : public true_type
+	{
 	};
 
 	/**

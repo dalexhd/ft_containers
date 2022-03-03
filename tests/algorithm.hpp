@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 14:15:36 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:37:52 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:10:21 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class algorithm_tester : public Tester
 		this->section("lexicographical_compare");
 		char foo[] = "Apple";
 		char bar[] = "apartment";
-		this->expect(
+		this->expect<bool>(
 		    "Using default comparison (operator<)",
 		    [&] {
 			    return ft::lexicographical_compare(foo, foo + 5, bar, bar + 9);
@@ -47,7 +47,7 @@ class algorithm_tester : public Tester
 		    [&] {
 			    return std::lexicographical_compare(foo, foo + 5, bar, bar + 9);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "Using mycomp as comparison object",
 		    [&] {
 			    return ft::lexicographical_compare(foo, foo + 5, bar, bar + 9, mycomp);
@@ -55,7 +55,7 @@ class algorithm_tester : public Tester
 		    [&] {
 			    return std::lexicographical_compare(foo, foo + 5, bar, bar + 9, mycomp);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "Using default comparison (operator<)",
 		    [&] {
 			    return ft::lexicographical_compare(bar, bar + 9, foo, foo + 5);
@@ -63,7 +63,7 @@ class algorithm_tester : public Tester
 		    [&] {
 			    return std::lexicographical_compare(bar, bar + 9, foo, foo + 5);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "Using mycomp as comparison object",
 		    [&] {
 			    return ft::lexicographical_compare(bar, bar + 9, foo, foo + 5, mycomp);

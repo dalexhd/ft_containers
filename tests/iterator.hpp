@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:24:51 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:38:30 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:10:45 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class iterator_tester : public Tester
 	bool test()
 	{
 		this->section("operators");
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator++",
 		    [&] {
 			    // vector
@@ -109,7 +109,7 @@ class iterator_tester : public Tester
 			                                                             "1 "
 			                                                             "0 ");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::&operator++",
 		    [&] {
 			    // vector
@@ -179,7 +179,7 @@ class iterator_tester : public Tester
 			                                                             "1 "
 			                                                             "0 ");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator--",
 		    [&] {
 			    std::vector<int> myvector;
@@ -227,7 +227,7 @@ class iterator_tester : public Tester
 			    return (ret1 == "9 8 7 6 5 4 3 2 1 0 " && ret2 == "0 1 2 3 4 5 "
 			                                                      "6 7 8 9 ");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::&operator--",
 		    [&] {
 			    std::vector<int> myvector;
@@ -263,7 +263,7 @@ class iterator_tester : public Tester
 			    return (ret1 == "9 8 7 6 5 4 3 2 1 0 " && ret2 == "0 1 2 3 4 5 "
 			                                                      "6 7 8 9 ");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator*",
 		    [&] {
 			    std::vector<int> myvector;
@@ -294,7 +294,7 @@ class iterator_tester : public Tester
 			    return (str == "9 8 7 6 5 4 3 2 1 0 ");
 		    });
 
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator[]",
 		    [&] {
 			    std::vector<int> myvector;
@@ -315,7 +315,7 @@ class iterator_tester : public Tester
 			    return (rev_until[2] == 7);
 		    });
 
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator->",
 		    [&] {
 			    std::map<int, std::string> numbers;
@@ -347,7 +347,7 @@ class iterator_tester : public Tester
 			    return (str == "3 three 2 two 1 one ");
 		    });
 
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator==",
 		    [&] {
 			    // Vector
@@ -410,7 +410,7 @@ class iterator_tester : public Tester
 			                                                    "1 one ");
 		    });
 
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator!=",
 		    [&] {
 			    std::vector<int> myvector;
@@ -440,7 +440,7 @@ class iterator_tester : public Tester
 				    result += std::to_string(*rev_from++);
 			    return (result == "9876543210");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator<",
 		    [&] {
 			    std::vector<int> myvector;
@@ -470,7 +470,7 @@ class iterator_tester : public Tester
 				    result += std::to_string(*rev_from++);
 			    return (result == "9876543210");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator>",
 		    [&] {
 			    std::vector<int> myvector;
@@ -500,7 +500,7 @@ class iterator_tester : public Tester
 				    result += std::to_string(*rev_from++);
 			    return (result == "9876543210");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator<=",
 		    [&] {
 			    std::vector<int> myvector;
@@ -540,7 +540,7 @@ class iterator_tester : public Tester
 			    }
 			    return (result == "9876543210");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator>=",
 		    [&] {
 			    std::vector<int> myvector;
@@ -580,7 +580,7 @@ class iterator_tester : public Tester
 			    }
 			    return (result == "9876543210");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator+",
 		    [&] {
 			    std::vector<int> myvector;
@@ -600,7 +600,7 @@ class iterator_tester : public Tester
 			    std::reverse_iterator<iter_type>   rev_until(from);
 			    return (*(from + 5) == 10);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator-",
 		    [&] {
 			    std::vector<int> myvector;
@@ -620,7 +620,7 @@ class iterator_tester : public Tester
 			    std::reverse_iterator<iter_type>   rev_until(from);
 			    return (*(from - 6) == 8);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator+=",
 		    [&] {
 			    std::vector<int> myvector;
@@ -642,7 +642,7 @@ class iterator_tester : public Tester
 			    from += 5;
 			    return (*from == 10);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "ft::reverse_iterator::operator-=",
 		    [&] {
 			    std::vector<int> myvector;

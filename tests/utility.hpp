@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:37:03 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/25 12:51:27 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:10:33 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class utility_tester : public Tester
 	bool test()
 	{
 		this->section("pair");
-		this->expect(
+		this->expect<bool>(
 		    "pair & make_pair",
 		    [&] {
 			    ft::pair<std::string, double> product1; // default constructor
@@ -55,7 +55,7 @@ class utility_tester : public Tester
 		this->endSection();
 
 		this->section("red_black_tree");
-		this->expect(
+		this->expect<bool>(
 		    "pair & make_pair",
 		    [&] {
 			    /* 			    ft::red_black_tree tree;

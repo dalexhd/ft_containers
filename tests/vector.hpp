@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:28:42 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:39:39 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:10:35 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class vector_tester : public Tester
 	bool test()
 	{
 		this->section("member functions");
-		this->expect(
+		this->expect<bool>(
 		    "vector::at",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -44,7 +44,7 @@ class vector_tester : public Tester
 			    myvector.assign(10, 42);
 			    return (myvector.at(8) == 42);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::at catch(out_of_range)",
 		    [&] {
 			    try
@@ -70,7 +70,7 @@ class vector_tester : public Tester
 				    return (true);
 			    }
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::back",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -82,7 +82,7 @@ class vector_tester : public Tester
 			    myvector.assign(10, 42);
 			    return myvector.back() == 42;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::begin",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -94,7 +94,7 @@ class vector_tester : public Tester
 			    myvector.assign(10, 42);
 			    return *(myvector.begin()) == 42;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::clear",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -108,7 +108,7 @@ class vector_tester : public Tester
 			    myvector.clear();
 			    return (myvector.empty());
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::empty",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -120,7 +120,7 @@ class vector_tester : public Tester
 			    myvector.assign(10, 42);
 			    return (!myvector.empty());
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::end",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -134,7 +134,7 @@ class vector_tester : public Tester
 			    myvector.push_back(11);
 			    return *(myvector.end() - 1) == 11;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::erase",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -166,7 +166,7 @@ class vector_tester : public Tester
 				    result += std::to_string(*it) + " ";
 			    return (myvector.size() == 9 && myvector2.size() == 7 && result == "0 1 2 3 7 8 9 ");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::front",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -178,7 +178,7 @@ class vector_tester : public Tester
 			    myvector.assign(10, 42);
 			    return (myvector.front() == 42);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::get_allocator",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -190,7 +190,7 @@ class vector_tester : public Tester
 			    myvector.assign(10, 42);
 			    return (myvector.get_allocator() == std::allocator<int>());
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::insert",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -226,7 +226,7 @@ class vector_tester : public Tester
 				    result2 += std::to_string(*it2) + " ";
 			    return (myvector.size() == 11 && result == "42 42 42 42 42 20 42 42 42 42 42 " && result2 == "42 42 42 42 4 4 4 4 4 4 4 4 4 4 42 42 42 42 42 42 ");
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::max_size",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -236,7 +236,7 @@ class vector_tester : public Tester
 			    std::vector<int> myvector;
 			    return (myvector.max_size() == std::vector<int>().max_size());
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::pop_back",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -250,7 +250,7 @@ class vector_tester : public Tester
 			    myvector.pop_back();
 			    return (myvector.size() == 9);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::push_back",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -264,7 +264,7 @@ class vector_tester : public Tester
 			    myvector.push_back(24);
 			    return (myvector.size() == 11 && myvector.back() == 24);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::rbegin",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -278,7 +278,7 @@ class vector_tester : public Tester
 			    myvector.push_back(2);
 			    return *(myvector.rbegin()) == 1;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::rend",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -292,7 +292,7 @@ class vector_tester : public Tester
 			    myvector.at(0) = 10;
 			    return (*(myvector.rend() - 1) == 10);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::reserve",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -304,7 +304,7 @@ class vector_tester : public Tester
 			    myvector.reserve(42);
 			    return (myvector.capacity() == 42);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::reserve catch(length_error)",
 		    [&] {
 			    int status = 0;
@@ -332,7 +332,7 @@ class vector_tester : public Tester
 			    }
 			    return (status);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::resize",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -346,7 +346,7 @@ class vector_tester : public Tester
 			    myvector.resize(30);
 			    return (myvector.size() == 30);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::size",
 		    [&] {
 			    ft::vector<int> myvector;
@@ -362,7 +362,7 @@ class vector_tester : public Tester
 			    myvector.push_back(3);
 			    return (myvector.size() == 3);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "vector::swap",
 		    [&] {
 			    ft::vector<int> myvector;

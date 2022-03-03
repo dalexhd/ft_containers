@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/02 17:32:07 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:33:16 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,13 +308,18 @@ namespace ft
 		{
 			return (_size);
 		};
+
+		size_type max_size(void) const
+		{
+			return (_node_allocator.max_size());
+		};
 		bool empty(void) const
 		{
 			return (_size == 0);
 		};
 		allocator_type get_allocator(void) const
 		{
-			return (_allocator);
+			return (_node_allocator);
 		};
 		node_pointer create_node(const value_type &value)
 		{
@@ -339,14 +344,22 @@ namespace ft
 				parent->right = node;
 			node->parent = parent;
 			node->left = node->right = NULL;
-			node->color = RED; // INFO: check if this is red
+			node->color = node->parent->color == RED ? BLACK : RED; // INFO: check if this is red
 			return (node);
 		}
 		node_pointer insert(node_pointer node)
 		{
-			if (!_root) // If the tree is empty
-				return (node);
-			insert(_root, node);
+			if (!_root)
+			{
+				_root = node;
+				_root->color = BLACK;
+				_root->left = _root->right = NULL;
+				_root->parent = NULL;
+			}
+			else
+			{
+				insert(_root, node);
+			}
 			return (node);
 		}
 		node_pointer search(node_pointer node, const T &value) const
@@ -366,6 +379,15 @@ namespace ft
 		{
 			return (search(_root, value));
 		}
+		const_iterator find(const value_type &value) const
+		{
+			return (const_iterator(search(value)));
+		}
+		iterator find(const value_type &value)
+		{
+			return (iterator(search(value)));
+		}
+
 		ft::pair<iterator, bool> insert(const value_type &value)
 		{
 			node_pointer node = search(value);
@@ -405,6 +427,23 @@ namespace ft
 			_size++;
 			return (iterator(node));
 		}
+
+		// create a function that prints the tree
+		void print_tree(node_pointer node, int level) const
+		{
+			if (node == NULL)
+				return;
+			print_tree(node->right, level + 1);
+			for (int i = 0; i < level; i++)
+				std::cout << i << "    ";
+			std::cout << node->data.first << std::endl;
+			print_tree(node->left, level + 1);
+		}
+		void print_tree(void) const
+		{
+			print_tree(_root, 0);
+		}
+
 		template <class InputIterator>
 		void insert(InputIterator first, InputIterator last, typename std::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type)
 		{

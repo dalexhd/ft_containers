@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 15:37:03 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:38:43 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:10:26 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class stack_tester : public Tester
 	bool test()
 	{
 		this->section("empty");
-		this->expect(
+		this->expect<bool>(
 		    "empty true",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -42,7 +42,7 @@ class stack_tester : public Tester
 			    std::stack<int> mystack;
 			    return mystack.empty();
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "empty false",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -57,7 +57,7 @@ class stack_tester : public Tester
 		this->endSection();
 
 		this->section("size");
-		this->expect(
+		this->expect<bool>(
 		    "size 0",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -67,7 +67,7 @@ class stack_tester : public Tester
 			    std::stack<int> mystack;
 			    return mystack.size();
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "size 1",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -82,7 +82,7 @@ class stack_tester : public Tester
 		this->endSection();
 
 		this->section("top");
-		this->expect(
+		this->expect<bool>(
 		    "top",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -101,7 +101,7 @@ class stack_tester : public Tester
 		this->endSection();
 
 		this->section("push");
-		this->expect(
+		this->expect<bool>(
 		    "top",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -115,7 +115,7 @@ class stack_tester : public Tester
 				    mystack.push(i);
 			    return mystack.top() == 4;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "top with pop",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -134,7 +134,7 @@ class stack_tester : public Tester
 		this->endSection();
 
 		this->section("operators");
-		this->expect(
+		this->expect<bool>(
 		    "==",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -154,7 +154,7 @@ class stack_tester : public Tester
 				    mystack2.push(i);
 			    return mystack == mystack2;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "!=",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -174,7 +174,7 @@ class stack_tester : public Tester
 				    mystack2.push(i);
 			    return mystack != mystack2;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "<",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -194,7 +194,7 @@ class stack_tester : public Tester
 				    mystack2.push(i);
 			    return mystack < mystack2;
 		    });
-		this->expect(
+		this->expect<bool>(
 		    "<=",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -220,7 +220,7 @@ class stack_tester : public Tester
 				    mystack3.push(i);
 			    return mystack < mystack2 && !(mystack2 < mystack3);
 		    });
-		this->expect(
+		this->expect<bool>(
 		    ">",
 		    [&] {
 			    ft::stack<int> mystack;
@@ -241,7 +241,7 @@ class stack_tester : public Tester
 			    return mystack > mystack2;
 		    });
 
-		this->expect(
+		this->expect<bool>(
 		    ">=",
 		    [&] {
 			    ft::stack<int> mystack;
