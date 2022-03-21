@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/03 20:33:16 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:24:32 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "iterator.hpp"
 #include "type_traits.hpp"
 #include <functional>
+#include <math.h>
 int LEFT = 2;
 int RIGHT = 3;
 int RED = 1;
@@ -31,7 +32,7 @@ namespace ft
 		node *right;
 		node *parent;
 		T     data;
-		bool  color;
+		int   color;
 
 		node(const T &value)
 		    : left(nullptr), right(nullptr), parent(nullptr), data(value)
@@ -338,12 +339,13 @@ namespace ft
 				else
 					tmp = tmp->right;
 			}
-			if (_comp(node->data, parent->data)) // Chekc if the node is the left child of its parent
+			if (_comp(node->data, parent->data)) // Check if the node is the left child of its parent
 				parent->left = node;
 			else
 				parent->right = node;
 			node->parent = parent;
 			node->left = node->right = NULL;
+			node->right = NULL;
 			node->color = node->parent->color == RED ? BLACK : RED; // INFO: check if this is red
 			return (node);
 		}
@@ -400,10 +402,7 @@ namespace ft
 			ft::pair<iterator, bool> ret(iterator(node), true);
 			return (ret);
 		}
-		void insert_fix(node_pointer node)
-		{
-			(void) node;
-		}
+
 		iterator insert(iterator position, const value_type &value)
 		{
 			node_pointer node = search(value);
@@ -423,27 +422,12 @@ namespace ft
 			}
 			else // If the iterator is somewhere in the middle of the tree
 				insert(node);
-			insert_fix(node);
+			// insert_fix(node);
 			_size++;
 			return (iterator(node));
 		}
 
-		// create a function that prints the tree
-		void print_tree(node_pointer node, int level) const
-		{
-			if (node == NULL)
-				return;
-			print_tree(node->right, level + 1);
-			for (int i = 0; i < level; i++)
-				std::cout << i << "    ";
-			std::cout << node->data.first << std::endl;
-			print_tree(node->left, level + 1);
-		}
-		void print_tree(void) const
-		{
-			print_tree(_root, 0);
-		}
-
+	  public:
 		template <class InputIterator>
 		void insert(InputIterator first, InputIterator last, typename std::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type)
 		{

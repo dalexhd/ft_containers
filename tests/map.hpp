@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:16:04 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/03 20:34:16 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:29:26 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,12 @@ class map_tester : public Tester
 		this->expect<size_t>(
 		    "map::max_size",
 		    [&] {
-			    ft::map<char, int> mymap;
-			    mymap.insert(ft::pair<char, int>('a', 100));
-			    mymap.insert(ft::pair<char, int>('z', 200));
-			    mymap.insert(ft::pair<char, int>('b', 400));
-			    mymap.insert(ft::pair<char, int>('c', 500));
-			    mymap.insert(ft::pair<char, int>('d', 600));
-			    mymap.insert(ft::pair<char, int>('e', 700));
-			    mymap.insert(ft::pair<char, int>('f', 800));
+			    ft::map<int, int> mymap;
+			    mymap.insert(ft::pair<int, int>(1, 2));
+			    mymap.insert(ft::pair<int, int>(2, 3));
+			    mymap.insert(ft::pair<int, int>(3, 5));
+			    mymap.insert(ft::pair<int, int>(4, 5));
+			    mymap.insert(ft::pair<int, int>(5, 5));
 			    return (mymap.max_size() + mymap.get_allocator().max_size());
 		    },
 		    [&] {
@@ -129,10 +127,7 @@ class map_tester : public Tester
 			    mymap.insert(std::pair<char, int>('a', 100));
 			    mymap.insert(std::pair<char, int>('z', 200));
 			    mymap.insert(std::pair<char, int>('b', 400));
-			    mymap.insert(std::pair<char, int>('c', 500));
-			    mymap.insert(std::pair<char, int>('d', 600));
-			    mymap.insert(std::pair<char, int>('e', 700));
-			    mymap.insert(std::pair<char, int>('f', 800));
+
 			    return (mymap.max_size() + mymap.get_allocator().max_size());
 		    });
 		this->endSection();

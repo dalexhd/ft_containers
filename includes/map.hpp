@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/03 20:22:16 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:29:13 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,6 @@ namespace ft
 	  public:
 		map &        operator=(const map &x);
 		mapped_type &operator[](const key_type &k);
-
-	  public:
-		void print(void)
-		{
-			_tree.print_tree();
-		};
 	};
 
 	template <class Key, class T, class Compare, class Alloc>
