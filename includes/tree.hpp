@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/22 18:29:19 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:26:15 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,8 @@ namespace ft
 			node->parent = parent;
 			node->left = node->right = NULL;
 			node->right = NULL;
-			node->color = node->parent->color == RED ? BLACK : RED; // INFO: check if this is red
+			node->color = RED; // INFO: check if this is red
+			fix_insert(node);
 			return (node);
 		}
 		node_pointer insert(node_pointer node)
@@ -422,9 +423,99 @@ namespace ft
 			}
 			else // If the iterator is somewhere in the middle of the tree
 				insert(node);
-			// insert_fix(node);
 			_size++;
 			return (iterator(node));
+		}
+
+		void rotate_left(node_pointer node)
+		{
+			node_pointer tmp = node->right;
+			node->right = tmp->left;
+			if (tmp->left)
+				tmp->left->parent = node;
+			tmp->parent = node->parent;
+			if (!node->parent)
+				_root = tmp;
+			else if (node == node->parent->left)
+				node->parent->left = tmp;
+			else
+				node->parent->right = tmp;
+			tmp->left = node;
+			node->parent = tmp;
+		}
+
+		void rotate_right(node_pointer node)
+		{
+			node_pointer tmp = node->left;
+			node->left = tmp->right;
+			if (tmp->right)
+				tmp->right->parent = node;
+			tmp->parent = node->parent;
+			if (!node->parent)
+				_root = tmp;
+			else if (node == node->parent->left)
+				node->parent->left = tmp;
+			else
+				node->parent->right = tmp;
+			tmp->right = node;
+			node->parent = tmp;
+		}
+
+		/**
+		 * @brief Fix insert
+		 * @see https://www.geeksforgeeks.org/c-program-red-black-tree-insertion/
+		 * @param node
+		 */
+		void fix_insert(node_pointer node) // here we fix the tree after insertion.
+		{
+			while (node->parent && node->parent->color == RED)
+			{
+				if (node->parent == node->parent->parent->left) // If the parent is the left child of the grandparent
+				{
+					node_pointer uncle = node->parent->parent->right;
+					if (uncle && uncle->color == RED) // If the uncle is red
+					{
+						node->parent->color = BLACK;
+						uncle->color = BLACK;
+						node->parent->parent->color = RED;
+						node = node->parent->parent;
+					}
+					else
+					{
+						if (node == node->parent->right) // If the node is the right child of its parent
+						{
+							node = node->parent;
+							rotate_left(node);
+						}
+						node->parent->color = BLACK;
+						node->parent->parent->color = RED;
+						rotate_right(node->parent->parent);
+					}
+				}
+				else
+				{
+					node_pointer uncle = node->parent->parent->left;
+					if (uncle && uncle->color == RED) // If the parent is the right child of the grandparent
+					{
+						node->parent->color = BLACK;
+						uncle->color = BLACK;
+						node->parent->parent->color = RED;
+						node = node->parent->parent;
+					}
+					else
+					{
+						if (node == node->parent->left) // If the node is the left child of its parent
+						{
+							node = node->parent;
+							rotate_right(node);
+						}
+						node->parent->color = BLACK;
+						node->parent->parent->color = RED;
+						rotate_left(node->parent->parent);
+					}
+				}
+			}
+			_root->color = BLACK;
 		}
 
 		// create a function that prints the tree
@@ -442,7 +533,7 @@ namespace ft
 			std::cout << std::endl;
 			for (int i = 10; i < space; i++)
 				std::cout << " ";
-			std::cout << node->data.second << std::endl;
+			std::cout << node->data.first << std::endl;
 			// Process left child
 			print_tree(node->left, space);
 		}
@@ -451,7 +542,6 @@ namespace ft
 			print_tree(_root, 0);
 			std::cout << ".----------------------------------." << std::endl;
 		}
-
 
 	  public:
 		template <class InputIterator>

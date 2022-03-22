@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:16:04 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/22 18:32:15 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:29:49 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,17 @@ class map_tester : public Tester
 		    "map::size",
 		    [&] {
 			    ft::map<char, int> mymap;
-			    mymap.insert(ft::pair<char, int>('a', 5));
-			    mymap.insert(ft::pair<char, int>('b', 3));
-			    mymap.insert(ft::pair<char, int>('c', 2));
-			    mymap.insert(ft::pair<char, int>('d', 4));
-			    mymap.insert(ft::pair<char, int>('e', 7));
+			    mymap.insert(ft::pair<char, int>('g', 7));
 			    mymap.insert(ft::pair<char, int>('f', 6));
-			    mymap.insert(ft::pair<char, int>('g', 8));
-				mymap.print();
+			    mymap.insert(ft::pair<char, int>('e', 5));
+			    mymap.insert(ft::pair<char, int>('d', 4));
+			    mymap.insert(ft::pair<char, int>('c', 3));
+			    mymap.insert(ft::pair<char, int>('b', 2));
+			    mymap.insert(ft::pair<char, int>('a', 1));
+			    mymap.insert(ft::pair<char, int>('h', 8));
+			    mymap.insert(ft::pair<char, int>('l', 12));
+			    mymap.insert(ft::pair<char, int>('m', 11));
+			    mymap.print();
 			    return (mymap.size());
 		    },
 		    [&] {
