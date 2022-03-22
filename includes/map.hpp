@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/21 18:29:13 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:12:08 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ namespace ft
 			}
 			bool operator()(const value_type &lhs, const value_type &rhs) const
 			{
-				return (_comp(lhs.first, rhs.first));
+				return (_comp(lhs.second, rhs.second));
 			}
 		};
 
@@ -130,6 +130,13 @@ namespace ft
 	  public:
 		map &        operator=(const map &x);
 		mapped_type &operator[](const key_type &k);
+
+
+	  public:
+		void print(void)
+		{
+			_tree.print_tree();
+		};
 	};
 
 	template <class Key, class T, class Compare, class Alloc>

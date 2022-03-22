@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:16:04 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/21 18:29:26 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:32:15 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,14 @@ class map_tester : public Tester
 		    "map::size",
 		    [&] {
 			    ft::map<char, int> mymap;
-			    mymap.insert(ft::pair<char, int>('a', 100));
-			    mymap.insert(ft::pair<char, int>('z', 200));
-			    mymap.insert(ft::pair<char, int>('b', 400));
+			    mymap.insert(ft::pair<char, int>('a', 5));
+			    mymap.insert(ft::pair<char, int>('b', 3));
+			    mymap.insert(ft::pair<char, int>('c', 2));
+			    mymap.insert(ft::pair<char, int>('d', 4));
+			    mymap.insert(ft::pair<char, int>('e', 7));
+			    mymap.insert(ft::pair<char, int>('f', 6));
+			    mymap.insert(ft::pair<char, int>('g', 8));
+				mymap.print();
 			    return (mymap.size());
 		    },
 		    [&] {

@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/21 18:24:32 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:29:19 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,6 +426,32 @@ namespace ft
 			_size++;
 			return (iterator(node));
 		}
+
+		// create a function that prints the tree
+		void print_tree(node_pointer node, int space) const
+		{
+			if (node == NULL)
+				return;
+			// Increase distance between levels
+			space += 10;
+
+			// Process right child first
+			print_tree(node->right, space);
+			// Print current node after space
+			// count
+			std::cout << std::endl;
+			for (int i = 10; i < space; i++)
+				std::cout << " ";
+			std::cout << node->data.second << std::endl;
+			// Process left child
+			print_tree(node->left, space);
+		}
+		void print_tree(void) const
+		{
+			print_tree(_root, 0);
+			std::cout << ".----------------------------------." << std::endl;
+		}
+
 
 	  public:
 		template <class InputIterator>
