@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/24 18:52:15 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:06:28 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
 		int   color;
 
 		node(const T &value)
-		    : left(nullptr), right(nullptr), parent(nullptr), data(value)
+		    : left(NULL), right(NULL), parent(NULL), data(value)
 		{
 			color = 0;
 		};
@@ -43,7 +43,7 @@ namespace ft
 
 		int getSide()
 		{
-			if (parent == nullptr)
+			if (parent == NULL)
 				return 0;
 			if (parent->left == this)
 				return LEFT;
@@ -52,8 +52,8 @@ namespace ft
 
 		node *getBrother()
 		{
-			if (parent == nullptr)
-				return nullptr;
+			if (parent == NULL)
+				return NULL;
 			if (parent->left == this)
 				return parent->right;
 			return parent->left;
@@ -61,8 +61,8 @@ namespace ft
 
 		node *getUncle()
 		{
-			if (parent == nullptr)
-				return nullptr;
+			if (parent == NULL)
+				return NULL;
 			if (parent->left == this)
 				return parent->right;
 			return parent->left;
@@ -70,8 +70,8 @@ namespace ft
 
 		node *getGrandparent()
 		{
-			if (parent == nullptr)
-				return nullptr;
+			if (parent == NULL)
+				return NULL;
 			return parent->parent;
 		}
 	};
@@ -540,7 +540,7 @@ namespace ft
 
 	  public:
 		template <class InputIterator>
-		void insert(InputIterator first, InputIterator last, typename std::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type)
+		void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type)
 		{
 			for (; first != last; first++)
 				insert(*first);
