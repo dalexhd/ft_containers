@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:16:04 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/22 19:29:49 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:00:21 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,41 +60,20 @@ class map_tester : public Tester
 			    ret = mymap.insert(std::pair<char, int>('z', 500));
 			    return (ret.second);
 		    });
-		/* this->expect(
+		this->expect<int>(
 		    "map::insert(InputIterator)",
 		    [&] {
-		        ft::map<char, int>           mymap;
-		        ft::map<char, int>::iterator it = mymap.begin();
-		        mymap.insert(it, ft::pair<char, int>('b', 300)); // max efficiency inserting
-		        mymap.insert(it, ft::pair<char, int>('c', 400)); // no max efficiency inserting
-
-		        // third insert function version (range insertion):
-		        ft::map<char, int> anothermap;
-		        anothermap.insert(mymap.begin(), mymap.find('c'));
-
-		        std::string res = "";
-		        for (it = mymap.begin(); it != mymap.end(); ++it)
-		            res += std::to_string(it->first) + " " + std::to_string(it->second) + " ";
-		        for (it = anothermap.begin(); it != anothermap.end(); ++it)
-		            res += std::to_string(it->first) + " " + std::to_string(it->second) + " ";
-		        return (res == "b 300 c 400 ");
+			    ft::map<char, int> mymap;
+			    mymap.insert(ft::pair<char, int>('a', 100));
+			    mymap.insert(ft::pair<char, int>('z', 200));
+			    return (mymap.find('a')->second);
 		    },
 		    [&] {
-		        std::map<char, int>           mymap;
-		        std::map<char, int>::iterator it = mymap.begin();
-		        mymap.insert(it, std::pair<char, int>('b', 300)); // max efficiency inserting
-		        mymap.insert(it, std::pair<char, int>('c', 400)); // no max efficiency inserting
-
-		        // third insert function version (range insertion):
-		        std::map<char, int> anothermap;
-		        anothermap.insert(mymap.begin(), mymap.find('c'));
-		        std::string res = "";
-		        for (it = mymap.begin(); it != mymap.end(); ++it)
-		            res += std::to_string(it->first) + " " + std::to_string(it->second) + " ";
-		        for (it = anothermap.begin(); it != anothermap.end(); ++it)
-		            res += std::to_string(it->first) + " " + std::to_string(it->second) + " ";
-		        return (res == "b 300 c 400 ");
-		    }); */
+			    std::map<char, int> mymap;
+			    mymap.insert(std::pair<char, int>('a', 100));
+			    mymap.insert(std::pair<char, int>('z', 200));
+			    return (mymap.find('a')->second);
+		    });
 		this->expect<size_t>(
 		    "map::size",
 		    [&] {
@@ -109,25 +88,29 @@ class map_tester : public Tester
 			    mymap.insert(ft::pair<char, int>('h', 8));
 			    mymap.insert(ft::pair<char, int>('l', 12));
 			    mymap.insert(ft::pair<char, int>('m', 11));
-			    mymap.print();
 			    return (mymap.size());
 		    },
 		    [&] {
 			    std::map<char, int> mymap;
-			    mymap.insert(std::pair<char, int>('a', 100));
-			    mymap.insert(std::pair<char, int>('z', 200));
-			    mymap.insert(std::pair<char, int>('b', 400));
+			    mymap.insert(std::pair<char, int>('g', 7));
+			    mymap.insert(std::pair<char, int>('f', 6));
+			    mymap.insert(std::pair<char, int>('e', 5));
+			    mymap.insert(std::pair<char, int>('d', 4));
+			    mymap.insert(std::pair<char, int>('c', 3));
+			    mymap.insert(std::pair<char, int>('b', 2));
+			    mymap.insert(std::pair<char, int>('a', 1));
+			    mymap.insert(std::pair<char, int>('h', 8));
+			    mymap.insert(std::pair<char, int>('l', 12));
+			    mymap.insert(std::pair<char, int>('m', 11));
 			    return (mymap.size());
 		    });
 		this->expect<size_t>(
 		    "map::max_size",
 		    [&] {
 			    ft::map<int, int> mymap;
-			    mymap.insert(ft::pair<int, int>(1, 2));
-			    mymap.insert(ft::pair<int, int>(2, 3));
-			    mymap.insert(ft::pair<int, int>(3, 5));
-			    mymap.insert(ft::pair<int, int>(4, 5));
-			    mymap.insert(ft::pair<int, int>(5, 5));
+			    mymap.insert(ft::pair<char, int>('a', 100));
+			    mymap.insert(ft::pair<char, int>('z', 200));
+			    mymap.insert(ft::pair<char, int>('b', 400));
 			    return (mymap.max_size() + mymap.get_allocator().max_size());
 		    },
 		    [&] {
@@ -135,7 +118,6 @@ class map_tester : public Tester
 			    mymap.insert(std::pair<char, int>('a', 100));
 			    mymap.insert(std::pair<char, int>('z', 200));
 			    mymap.insert(std::pair<char, int>('b', 400));
-
 			    return (mymap.max_size() + mymap.get_allocator().max_size());
 		    });
 		this->endSection();

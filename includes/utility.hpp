@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/25 15:11:00 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:35:43 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 namespace ft
 {
-	template <class T1, class T2> struct pair
+	template <typename T1, typename T2> struct pair
 	{
 	  public:
 		// Member types
@@ -25,8 +25,8 @@ namespace ft
 		typedef T2 second_type; // The second template parameter (T2)
 
 		// Member variables
-		first_type  first;  // The first value in the pair
-		second_type second; // The second value in the pair
+		T1 first;  // The first value in the pair
+		T2 second; // The second value in the pair
 
 		/**
 		 * @brief Default constructor.

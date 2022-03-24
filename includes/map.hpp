@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/22 19:25:55 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:02:10 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,15 @@ namespace ft
 		ft::pair<iterator, iterator>             equal_range(const key_type &k);
 		void                                     erase(iterator position);
 		size_type                                erase(const key_type &k);
-		void           erase(iterator first, iterator last);
-		iterator       find(const key_type &k);
-		const_iterator find(const key_type &k) const;
+		void     erase(iterator first, iterator last);
+		iterator find(const key_type &k)
+		{
+			return (iterator(_tree.find(value_type(k, mapped_type()))));
+		}
+		const_iterator find(const key_type &k) const
+		{
+			return (const_iterator(_tree.find(value_type(k, mapped_type()))));
+		}
 		allocator_type get_allocator() const
 		{
 			return (_tree.get_allocator());

@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/22 19:26:15 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:52:15 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ namespace ft
 		{
 		  public:
 			typedef ft::pair<const Key, T> pair_type;
-			typedef typename ft::conditional<isConst, const pair_type, pair_type>::type value_type;
+			typedef typename ft::conditional<isConst, const Key, T>::type value_type;
 			typedef typename ft::conditional<isConst, const node<T>, node<T> >::type node_type;
 			typedef std::ptrdiff_t difference_type;
 			typedef size_t         size_type;
@@ -151,7 +151,7 @@ namespace ft
 			};
 			value_type *operator->(void) const
 			{
-				return (&_ptr);
+				return (&(_ptr->data));
 			};
 			void next(void)
 			{
@@ -523,20 +523,15 @@ namespace ft
 		{
 			if (node == NULL)
 				return;
-			// Increase distance between levels
 			space += 10;
-
-			// Process right child first
 			print_tree(node->right, space);
-			// Print current node after space
-			// count
 			std::cout << std::endl;
 			for (int i = 10; i < space; i++)
 				std::cout << " ";
 			std::cout << node->data.first << std::endl;
-			// Process left child
 			print_tree(node->left, space);
 		}
+
 		void print_tree(void) const
 		{
 			print_tree(_root, 0);
