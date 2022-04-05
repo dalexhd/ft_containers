@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/24 19:06:28 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:30:53 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ namespace ft
 	template <class Key, class T, class Compare, class Allocator>
 	class red_black_tree
 	{
-		template <bool isConst = false> class red_black_tree_iterator
+		template <bool isConst = true> class red_black_tree_iterator
 		{
 		  public:
 			typedef ft::pair<const Key, T> pair_type;
@@ -87,12 +87,14 @@ namespace ft
 			typedef typename ft::conditional<isConst, const node<T>, node<T> >::type node_type;
 			typedef std::ptrdiff_t difference_type;
 			typedef size_t         size_type;
+			typedef typename ft::conditional<isConst, const T *, T *>::type pointer;
+			typedef typename ft::conditional<isConst, const T &, T &>::type reference;
 
 		  private:
 			node_type *_ptr;
 
 		  public:
-			node_type *getPtr(void)
+			node_type *getPtr(void) const
 			{
 				return (_ptr);
 			};
@@ -114,15 +116,16 @@ namespace ft
 				return (*this);
 			};
 			template <bool _isConst>
-			bool operator==(const red_black_tree_iterator<_isConst> &x)
+			bool operator==(const red_black_tree_iterator<_isConst> &x) const
 			{
 				return (_ptr == x.getPtr());
 			};
 			template <bool _isConst>
-			bool operator!=(const red_black_tree_iterator<_isConst> &x)
+			bool operator!=(const red_black_tree_iterator<_isConst> &x) const
 			{
 				return !(_ptr == x.getPtr());
 			};
+
 			red_black_tree_iterator &operator++(void)
 			{
 				next();
@@ -145,14 +148,21 @@ namespace ft
 				prev();
 				return (iterator);
 			};
-			value_type &operator*(void) const
+			reference operator*(void)
 			{
 				return (_ptr->data);
 			};
-			value_type *operator->(void) const
+
+			reference &operator*(void) const
+			{
+				return (_ptr->data);
+			};
+
+			pointer operator->(void) const
 			{
 				return (&(_ptr->data));
 			};
+
 			void next(void)
 			{
 				if (_ptr->right)
@@ -240,6 +250,12 @@ namespace ft
 		// Constructor with a comparator and an allocator
 		red_black_tree(const value_compare &comp, const allocator_type &alloc = node_allocator())
 		    : _allocator(alloc), _comp(comp), _root(NULL), _size(0){};
+		template <class InputIterator>
+		red_black_tree(InputIterator first, InputIterator last, const value_compare &comp = value_compare(), const allocator_type &alloc = node_allocator())
+		    : _allocator(alloc), _comp(comp), _root(NULL), _size(0)
+		{
+			insert(first, last);
+		};
 		// Copy constructor
 		red_black_tree(const red_black_tree &tree)
 		    : _allocator(tree._allocator), _comp(tree._comp), _root(tree._root), _size(tree._size)
@@ -328,6 +344,14 @@ namespace ft
 			_node_allocator.construct(node, value);
 			return (node);
 		}
+
+		template <class InputIterator>
+		void insert(InputIterator first, InputIterator last)
+		{
+			for (; first != last; ++first)
+				insert(*first);
+		}
+
 		node_pointer insert(node_pointer parent, node_pointer node)
 		{
 			node_pointer tmp = parent;
@@ -397,6 +421,19 @@ namespace ft
 			if (node)
 				return (ft::pair<iterator, bool>(iterator(node), false));
 			node = create_node(value);
+			node->right = node->left = NULL;
+			insert(node);
+			_size++;
+			ft::pair<iterator, bool> ret(iterator(node), true);
+			return (ret);
+		}
+
+		ft::pair<iterator, bool> insert(const value_type &key, const T &value)
+		{
+			node_pointer node = search(key);
+			if (node)
+				return (ft::pair<iterator, bool>(iterator(node), false));
+			node = create_node(key, value);
 			node->right = node->left = NULL;
 			insert(node);
 			_size++;

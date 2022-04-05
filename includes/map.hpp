@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/24 19:02:10 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:31:10 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ namespace ft
 	class map
 	{
 	  public:
-		typedef Key                                   key_type;
-		typedef T                                     mapped_type;
-		typedef ft::pair<const key_type, mapped_type> value_type;
+		typedef Key                    key_type;
+		typedef T                      mapped_type;
+		typedef ft::pair<const Key, T> value_type;
 
 	  private:
 		class val_compare
@@ -71,21 +71,70 @@ namespace ft
 	  public:
 		explicit map(const Compare &comp = Compare(), const Allocator &alloc = Allocator())
 		    : _tree(tree_type(comp, alloc)), _allocator(alloc), _comp(comp){};
+		template <class InputIterator>
+		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
+		    : _tree(tree_type(first, last, comp, alloc)), _allocator(alloc), _comp(comp){};
+
+		map(const map &other) : _tree(other._tree){};
 
 	  public:
 		// Iterators
-		iterator               begin();
-		const_iterator         begin() const;
-		iterator               end();
-		const_iterator         end() const;
-		iterator               lower_bound(const key_type &k);
-		const_iterator         lower_bound(const key_type &k) const;
-		reverse_iterator       rbegin();
-		const_reverse_iterator rbegin() const;
-		reverse_iterator       rend();
-		const_reverse_iterator rend() const;
-		iterator               upper_bound(const key_type &k);
-		const_iterator         upper_bound(const key_type &k) const;
+		iterator begin()
+		{
+			return (_tree.begin());
+		}
+		const_iterator begin() const
+		{
+			return (_tree.begin());
+		}
+		iterator end()
+		{
+			return (_tree.end());
+		}
+		const_iterator end() const
+		{
+			return (const_iterator(_tree.end()));
+		}
+		iterator lower_bound(const key_type &k)
+		{
+			iterator it = begin();
+			while (it != end())
+			{
+				if (!_comp(it->first, k))
+					return it;
+				it++;
+			}
+			return begin();
+		}
+		const_iterator lower_bound(const key_type &k) const
+		{
+			iterator it = begin();
+			while (it != end())
+			{
+				if (!_comp(it->first, k))
+					return it;
+				it++;
+			}
+			return end();
+		}
+		reverse_iterator rbegin()
+		{
+			return (_tree.rbegin());
+		}
+		const_reverse_iterator rbegin() const
+		{
+			return (_tree.rbegin());
+		}
+		reverse_iterator rend()
+		{
+			return (_tree.rend());
+		}
+		const_reverse_iterator rend() const
+		{
+			return (_tree.rend());
+		}
+		iterator       upper_bound(const key_type &k);
+		const_iterator upper_bound(const key_type &k) const;
 
 	  public:
 		void                                     clear();
@@ -134,8 +183,16 @@ namespace ft
 		value_compare value_comp() const;
 
 	  public:
-		map &        operator=(const map &x);
-		mapped_type &operator[](const key_type &k);
+		map const &operator=(const map &x)
+		{
+			_tree = x._tree;
+			return (*this);
+		}
+		mapped_type &operator[](const key_type &k)
+		{
+			return (
+			    ((_tree.insert(ft::make_pair(k, mapped_type()))).first)->data.second); // a reference to the mapped type of a pair(key, mapped_type()), or of an existing key if one already existed
+		}
 
 	  public:
 		void print(void)

@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:16:04 by aborboll          #+#    #+#             */
-/*   Updated: 2022/03/24 19:00:21 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:12:54 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ class map_tester : public Tester
 			    mymap.insert(std::pair<char, int>('z', 200));
 			    return (mymap.size());
 		    });
-		this->expect<bool>(
+		this->expect<int>(
 		    "map::insert(iterator)",
 		    [&] {
 			    ft::map<char, int>                           mymap;
