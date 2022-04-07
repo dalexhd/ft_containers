@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/05 17:56:28 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:42:18 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,9 @@ namespace ft
 		node_pointer   _root;           // Root node of the tree
 		size_type      _size;           // Number of nodes in the tree
 
+		node_pointer _start; // First node after sort.
+		node_pointer _end;   // First node after sort.
+
 	  public:
 		// Default constructor
 		red_black_tree()
@@ -287,23 +290,42 @@ namespace ft
 			clear(_root);
 		};
 
+	  private:
+		node_pointer min(node_pointer node) const
+		{
+			node_pointer tmp = node;
+
+			while (tmp->left)
+				tmp = tmp->left;
+			return (tmp);
+		}
+
+		node_pointer max(node_pointer node) const
+		{
+			node_pointer tmp = node;
+
+			while (tmp->right)
+				tmp = tmp->right;
+			return (tmp->right);
+		}
+
 	  public:
 		// Iterators
 		iterator begin(void)
 		{
-			return (iterator(_root));
+			return (iterator(_start));
 		};
 		iterator end(void)
 		{
-			return (iterator(_root));
+			return (iterator(_end));
 		};
 		const_iterator begin(void) const
 		{
-			return (const_iterator(_root));
+			return (const_iterator(_start));
 		};
 		const_iterator end(void) const
 		{
-			return (const_iterator(_root));
+			return (const_iterator(_end));
 		};
 		reverse_iterator rbegin(void)
 		{
@@ -327,6 +349,11 @@ namespace ft
 		size_type size(void) const
 		{
 			return (_size);
+		};
+
+		value_compare value_comp(void) const
+		{
+			return (_comp);
 		};
 
 		size_type max_size(void) const
@@ -378,6 +405,8 @@ namespace ft
 			node->right = NULL;
 			node->color = RED; // INFO: check if this is red
 			fix_insert(node);
+			_start = min(_root);
+			_end = max(_root);
 			return (node);
 		}
 		node_pointer insert(node_pointer node)

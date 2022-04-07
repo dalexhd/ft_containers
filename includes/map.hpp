@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/05 17:57:59 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:16:14 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define MAP_H
 
 #include "tree.hpp"
+#include <map>
 
 namespace ft
 {
@@ -248,7 +249,7 @@ namespace ft
 
 		mapped_type &operator[](const key_type &k)
 		{
-			return (_tree.operator[](k));
+			return (insert(value_type(k, mapped_type())).first->second);
 		}
 
 	  public:
@@ -257,7 +258,6 @@ namespace ft
 			_tree.print_tree();
 		};
 	};
-
 	template <class Key, class Value, class Compare, class Alloc>
 	bool operator==(const map<Key, Value, Compare, Alloc> &lhs, const map<Key, Value, Compare, Alloc> &rhs);
 
