@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/07 16:42:18 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:59:14 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ namespace ft
 		node *parent;
 		Value data;
 		int   color;
+
+		node() : left(NULL), right(NULL), parent(NULL), data(Value())
+		{
+			color = 0;
+		};
 
 		node(const Value &value)
 		    : left(NULL), right(NULL), parent(NULL), data(value)
@@ -123,7 +128,7 @@ namespace ft
 			template <bool _isConst>
 			bool operator!=(const red_black_tree_iterator<_isConst> &x) const
 			{
-				return !(_ptr == x.getPtr());
+				return (!operator==(x));
 			};
 
 			red_black_tree_iterator &operator++(void)
@@ -139,7 +144,7 @@ namespace ft
 			red_black_tree_iterator operator++(int)
 			{
 				red_black_tree_iterator iterator(*this);
-				next();
+				++(*this);
 				return (iterator);
 			};
 			red_black_tree_iterator operator--(int)
@@ -240,6 +245,8 @@ namespace ft
 		node_pointer _start; // First node after sort.
 		node_pointer _end;   // First node after sort.
 
+		ft::node<Value> _trash; // Trash
+
 	  public:
 		// Default constructor
 		red_black_tree()
@@ -249,10 +256,10 @@ namespace ft
 		    : _comp(comp), _root(NULL), _size(0){};
 		// Constructor with an allocator
 		red_black_tree(const allocator_type &alloc = node_allocator())
-		    : _allocator(alloc), _comp(value_compare()), _root(NULL), _size(0){};
+		    : _allocator(alloc), _comp(value_compare()), _root(NULL), _size(0), _start(&_trash), _end(&_trash){};
 		// Constructor with a comparator and an allocator
 		red_black_tree(const value_compare &comp, const allocator_type &alloc = node_allocator())
-		    : _allocator(alloc), _comp(comp), _root(NULL), _size(0){};
+		    : _allocator(alloc), _comp(comp), _root(NULL), _size(0), _start(&_trash), _end(&_trash){};
 		template <class InputIterator>
 		red_black_tree(InputIterator first, InputIterator last, const value_compare &comp = value_compare(), const allocator_type &alloc = node_allocator())
 		    : _allocator(alloc), _comp(comp), _root(NULL), _size(0)
@@ -261,17 +268,19 @@ namespace ft
 		};
 		// Copy constructor
 		red_black_tree(const red_black_tree &tree)
-		    : _allocator(tree._allocator), _comp(tree._comp), _root(tree._root), _size(tree._size)
+		    : _allocator(tree._allocator), _comp(tree._comp)
 		{
-			*this = tree;
+			for (const_iterator it = tree.begin(); it != tree.end(); ++it)
+				insert(*it);
 		};
 
 		// Other
-		red_black_tree operator=(const red_black_tree &tree)
-		{
-			(void) tree;
-			return (*this);
-		};
+		/* 		red_black_tree operator=(const red_black_tree &tree)
+		        {
+		            clear();
+		            insert(tree.begin(), tree.end());
+		            return (*this);
+		        }; */
 
 		void clear(node_pointer node)
 		{
@@ -282,6 +291,14 @@ namespace ft
 				_node_allocator.destroy(node);
 				_node_allocator.deallocate(node, 1);
 			}
+		};
+
+		void clear(void)
+		{
+			clear(_root);
+			_size = 0;
+			_root = NULL;
+			_start = _end;
 		};
 
 		// Destructor
@@ -417,6 +434,8 @@ namespace ft
 				_root->color = BLACK;
 				_root->left = _root->right = NULL;
 				_root->parent = NULL;
+				_start = _root;
+				_end = _root;
 			}
 			else
 			{
@@ -486,6 +505,7 @@ namespace ft
 			node->right = node->left = NULL;
 			if (position == begin()) // If the iterator is at the beginning of the tree
 			{
+				clear();
 				node->parent = NULL;
 				_root = node;
 			}
@@ -498,6 +518,16 @@ namespace ft
 				insert(node);
 			_size++;
 			return (iterator(node));
+		}
+
+		void swap(red_black_tree &x)
+		{
+			std::swap(_root, x._root);
+			std::swap(_size, x._size);
+			std::swap(_start, x._start);
+			std::swap(_end, x._end);
+			std::swap(_comp, x._comp);
+			std::swap(_node_allocator, x._node_allocator);
 		}
 
 		void rotate_left(node_pointer node)

@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/07 16:16:14 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:55:25 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ namespace ft
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
 		    : _tree(rb_tree(first, last, comp, alloc)), _allocator(alloc), _comp(comp){};
 		// Copy constructor
-		map(const map &other) : _tree(other._tree){};
+		map(const map &other)
+		    : _tree(other._tree), _allocator(other._allocator), _comp(other._comp){};
 		// Destructor
-		~map(){};
+		~map()
+		{
+			_tree.clear();
+		};
 
 	  public:
 		// Iterators
@@ -166,7 +170,7 @@ namespace ft
 		}
 		size_type count(const key_type &k) const
 		{
-			return (_tree.count(k));
+			return (find(k) != end() ? 1 : 0);
 		}
 		bool empty() const
 		{
@@ -180,14 +184,21 @@ namespace ft
 		{
 			return (ft::make_pair(lower_bound(k), upper_bound(k)));
 		}
+
 		void erase(iterator position)
 		{
 			_tree.erase(position);
 		}
+
 		size_type erase(const key_type &k)
 		{
-			return (_tree.erase(k));
+			iterator it = find(k);
+			if (it == end())
+				return 0;
+			erase(it);
+			return 1;
 		}
+
 		void erase(iterator first, iterator last)
 		{
 			_tree.erase(first, last);
@@ -215,9 +226,10 @@ namespace ft
 			return (_tree.insert(position, val));
 		}
 		template <class InputIterator>
-		void insert(InputIterator first, InputIterator last)
+		void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = NULL)
 		{
-			_tree.insert(first, last);
+			for (; first != last; first++)
+				insert(*first);
 		}
 		key_compare key_comp() const
 		{
@@ -243,7 +255,12 @@ namespace ft
 	  public:
 		map const &operator=(const map &x)
 		{
-			_tree = x._tree;
+			if (this != &x)
+			{
+				_tree = x._tree;
+				_comp = x._comp;
+				_allocator = x._allocator;
+			}
 			return (*this);
 		}
 
