@@ -255,12 +255,10 @@ namespace ft
 	  public:
 		map const &operator=(const map &x)
 		{
-			if (this != &x)
-			{
-				_tree = x._tree;
-				_comp = x._comp;
-				_allocator = x._allocator;
-			}
+			_allocator = x._allocator;
+			_comp = x._comp;
+			clear();
+			_tree.insert(x.begin(), x.end());
 			return (*this);
 		}
 
