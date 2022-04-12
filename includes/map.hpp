@@ -297,25 +297,25 @@ namespace ft
 	template <class Key, class Value, class Compare, class Alloc>
 	bool operator<(const map<Key, Value, Compare, Alloc> &lhs, const map<Key, Value, Compare, Alloc> &rhs)
 	{
-		return (lhs.size() < rhs.size());
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
 	template <class Key, class Value, class Compare, class Alloc>
 	bool operator<=(const map<Key, Value, Compare, Alloc> &lhs, const map<Key, Value, Compare, Alloc> &rhs)
 	{
-		return (lhs.size() <= rhs.size());
+		return (!operator<(rhs, lhs));
 	}
 
 	template <class Key, class Value, class Compare, class Alloc>
 	bool operator>(const map<Key, Value, Compare, Alloc> &lhs, const map<Key, Value, Compare, Alloc> &rhs)
 	{
-		return (lhs.size() > rhs.size());
+		return (operator<(rhs, lhs));
 	}
 
 	template <class Key, class Value, class Compare, class Alloc>
 	bool operator>=(const map<Key, Value, Compare, Alloc> &lhs, const map<Key, Value, Compare, Alloc> &rhs)
 	{
-		return (lhs.size() >= rhs.size());
+		return (!operator<(lhs, rhs));
 	}
 
 	template <class Key, class T, class Compare, class Alloc>
