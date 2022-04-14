@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/11 16:55:25 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:44:05 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define MAP_H
 
 #include "tree.hpp"
+#include "vector.hpp"
 #include <map>
 
 namespace ft
@@ -187,21 +188,19 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			_tree.erase(position);
+			(void) position;
 		}
 
 		size_type erase(const key_type &k)
 		{
-			iterator it = find(k);
-			if (it == end())
-				return 0;
-			erase(it);
-			return 1;
+			(void) k;
+			return (0);
 		}
 
 		void erase(iterator first, iterator last)
 		{
-			_tree.erase(first, last);
+			(void) first;
+			(void) last;
 		}
 
 		iterator find(const key_type &k)

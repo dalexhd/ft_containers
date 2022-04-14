@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/11 16:59:14 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:44:20 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -639,6 +639,11 @@ namespace ft
 		{
 			print_tree(_root, 0);
 			std::cout << ".----------------------------------." << std::endl;
+		}
+
+		node_pointer getRoot()
+		{
+			return _root;
 		}
 
 	  public:
