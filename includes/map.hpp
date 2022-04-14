@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/14 15:44:05 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:53:08 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,19 +188,20 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			(void) position;
+			_tree.delete_node(position);
 		}
 
 		size_type erase(const key_type &k)
 		{
-			(void) k;
-			return (0);
+			iterator tmp = iterator(_tree.find(value_type(k, mapped_type())));
+			erase(tmp);
+			return (1);
 		}
 
 		void erase(iterator first, iterator last)
 		{
-			(void) first;
-			(void) last;
+			for (; first != last; first++)
+				erase(first);
 		}
 
 		iterator find(const key_type &k)
