@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/14 16:53:08 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:43:08 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ namespace ft
 		typedef typename allocator_type::const_pointer   const_pointer;
 		typedef val_compare                              value_compare;
 		typedef red_black_tree<key_type, value_type, value_compare, Allocator> rb_tree;
+		typedef node<value_type>                         node;
 		typedef typename rb_tree::iterator               iterator;
 		typedef typename rb_tree::const_iterator         const_iterator;
 		typedef typename rb_tree::reverse_iterator       reverse_iterator;
@@ -188,14 +189,15 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			_tree.delete_node(position);
+			node *ptr = position.getPtr();
+			erase(ptr->data.first);
 		}
 
 		size_type erase(const key_type &k)
 		{
-			iterator tmp = iterator(_tree.find(value_type(k, mapped_type())));
-			erase(tmp);
-			return (1);
+			size_type tmp = _tree.size();
+			_tree.delete_node(value_type(k, mapped_type()));
+			return (tmp - _tree.size());
 		}
 
 		void erase(iterator first, iterator last)
@@ -203,7 +205,6 @@ namespace ft
 			for (; first != last; first++)
 				erase(first);
 		}
-
 		iterator find(const key_type &k)
 		{
 			return (iterator(_tree.find(value_type(k, mapped_type()))));

@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/14 17:07:20 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:43:25 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,70 +395,38 @@ namespace ft
 			return (node);
 		}
 
-		node<Value> *delete_node(node<Value> *node, Value value)
+		node_pointer delete_node(const value_type &key)
 		{
-			if (node == NULL)
-				return (&_trash);
-			if (value < node->data)
-				node->left = delete_node(node->left, value);
-			else if (value > node->data)
-				node->right = delete_node(node->right, value);
-			else
+			node_pointer node = search(key);
+			if (node)
 			{
-				if (node->left == NULL)
+				node_pointer parent = node->parent;
+				if (node->left && node->right)
 				{
-					node_pointer tmp = node->right;
-					_node_allocator.destroy(node);
-					_node_allocator.deallocate(node, 1);
-					return (tmp);
+					node_pointer min_node = min(node->right);
+					node = min_node;
+					parent = node->parent;
 				}
-				else if (node->right == NULL)
+				if (node->left)
+					node->left->parent = node->parent;
+				if (node->right)
+					node->right->parent = node->parent;
+				if (node->parent)
 				{
-					node_pointer tmp = node->left;
-					_node_allocator.destroy(node);
-					_node_allocator.deallocate(node, 1);
-					return (tmp);
-				}
-				node_pointer tmp = min(node->right);
-				node = tmp;
-				node->right = delete_node(node->right, tmp->data);
-			}
-			return (node);
-		}
-
-		node<Value> *delete_node(iterator position)
-		{
-			if (_root == NULL)
-				return (&_trash);
-			if (_comp(position.getPtr()->data, _root->data))
-				_root->left = delete_node(_root->left, position.getPtr()->data);
-			else if (_comp(_root->data, position.getPtr()->data))
-				_root->right = delete_node(_root->right, position.getPtr()->data);
-			else
-			{
-				node_pointer tmp = _root;
-				if (tmp->left == NULL)
-				{
-					_root = tmp->right;
-					_node_allocator.destroy(tmp);
-					_node_allocator.deallocate(tmp, 1);
-					return (&_trash);
-				}
-				else if (tmp->right == NULL)
-				{
-					_root = tmp->left;
-					_node_allocator.destroy(tmp);
-					_node_allocator.deallocate(tmp, 1);
-					return (&_trash);
+					if (node->parent->left == node)
+						node->parent->left = node->left ? node->left : node->right;
+					else
+						node->parent->right = node->left ? node->left : node->right;
 				}
 				else
-				{
-					node_pointer tmp2 = min(tmp->right);
-					tmp = tmp2;
-					tmp->right = delete_node(tmp2);
-				}
+					_root = node->left ? node->left : node->right;
+				_node_allocator.destroy(node);
+				_node_allocator.deallocate(node, 1);
+				_start = min(_root);
+				_end = max(_root);
+				--_size;
 			}
-			return (_root);
+			return (NULL);
 		}
 
 		template <class InputIterator>
