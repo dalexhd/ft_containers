@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/17 15:43:25 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:30:52 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ namespace ft
 
 			while (tmp->right)
 				tmp = tmp->right;
-			return (tmp->right);
+			return (tmp);
 		}
 
 	  public:
@@ -397,36 +397,7 @@ namespace ft
 
 		node_pointer delete_node(const value_type &key)
 		{
-			node_pointer node = search(key);
-			if (node)
-			{
-				node_pointer parent = node->parent;
-				if (node->left && node->right)
-				{
-					node_pointer min_node = min(node->right);
-					node = min_node;
-					parent = node->parent;
-				}
-				if (node->left)
-					node->left->parent = node->parent;
-				if (node->right)
-					node->right->parent = node->parent;
-				if (node->parent)
-				{
-					if (node->parent->left == node)
-						node->parent->left = node->left ? node->left : node->right;
-					else
-						node->parent->right = node->left ? node->left : node->right;
-				}
-				else
-					_root = node->left ? node->left : node->right;
-				_node_allocator.destroy(node);
-				_node_allocator.deallocate(node, 1);
-				_start = min(_root);
-				_end = max(_root);
-				--_size;
-			}
-			return (NULL);
+			// TODO
 		}
 
 		template <class InputIterator>
@@ -465,15 +436,11 @@ namespace ft
 			{
 				_root = node;
 				_root->color = BLACK;
-				_root->left = _root->right = NULL;
-				_root->parent = NULL;
-				_start = _root;
-				_end = _root;
+				_root->left = _root->right = _root->parent = NULL;
+				_start = _end = _root;
 			}
 			else
-			{
 				insert(_root, node);
-			}
 			return (node);
 		}
 
