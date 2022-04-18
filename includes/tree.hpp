@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 13:51:35 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/17 16:30:52 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:24:40 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,7 @@ namespace ft
 
 			while (tmp->right)
 				tmp = tmp->right;
-			return (tmp);
+			return (tmp->right);
 		}
 
 	  public:
@@ -397,7 +397,8 @@ namespace ft
 
 		node_pointer delete_node(const value_type &key)
 		{
-			// TODO
+			(void) key;
+			return (NULL);
 		}
 
 		template <class InputIterator>
