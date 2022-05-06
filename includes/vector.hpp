@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:22 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:37:12 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:59:17 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 #include "algorithm.hpp"
 #include "iterator.hpp"
-#include "type_traits.hpp"
-#include <exception>
-#include <memory>
 
 namespace ft
 {
@@ -47,10 +44,6 @@ namespace ft
 		size_type      _capacity;
 		allocator_type _allocator;
 		pointer        _data;
-		size_type      diff(iterator first, iterator last)
-		{
-			return (last - first);
-		}
 
 	  public:
 		explicit vector(const allocator_type &alloc = allocator_type())
@@ -166,7 +159,7 @@ namespace ft
 			iterator  it;
 			size_type i;
 
-			i = diff(first, last);
+			i = last - first;
 			for (it = first; it != last; it++)
 				_allocator.destroy(&*it);
 			for (it = first; it + i != end(); it++)
@@ -382,7 +375,7 @@ namespace ft
 				                        "supported size");
 			else if (n > _capacity)
 			{
-				T *       tmp = _allocator.allocate(n);
+				T        *tmp = _allocator.allocate(n);
 				size_type newSize;
 				for (newSize = 0; newSize < _size; newSize++)
 					_allocator.construct(&tmp[newSize], _data[newSize]);
