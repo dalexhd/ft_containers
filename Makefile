@@ -13,7 +13,7 @@ LEAKS_FLAGS			=	--tool=memcheck --leak-check=full --leak-resolution=high --show-
 HEADER_DIR			=	includes
 OBJ_DIR				=	obj/
 RESULT				=	$(shell cat output.txt)
-AUTHOR				=	$(shell cat ../author)
+AUTHOR				=	$(shell cat author)
 LAST_COMMIT_DATE	=	$(shell git log -1 --date=format:"%m/%d/%Y" --format="%ad   [%cr]")
 LAST_COMMIT_HASH	=	$(shell git log -1 --date=format:"%m/%d/%y %T" --format="%H")
 LAST_COMMIT_MESSAGE	=	$(shell git log -1 --date=format:"%m/%d/%y %T" --format=\'%s\')
