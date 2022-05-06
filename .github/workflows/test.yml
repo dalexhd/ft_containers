@@ -6,9 +6,9 @@ name: Test
 # events but only for the main branch
 on:
   push:
-    branches: [ main, dev ]
+    branches: [main, dev]
   pull_request:
-    branches: [ '**' ]
+    branches: ["**"]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,6 +41,8 @@ jobs:
           perl -i -pe's/incl_path="..\/"/incl_path="..\/includes\/"/' fct.sh
           ./do.sh stack vector map
       - name: Generate cov
+        if: always()
         run: make cov
       - name: Upload coverage to Codecov
+        if: always()
         uses: codecov/codecov-action@v1
