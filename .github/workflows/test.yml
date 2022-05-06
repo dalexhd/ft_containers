@@ -41,8 +41,6 @@ jobs:
           perl -i -pe's/incl_path="..\/"/incl_path="..\/includes\/"/' fct.sh
           ./do.sh stack vector map
       - name: Generate cov
-        if: always()
         run: make cov
       - name: Upload coverage to Codecov
-        if: always()
         uses: codecov/codecov-action@v1
