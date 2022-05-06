@@ -6,16 +6,18 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:37:15 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:32:23 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
+#include <functional>
+
 namespace ft
 {
-	template <class T1, class T2> struct pair
+	template <typename T1, typename T2> struct pair
 	{
 	  public:
 		// Member types
@@ -23,15 +25,15 @@ namespace ft
 		typedef T2 second_type; // The second template parameter (T2)
 
 		// Member variables
-		first_type  first;  // The first value in the pair
-		second_type second; // The second value in the pair
+		T1 first;  // The first value in the pair
+		T2 second; // The second value in the pair
 
 		/**
 		 * @brief Default constructor.
 		 * Constructs a pair object with its elements value-initialized.
 		 *
 		 */
-		pair() : first(), second(){};
+		pair(void) : first(), second(){};
 
 		/**
 		 * @brief Copy / move constructor (and implicit conversion)
@@ -52,7 +54,7 @@ namespace ft
 		 * @param a An object of the type of first, or some other type implicitly convertible to it.
 		 * @param b An object of the type of second, or some other type implicitly convertible to it.
 		 */
-		pair(const first_type &a, const second_type &b) : first(a), second(b){};
+		pair(const T1 &a, const T2 &b) : first(a), second(b){};
 
 		/**
 		 * @brief Assigns pr as the new content for the pair object.
@@ -119,6 +121,6 @@ namespace ft
 	{
 		return (ft::pair<T1, T2>(t, u));
 	};
-} // namespace ft
+}; // namespace ft
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 18:16:18 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 13:38:54 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:10:54 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <vector>
 
+#include "../includes/type_traits.hpp"
 #include "colors.hpp"
 
 #ifdef __MACH__
@@ -83,12 +84,14 @@ class Tester
 		std::cout << "------------------------------------ " << C_BOLD << "Ending " << this->getSection() << " section..." << C_X << " ------------------------------------" << std::endl;
 		this->setSection("");
 	}
-	bool expect(std::string const title, std::function<bool()> &&fn, std::function<bool()> &&ret)
+
+	template <typename T = bool>
+	bool expect(std::string const title, std::function<T()> &&fn, std::function<T()> &&ret)
 	{
 		long long fnDuration[10];
 		long long retDuration[10];
-		bool      fnVal;
-		bool      retVal;
+		T         fnVal;
+		T         retVal;
 
 		int i = 0;
 		while (i < 10)
@@ -126,6 +129,7 @@ class Tester
 		usleep(1000);
 		return (this->getStatus());
 	}
+
 	void setIndex(size_t index)
 	{
 		_index = index;

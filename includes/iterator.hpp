@@ -6,12 +6,15 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/02/15 16:53:34 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/05/06 07:41:24 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 #define ITERATOR_HPP
+
+#include "./type_traits.hpp"
+#include "./utility.hpp"
 
 namespace ft
 {
@@ -34,11 +37,9 @@ namespace ft
 	template <class Iterator> class iterator_traits
 	{
 	  public:
-		typedef typename Iterator::iterator_category iterator_category;
-		typedef typename Iterator::value_type        value_type;
-		typedef typename Iterator::difference_type   difference_type;
-		typedef typename Iterator::pointer           pointer;
-		typedef typename Iterator::reference         reference;
+		typedef typename Iterator::value_type value_type;
+		typedef typename Iterator::pointer    pointer;
+		typedef typename Iterator::reference  reference;
 	};
 
 	template <class Iterator> class iterator_traits<Iterator *>
@@ -255,12 +256,11 @@ namespace ft
 	template <class Iterator> class reverse_iterator
 	{
 	  public:
-		typedef Iterator iterator_type;
-		typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
-		typedef typename iterator_traits<Iterator>::value_type      value_type;
-		typedef typename iterator_traits<Iterator>::difference_type difference_type;
-		typedef typename iterator_traits<Iterator>::pointer         pointer;
-		typedef typename iterator_traits<Iterator>::reference       reference;
+		typedef Iterator                                       iterator_type;
+		typedef typename iterator_traits<Iterator>::value_type value_type;
+		typedef std::ptrdiff_t                                 difference_type;
+		typedef typename iterator_traits<Iterator>::pointer    pointer;
+		typedef typename iterator_traits<Iterator>::reference  reference;
 
 	  private:
 		iterator_type _type;
@@ -418,6 +418,6 @@ namespace ft
 	{
 		return (y.base() - x.base());
 	};
-} // namespace ft
+}; // namespace ft
 
 #endif
