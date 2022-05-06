@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 00:04:49 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/10 13:33:21 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/05/06 07:41:24 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ namespace ft
 	template <class Iterator> class iterator_traits
 	{
 	  public:
-		typedef typename Iterator::value_type      value_type;
-		typedef typename Iterator::difference_type difference_type;
-		typedef typename Iterator::pointer         pointer;
-		typedef typename Iterator::reference       reference;
+		typedef typename Iterator::value_type value_type;
+		typedef typename Iterator::pointer    pointer;
+		typedef typename Iterator::reference  reference;
 	};
 
 	template <class Iterator> class iterator_traits<Iterator *>
@@ -259,9 +258,9 @@ namespace ft
 	  public:
 		typedef Iterator                                       iterator_type;
 		typedef typename iterator_traits<Iterator>::value_type value_type;
-		typedef typename iterator_traits<Iterator>::difference_type difference_type;
-		typedef typename iterator_traits<Iterator>::pointer         pointer;
-		typedef typename iterator_traits<Iterator>::reference       reference;
+		typedef std::ptrdiff_t                                 difference_type;
+		typedef typename iterator_traits<Iterator>::pointer    pointer;
+		typedef typename iterator_traits<Iterator>::reference  reference;
 
 	  private:
 		iterator_type _type;

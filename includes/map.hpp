@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/04/17 15:43:08 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/05/06 07:45:58 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ namespace ft
 		typedef typename allocator_type::const_pointer   const_pointer;
 		typedef val_compare                              value_compare;
 		typedef red_black_tree<key_type, value_type, value_compare, Allocator> rb_tree;
-		typedef node<value_type>                         node;
+		typedef node<value_type>                         _node;
 		typedef typename rb_tree::iterator               iterator;
 		typedef typename rb_tree::const_iterator         const_iterator;
 		typedef typename rb_tree::reverse_iterator       reverse_iterator;
@@ -80,9 +80,8 @@ namespace ft
 		map(const map &other)
 		    : _tree(other._tree), _allocator(other._allocator), _comp(other._comp){};
 		// Destructor
-		~map()
-		{
-			_tree.clear();
+		~map(){
+		    //_tree.clear();
 		};
 
 	  public:
@@ -125,7 +124,7 @@ namespace ft
 			while (it != end())
 			{
 				if (!_comp(it->first, k))
-					return it;
+					return (it);
 				it++;
 			}
 			return begin();
@@ -136,7 +135,7 @@ namespace ft
 			while (it != end())
 			{
 				if (!_comp(it->first, k))
-					return it;
+					return (it);
 				it++;
 			}
 			return end();
@@ -159,7 +158,7 @@ namespace ft
 			while (it != end())
 			{
 				if (_comp(k, it->first))
-					return it;
+					return (it);
 				it++;
 			}
 			return end();
@@ -170,9 +169,21 @@ namespace ft
 		{
 			_tree.clear();
 		}
+		void reset()
+		{
+			_tree.reset();
+		}
 		size_type count(const key_type &k) const
 		{
-			return (find(k) != end() ? 1 : 0);
+			size_type      n = 0;
+			const_iterator it = begin();
+			while (it != end())
+			{
+				if (!_comp(it->first, k) && !_comp(k, it->first))
+					n++;
+				it++;
+			}
+			return (n);
 		}
 		bool empty() const
 		{
@@ -189,15 +200,17 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			node *ptr = position.getPtr();
+			_node *ptr = position.getPtr();
 			erase(ptr->data.first);
 		}
 
 		size_type erase(const key_type &k)
 		{
-			size_type tmp = _tree.size();
-			_tree.delete_node(value_type(k, mapped_type()));
-			return (tmp - _tree.size());
+			ft::node<value_type> *ptr = _tree.search(value_type(k, mapped_type()));
+			if (ptr == NULL)
+				return (0);
+			_tree.delete_node(ptr);
+			return (1);
 		}
 
 		void erase(iterator first, iterator last)
@@ -224,7 +237,8 @@ namespace ft
 		}
 		iterator insert(iterator position, const value_type &val)
 		{
-			return (_tree.insert(position, val));
+			(void) position;
+			return (insert(val).first);
 		}
 		template <class InputIterator>
 		void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = NULL)
@@ -254,18 +268,23 @@ namespace ft
 		}
 
 	  public:
-		map const &operator=(const map &x)
+		map const &operator=(map &x)
 		{
-			_allocator = x._allocator;
-			_comp = x._comp;
-			clear();
-			_tree.insert(x.begin(), x.end());
+			if (this == &x)
+				return (*this);
+			reset();
+			std::swap(_allocator, x._allocator);
+			std::swap(_comp, x._comp);
+			for (const_iterator it = x.begin(); it != x.end(); it++)
+				this->insert(*it);
 			return (*this);
 		}
 
 		mapped_type &operator[](const key_type &k)
 		{
-			return (insert(value_type(k, mapped_type())).first->second);
+			if (_tree.find(value_type(k, mapped_type())) == _tree.end())
+				return (insert(value_type(k, mapped_type())).first->second);
+			return _tree.find(value_type(k, mapped_type()))->second;
 		}
 
 	  public:
