@@ -6,7 +6,7 @@
 /*   By: aborboll <aborboll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:47:09 by aborboll          #+#    #+#             */
-/*   Updated: 2022/05/06 14:32:51 by aborboll         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:57:24 by aborboll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -529,10 +529,10 @@ namespace ft
 		};
 
 	  public:
-		void print(void)
-		{
-			_tree.print_tree();
-		};
+		// void print(void)
+		// {
+		// 	_tree.print_tree();
+		// };
 	};
 
 	template <class Key, class Value, class Compare, class Alloc>

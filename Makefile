@@ -118,7 +118,24 @@ re:			## Call fclean => all
 ##@ Testing
 
 test:		## Make test
-			echo "Please set test cmd!!!"
+			@if [ ! -d containers_test ]; then \
+				git clone https://github.com/mli42/containers_test.git && cd containers_test; \
+				sed -i 's/# CFLAGS+=" -fsanitize=address -g3"/CFLAGS+=" -fsanitize=address -g3"/' fct.sh && \
+				perl -i -pe's/incl_path="..\/"/incl_path="..\/includes\/"/' fct.sh && \
+				cd ..; \
+			fi; \
+			cd containers_test; \
+			./do.sh stack vector map; \
+
+
+mytest:		## Make my own test
+			@if [ ! -d own_test ]; then \
+				git clone https://github.com/dalexhd/containers_test.git own_test && cd own_test; \
+				cd ..; \
+			fi; \
+			cd own_test; \
+			make re; \
+			./containers \
 
 cov:		## Make coverage files
 			gcov $(OBJS)
