@@ -35,11 +35,9 @@ jobs:
           command: ./containers
           max_attempts: 5
       - name: Run mli42 test
-        run: |
-          git clone https://github.com/mli42/containers_test.git && cd containers_test
-          perl -i -pe's/#CFLAGS+=" -fsanitize=address -g3"/CFLAGS+=" -fsanitize=address -g3"/' fct.sh
-          perl -i -pe's/incl_path="..\/"/incl_path="..\/includes\/"/' fct.sh
-          ./do.sh stack vector map
+        run: make test
+      - name: Run my test
+        run: make mytest
       - name: Generate cov
         run: make cov
       - name: Upload coverage to Codecov
