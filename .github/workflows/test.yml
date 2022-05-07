@@ -28,16 +28,14 @@ jobs:
         run: make
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
+      - name: Run mli42 test
+        run: make test
       - name: Run test
         uses: nick-invision/retry@v2
         with:
           timeout_minutes: 10
-          command: ./containers
+          command: make mytest
           max_attempts: 5
-      - name: Run mli42 test
-        run: make test
-      - name: Run my test
-        run: make mytest
       - name: Generate cov
         run: make cov
       - name: Upload coverage to Codecov
